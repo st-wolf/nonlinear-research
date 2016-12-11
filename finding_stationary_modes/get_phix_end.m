@@ -1,6 +1,11 @@
 function phix_end = get_phix_end( params, C, xspan )
+% Find the \Phi_{x}(xspan(2)) value after the shooting from the xspan(1)
+% using the asymptotical behaviour 'asympt'
+%
+% INPUT:
+%	
 
-xstart = xspan(1); xend = xspan(2);
+xstart = xspan(1);
 
 % From the asymtote of the solutions
 asympt_params = @(x) asympt(params, C, x);

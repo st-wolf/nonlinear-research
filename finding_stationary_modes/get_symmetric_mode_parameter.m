@@ -1,6 +1,8 @@
-function [ X, Phi ] = find_symmetric_mode(  params, xspan )
+function [ c_symmetric ] = get_symmetric_mode_parameter( params, xspan )
+% 
 %
-%
+% INPUT:
+%	
 
 get_phix_end_params = @(C) get_phix_end(params, C, xspan);
 
@@ -18,9 +20,7 @@ while sign(phix_end_0) == sign(phix_end_1)
 end
 
 eps = 1e-5;
-c = dichotomy(get_phix_end_params, c0, c1, eps);
-
-[ X, Phi ] = get_symmetric_mode(params, c, xspan);
+c_symmetric = dichotomy(get_phix_end_params, c0, c1, eps);
 
 end
 

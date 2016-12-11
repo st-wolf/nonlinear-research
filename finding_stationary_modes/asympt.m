@@ -1,7 +1,10 @@
 function f = asympt( params, C, x )
+% Asymtotical behaviour on the -\infty
+%
+% INPUT:
+%	C - constant of the asymptote
 
-parsed = num2cell(params);
-[beta, a, b] = deal(parsed{:});
+[beta, a, b, ~] = parse_params(params);
 
 f = -(C / x) * exp(...
 	+(sqrt(a) / 3) * x^3 ...

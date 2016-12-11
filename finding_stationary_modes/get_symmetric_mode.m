@@ -1,9 +1,10 @@
 function [ X, Phi ] = get_symmetric_mode( params, C, xspan )
+% Calculate a symmetric mode using the parameter C of the asymptotic 'asympt'
 %
 % INPUT:
 %
 
-xstart = xspan(1); xend = xspan(2);
+xstart = xspan(1);
 
 % From the asymtote of the solutions
 asympt_params = @(x) asympt(params, C, x);
