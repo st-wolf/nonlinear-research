@@ -1,4 +1,4 @@
-function [ phi_norm ] = symmetric_norm_on_params( params )
+function [ phi_norm ] = compute_symmetric_mode_norm( params )
 %
 %
 

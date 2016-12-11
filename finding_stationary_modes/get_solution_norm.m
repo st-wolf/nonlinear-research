@@ -3,7 +3,7 @@ function [ phi_norm ] = get_solution_norm( X, Phi )
 %
 
 dx = X(2) - X(1);
-phi_norm = simpson(Phi(:, 1), dx);
+phi_norm = sqrt(simpson(Phi(:, 1) .^ 2, dx));
 
 end
 

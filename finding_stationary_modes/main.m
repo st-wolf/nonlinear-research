@@ -1,9 +1,4 @@
-%% Finding "+" mode
-
-% Equation
-% u_{xx} + (\beta - x^2 - C \exp(-x^2))u - u^3 = 0
-
-for beta = linspace(1, 3, 20)
-	beta
-	[X, Phi] = find_symmetric_mode(params, xspan);
-end
+%% 
+% Symmetric mode result:
+% find_symmetric_chemical_potential(10, -20, -1) 
+% beta = 2.81113, norm = 1.00001
