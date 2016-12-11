@@ -1,9 +1,8 @@
-function phi_end = get_phi_end( params, C, xspan )
-% Find the \Phi(xspan(2)) value after the shooting from the xspan(1)
-% using the asymptotical behaviour 'asympt'
+function [ X, Phi ] = get_asymmetric_mode( params, C, xspan )
+% Calculate an asymmetric mode using the parameter C of the asymptotic 'asympt'
 %
 % INPUT:
-%	
+%
 
 xstart = xspan(1);
 
@@ -17,8 +16,12 @@ init = [ asympt_params(xstart)
 		(asympt_params(xstart + eps) - asympt_params(xstart - eps)) / eps];
 
 ode_params = @(x, f) ode(x, f, params);
-[~, Phi] = RK4(ode_params, xspan, init, 1024);
+[X, Phi] = RK4(ode_params, xspan, init, 1024);
 
-phi_end = Phi(end, 1);
+X = [X -X(end:-1:1)];
+Phi = [
+	Phi(:, 1), Phi(:, 2);
+	-Phi(end:-1:1, 1), Phi(end:-1:1, 2)
+];
 
 end
