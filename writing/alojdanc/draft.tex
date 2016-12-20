@@ -305,7 +305,7 @@ V(x) = \frac{(\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda))~\sn^2 x - \Lambda~\
 %
 \begin{figure}[Ht!]
 \center{\includegraphics[width=1\linewidth]{pic/V_1period_shifted.eps}}
-\caption{На 1-ом периоде функций Якоби ($[-2K; 2K]$) после сдвига}
+\caption{$V(x)$ на 1-ом периоде функций Якоби ($[-2K; 2K]$) после сдвига}
 \end{figure}
 %
 %\begin{figure}[Ht!]
@@ -329,41 +329,142 @@ V(x) = \frac{(\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda))~\sn^2 x - \Lambda~\
 Выражение для потенциала:
 %
 \begin{equation}
-V(x) = -\lambda (1 - \lambda)~\sd^2 x.
+V_F (x) = -\lambda (1 - \lambda)~\sd^2 x.
 \end{equation}
+%
+Типичный график потенциала показан на Рис. \ref{pic:potential_fock}
+%
+\begin{figure}[Ht!]
+\center{\includegraphics[width=0.5\linewidth]{pic/V_Fock.eps}}
+\caption{$V_F (x)$ на 1-ом периоде функций Якоби ($[-2K; 2K]$) после сдвига, $\lambda = 0.5$}
+\label{pic:potential_fock}
+\end{figure}
 %
 Используем критерий фазового перехода из статьи Чудновского в PRL.
 Разложим $V(x)$ в нуле в ряд тейлора:
 %
 \begin{equation}
-V(x) = -\lambda (1 - \lambda) (2x^2 - 8(1 - 2\lambda)x^4 + o(x^4)).
+V_F (x) = -\lambda (1 - \lambda) (2x^2 - 8(1 - 2\lambda)x^4 + o(x^4)).
 \end{equation}
 %
-\textbf{Утверждение} Знак перед 4-й степенью оперделяет локальное поведение $\tau(E)$ вблизи точки $E_0$ исчезнования термона.
-Знаку ``$-$'' соответствует убывание периода в окрестности $E_0$, а знаку ``$+$'' -- возрастание.
-Это означает, что в случае ``$+$'' имеет место фазовый переход 1-го рода.
-Случай ``$-$'' не означает, что функция $\tau(E)$ монотонна, однако мы, в след за работой Чудновского, будем полагать ее в этом случае монотонной (т.е. что ее локальное поведение можно экстраполировать на глобальное).
+
+\textbf{Утверждение.} Знак перед 4-й степенью оперделяет локальное поведение $\tau(E)$ вблизи точки $E_0$ исчезнования термона.
+Знаку ``$+$'' соответствует убывание периода в окрестности $E_0$, а знаку ``$-$'' -- возрастание.
+Это означает, что в случае ``$-$'' имеет место фазовый переход 1-го рода.
+Случай ``$+$'' не означает, что функция $\tau(E)$ монотонна, однако мы, вслед за работой Чудновского, будем полагать ее в этом случае монотонной (т.е. что ее локальное поведение можно экстраполировать на глобальное), что влечет а собой фазовый переход 2-го рода.
 
 Результат: при $\lambda < 0.5$ имеет место фазовый переход 2-го рода, при $\lambda > 0.5$ -- 1-го рода.
 Этот результат согласуется с численным счетом.
 %
 \begin{figure}[Ht!]
-\center{\includegraphics[width=1\linewidth]{pic/tau_on_E.eps}}
-\caption{$\tau(E)$}
+\center{\includegraphics[width=1\linewidth]{pic/tau_on_E_Fock.eps}}
+\caption{$\tau(E)$, Fock, {\bf qualitative only!}}
 \end{figure}
 %
 
-\paragraph{Rabi: $\Lambda \gg 1$.}
+\paragraph{Josephson: $\Lambda^2 \sim \Lambda$, $\lambda(1 - \lambda) \ll \Lambda^2$.}
+Это переходный режим.
 Выражение для потенциала:
 %
 \begin{equation}
-V(x) = \frac{\frac{1}{4} \Lambda^2 ~\sn^2 x - \Lambda~\cn x}{\dn^2 x}.
+V_J(x) = \frac{\frac{1}{4} \Lambda^2 ~\sn^2 x - \Lambda~\cn x}{\dn^2 x}.
 \end{equation}
 %
 В этом случае нет симметричной double-well ловушки.
+Типичный график потенциала показан на Рис. \ref{pic:potential_josephson}.
+%
+\begin{figure}[Ht!]
+\center{\includegraphics[width=1\linewidth]{pic/V_Josephson.eps}}
+\caption{$V_F (x)$ на 1-ом периоде функций Якоби ($[-2K; 2K]$ слева и $[-3K; K]$ справа) после сдвига, $\Lambda = 5$, $\lambda = 0.5$}
+\label{pic:potential_josephson}
+\end{figure}
+%
 
-\paragraph{Период малых колебаний}
-Рассмотри малые колебания в яме: $\sn~x \sim x$, $\cn~x \sim 1$, $\dn~x \sim 1$.
+\textbf{Квантовый осциллятор.}
+Рассмотрим в нуле малые колебания квантового гармонического осциллятора: $\sn~x \sim x$, $\cn~x \sim 1$, $\dn~x \sim 1$.
+Уравнение квантового осциллятора
+%
+\begin{equation}
+\frac{d^2 \Psi}{dx^2} + (E + S^2 \Lambda - \left( \frac{S \Lambda}{2} \right)^2 x^2) \Psi = 0.
+\end{equation}
+%
+После замены $x \to \sqrt{\frac{S \Lambda}{2}} x$, $\tilde{E} = \frac{2}{S \Lambda} (E + S^2 \Lambda)$:
+%
+\begin{equation}
+\frac{d^2 \Psi}{dx^2} + (\tilde{E} - x^2) \Psi = 0.
+\end{equation}
+%
+Уровни энергии: $\tilde{E} = 2n + 1$ или $E = S \Lambda (n + \frac{1}{2}) - S^2 \Lambda$.
+Собственные функции выражаются через полиномы Эрмита.
+
+\paragraph{Rabi: $\Lambda^2 \gg \Lambda \gg \lambda(1 - \lambda)$.}
+Выражение для потенциала:
+%
+\begin{equation}
+V_R = \frac{1}{4} \Lambda^2 ~\sd^2 x.
+\end{equation}
+%
+Типичный график потенциала показан на Рис. \ref{pic:potential_rabi}.
+%
+\begin{figure}[Ht!]
+\center{\includegraphics[width=1\linewidth]{pic/V_Rabi.eps}}
+\caption{$V_R (x)$ на 1-ом периоде функций Якоби ($[-2K; 2K]$ слева и $[-3K; K]$ справа) после сдвига, $\Lambda = 100$}
+\label{pic:potential_rabi}
+\end{figure}
+%
+В этом случае симметричная double-well ловушка наблюдается на полном $4K(\lambda)$ периоде потенциала.
+Чтобы было удобно, произведем преобразование координат: $x \to x + K(\lambda)$.
+В это случаем $\sd^2 x \to (1 - \lambda)^{-1} \cn^2 x$.
+Барьер окажется в точке $x = 0$.
+уравнение принимает вид:
+%
+\begin{equation}
+\frac{d^2 \Psi}{dx^2} + (E - \frac{S^2 \Lambda^2}{4 (1 - \lambda)} ~\cn^2 x) \Psi = 0.
+\end{equation}
+%
+Далее действуем как и раньше.
+Уравнение Ньютона:
+%
+\begin{equation}
+\frac{1}{2} \dot{x}^2 = S^2 V(x) - E.
+\end{equation}
+%
+$V(x) = \frac{\Lambda^2}{4(1 - \lambda)} ~\cn^2 x$.
+Разложим $V(x)$ в ряд Тейлора:
+%
+\begin{equation}
+V(x) = \frac{\Lambda^2}{4(1 - \lambda)} (1 - x^2 + \frac{1 + \lambda}{3} x^4 + o(x^4)).
+\end{equation}
+%
+Знак перед слагаемым $\sim x^4$ всегда ``$+$'', следовательно имеет место только фазовый переход 2-го рода.
+Это результат согласуется с численным счетом.
+%
+\begin{figure}[Ht!]
+\center{\includegraphics[width=1\linewidth]{pic/tau_on_E_Rabi.eps}}
+\caption{$\tau(E)$, Rabi, {\bf qualitative only!}}
+\end{figure}
+%
+
+\textbf{Квантовый осциллятор.}
+Рассмотрим в нуле малые колебания квантового гармонического осциллятора: $\sn~x \sim x$, $\cn~x \sim 1$, $\dn~x \sim 1$.
+Уравнение квантового осциллятора
+%
+\begin{equation}
+\frac{d^2 \Psi}{dx^2} + (E + \left( \frac{S \Lambda}{2} \right)^2 x^2) \Psi = 0.
+\end{equation}
+%
+После замены $x \to \sqrt{\frac{S \Lambda}{2}} x$, $\tilde{E} = \frac{2}{S \Lambda} E$:
+%
+\begin{equation}
+\frac{d^2 \Psi}{dx^2} + (\tilde{E} - x^2) \Psi = 0.
+\end{equation}
+%
+Уровни энергии: $\tilde{E} = 2n + 1$ или $E = S \Lambda (n + \frac{1}{2})$.
+Собственные функции выражаются через полиномы Эрмита.
+
+\paragraph{Период малых колебаний термона.}
+Он связан с температурой фазового перехода.
+Рассмотрим малые колебания в яме: $\sn~x \sim x$, $\cn~x \sim 1$, $\dn~x \sim 1$.
 Уравнение, описывающее мылые колебания:
 %
 \begin{equation}
@@ -388,4 +489,5 @@ V(x) = \frac{\frac{1}{4} \Lambda^2 ~\sn^2 x - \Lambda~\cn x}{\dn^2 x}.
 \lambda (1 - \lambda) > \frac{1}{4} \Lambda^2.
 \end{equation}
 %
+
 \end{document}
