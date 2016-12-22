@@ -320,6 +320,7 @@ V(x) = \frac{(\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda))~\sn^2 x - \Lambda~\
 %
 \begin{equation}
 \frac{1}{2} \dot{x}^2 = S^2 V(x) - E.
+\label{eq:newton}
 \end{equation}
 %
 Тип фазового перехода определяется зависимостью периода колебаний термона от энергии $\tau(E)$.
@@ -330,6 +331,7 @@ V(x) = \frac{(\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda))~\sn^2 x - \Lambda~\
 %
 \begin{equation}
 V_F (x) = -\lambda (1 - \lambda)~\sd^2 x.
+\label{eq:potential_fock}
 \end{equation}
 %
 Типичный график потенциала показан на Рис. \ref{pic:potential_fock}
@@ -353,13 +355,49 @@ V_F (x) = -\lambda (1 - \lambda) (2x^2 - 8(1 - 2\lambda)x^4 + o(x^4)).
 Это означает, что в случае ``$-$'' имеет место фазовый переход 1-го рода.
 Случай ``$+$'' не означает, что функция $\tau(E)$ монотонна, однако мы, вслед за работой Чудновского, будем полагать ее в этом случае монотонной (т.е. что ее локальное поведение можно экстраполировать на глобальное), что влечет а собой фазовый переход 2-го рода.
 
-Результат: при $\lambda < 0.5$ имеет место фазовый переход 2-го рода, при $\lambda > 0.5$ -- 1-го рода.
+\textbf{Результат:} при $\lambda < 0.5$ имеет место фазовый переход 2-го рода, при $\lambda > 0.5$ -- 1-го рода.
 Этот результат согласуется с численным счетом.
 %
 \begin{figure}[Ht!]
 \center{\includegraphics[width=1\linewidth]{pic/tau_on_E_Fock.eps}}
 \caption{$\tau(E)$, Fock, {\bf qualitative only!}}
 \end{figure}
+%
+
+\textbf{Аналитическое выражения для инстантона.}
+Можно получить аналитичекое выражения для инстантона, которое является сепаратрисным решением уравнения (\ref{eq:newton}) с потенциалом (\ref{eq:potential_fock}).
+В этом случае инстантон представляет собой кинк, который выходит из точки $x(-\infty) = -K(\lambda)$ и входит в $x(+\infty) = +K(\lambda)$.
+Уровень энергии, которому соответствует инстантонное решение найдем из условия покоя в точке $x_0 = x(-\infty) = -K(\lambda)$, $x_0' = \dot{x}(-\infty) = 0$, $E = V_F(x_0) = -\lambda S^2$.
+Тогда первый интеграл уравнения движения для инстантона запсиывается в виде:
+%
+\begin{equation}
+\frac{1}{2 S^2} \dot{x}^2 = \lambda - \lambda (1 - \lambda) ~\sd^2 x = 1 - (1 - \lambda) ~\nd^2 x.
+\end{equation}
+%
+Интегрируем:
+%
+\begin{equation}
+S \sqrt{2} t + C = \int\frac{dx}{\sqrt{1 - (1 - \lambda) ~\nd^2 x}}
+\end{equation}
+%
+Сделаем замену $u = \sn x$, тогда $\cn x = \sqrt{1 - u^2}$, $\dn x = \sqrt{1 - \lambda u^2}$, $du = \cn x ~\dn x dx$.
+%
+\begin{equation}
+S \sqrt{2} t + C = \frac{1}{\sqrt{\lambda}} \int \frac{du}{1 - u^2} = \frac{1}{2\sqrt{\lambda}} (\log(1 + u) - \log(1 - u)).
+\end{equation}
+%
+Откуда, при условии $u(0) = 0$, получается
+%
+\begin{equation}
+u(t) = \sn x = \frac{e^{2S\sqrt{2 \lambda} t} - 1}{e^{2S\sqrt{2 \lambda} t} + 1}.
+\end{equation}
+%
+Можно выразить $x(t)$ в явном виде:
+%
+\begin{equation}
+x(t) = F \left(\arcsin \left( \frac{e^{2S\sqrt{2 \lambda} t} - 1}{e^{2S\sqrt{2 \lambda} t} + 1} \right) , \lambda \right).
+\label{eq:instanton_fock}
+\end{equation}
 %
 
 \paragraph{Josephson: $\Lambda^2 \sim \Lambda$, $\lambda(1 - \lambda) \ll \Lambda^2$.}
