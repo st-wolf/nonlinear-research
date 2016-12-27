@@ -56,7 +56,7 @@ H = \int \Big\{ -\dfrac{1}{2} \psi^\dag \dfrac{d^2 \psi}{dx^2} + \psi^\dag \psi 
 а моды $\Phi_{\pm}$ удовлетворяют стационарному уравнению
 %
 \begin{equation}
-\beta_{\pm} \Phi_{\pm} = -\dfrac{1}{2} \dfrac{d^2 \Phi_{\pm}}{dx^2} + U(x) \Phi_{\pm} + g \Phi_{\pm}^3.
+\mu_{\pm} \Phi_{\pm} = -\dfrac{1}{2} \dfrac{d^2 \Phi_{\pm}}{dx^2} + U(x) \Phi_{\pm} + g \Phi_{\pm}^3.
 \label{eq:stationary}
 \end{equation}
 %
@@ -78,7 +78,7 @@ H = \int \Big\{ -\dfrac{1}{2} \psi^\dag \dfrac{d^2 \psi}{dx^2} + \psi^\dag \psi 
 \begin{equation}
 \begin{array}{c}
 	\gamma_{ij} = g \int \Phi_i^2 \Phi_j^2 dx, \quad i,j \in \{+,-\}; \\[10pt]
-	\quad A = \dfrac{\gamma_{++} + \gamma_{--} + 6 \gamma_{+-}}{4}; \quad E = \dfrac{\gamma_{--} - \gamma_{++}}{2}; \\[10pt]
+	\quad A = \dfrac{\gamma_{++} + \gamma_{--} + 6 \gamma_{+-}}{4}; \quad \Gamma = \dfrac{\gamma_{--} - \gamma_{++}}{2}; \\[10pt]
 	C = \dfrac{\gamma_{++} + \gamma_{--} - 2\gamma_{+-}}{4}; \\[10pt]
 	G = \dfrac{1}{2} \int (\Phi_-')^2 - (\Phi_+')^2 dx + \int ((\Phi_-)^2 - (\Phi_+)^2)U(x) dx.
 \end{array}
@@ -88,7 +88,7 @@ H = \int \Big\{ -\dfrac{1}{2} \psi^\dag \dfrac{d^2 \psi}{dx^2} + \psi^\dag \psi 
 Заметим, что $G$ можно выразить по-другому, используя уравнения для стационарных состояний (\ref{eq:stationary}):
 %
 \begin{equation}
-G = \beta_- - \beta_+ - 2E;
+G = \mu_- - \mu_+ - 2\Gamma;
 \end{equation}
 %
 
@@ -97,7 +97,7 @@ G = \beta_- - \beta_+ - 2E;
 \begin{equation}
 \begin{array}{lcl}
 	\hat{H} & = & -\dfrac{G}{2} (\psi_1^\dag \psi_2 +  \psi_1 \psi_2^\dag) + \dfrac{A}{2} (\psi_1^{\dag 2} \psi_1^2 + \psi_2^{\dag 2} \psi_2^2) \\[10pt]
-	& & -\dfrac{E}{2} (\psi_1^{\dag 2} \psi_1 \psi_2 + \psi_1^\dag \psi_1^2 \psi_2^\dag + \psi_1^\dag \psi_2^\dag \psi_2^2 + \psi_1 \psi_2^{\dag 2} \psi_2) \\[10pt]
+	& & -\dfrac{\Gamma}{2} (\psi_1^{\dag 2} \psi_1 \psi_2 + \psi_1^\dag \psi_1^2 \psi_2^\dag + \psi_1^\dag \psi_2^\dag \psi_2^2 + \psi_1 \psi_2^{\dag 2} \psi_2) \\[10pt]
 	& & +\dfrac{C}{2} (\psi_1^{\dag 2} \psi_2^2 + 4 \psi_1^\dag \psi_1 \psi_2^\dag \psi_2 + \psi_1^2 \psi_2^{\dag 2}).
 \end{array}
 \label{eq:hamiltonian}
@@ -108,10 +108,10 @@ G = \beta_- - \beta_+ - 2E;
 %
 \begin{equation}
 \begin{array}{lcl}
-	i \psi_{1,t} & = & (A |\psi_1|^2 + 2C |\psi_2|^2 - \dfrac{E}{2} \psi_1 \psi_2^*) \psi_1 - \\[10pt]
-	&& - (\dfrac{G}{2} + E |\psi_1|^2 + \dfrac{E}{2} |\psi_2|^2 - C \psi_1^* \psi_2) \psi_2; \\[10pt]
-	i \psi_{2,t} & = & (A |\psi_2|^2 + 2C |\psi_1|^2 - \dfrac{E}{2} \psi_2 \psi_1^*) \psi_2 - \\[10pt] 
-	&& - (\dfrac{G}{2} + E |\psi_2|^2 + \dfrac{E}{2}|\psi_1|^2 - C \psi_2^* \psi_1) \psi_1.
+	i \psi_{1,t} & = & (A |\psi_1|^2 + 2C |\psi_2|^2 - \dfrac{\Gamma}{2} \psi_1 \psi_2^*) \psi_1 - \\[10pt]
+	&& - (\dfrac{G}{2} + \Gamma |\psi_1|^2 + \dfrac{\Gamma}{2} |\psi_2|^2 - C \psi_1^* \psi_2) \psi_2; \\[10pt]
+	i \psi_{2,t} & = & (A |\psi_2|^2 + 2C |\psi_1|^2 - \dfrac{\Gamma}{2} \psi_2 \psi_1^*) \psi_2 - \\[10pt] 
+	&& - (\dfrac{G}{2} + \Gamma |\psi_2|^2 + \dfrac{\Gamma}{2}|\psi_1|^2 - C \psi_2^* \psi_1) \psi_1.
 \end{array}
 \label{eq:I2M}
 \end{equation}
@@ -121,8 +121,8 @@ G = \beta_- - \beta_+ - 2E;
 %
 \begin{equation*}
 \begin{array}{c}
-	i \psi_{1,t} = ((A - 2C) |\psi_1|^2 - \dfrac{E}{2} \psi_1 \psi_2^*) \psi_1 - (\dfrac{G}{2} + \dfrac{EN}{2} + \dfrac{E}{2} |\psi_1|^2 - C \psi_1^* \psi_2) \psi_2; \\[10pt]
-	i \psi_{2,t} = ((A - 2C) |\psi_2|^2 - \dfrac{E}{2} \psi_2 \psi_1^*) \psi_2 - (\dfrac{G}{2} + \dfrac{EN}{2} + \dfrac{E}{2} |\psi_2|^2 - C \psi_2^* \psi_1) \psi_1.
+	i \psi_{1,t} = ((A - 2C) |\psi_1|^2 - \dfrac{\Gamma}{2} \psi_1 \psi_2^*) \psi_1 - (\dfrac{G}{2} + \dfrac{\Gamma N}{2} + \dfrac{\Gamma}{2} |\psi_1|^2 - C \psi_1^* \psi_2) \psi_2; \\[10pt]
+	i \psi_{2,t} = ((A - 2C) |\psi_2|^2 - \dfrac{\Gamma}{2} \psi_2 \psi_1^*) \psi_2 - (\dfrac{G}{2} + \dfrac{\Gamma N}{2} + \dfrac{\Gamma}{2} |\psi_2|^2 - C \psi_2^* \psi_1) \psi_1.
 \end{array}
 \end{equation*}
 %
@@ -156,13 +156,13 @@ S_0^2 + S_x^2 + S_y^2 + S_z^2 = \dfrac{1}{2}(N^2 + N) = Const.
 \end{eqnarray*}
 %
 %
-$$\hat{H} = -G S_x + A(S_z^2 + S_0^2 - S_0) - E(2S_0 - 1) S_x + C(S_x^2 - S_y^2 + S_0^2 - 2S_z^2).$$
+$$\hat{H} = -G S_x + A(S_z^2 + S_0^2 - S_0) - \Gamma (2S_0 - 1) S_x + C(S_x^2 - S_y^2 + S_0^2 - 2S_z^2).$$
 %
 В полученном выражении выразим $S_y^2$ через $S_z^2$ и $S_x^2$ (см. выражение (\ref{eq:sum_of_squares}) и отбросим все постоянные.
 %
-$$\hat{H} = -G S_x + A S_z^2 - E(2S_0 - 1) S_x + C(2 S_x^2 - S_z^2).$$
+$$\hat{H} = -G S_x + A S_z^2 - \Gamma (2S_0 - 1) S_x + C(2 S_x^2 - S_z^2).$$
 %
-Заметим, что $A - C = 2 \gamma_{+-} = \alpha > 0$, также $2S_0 = N \gg 1$; $2C = \beta$; $EN+G = B$.
+Заметим, что $A - C = 2 \gamma_{+-} = \alpha > 0$, также $2S_0 = N \gg 1$; $2C = \beta$; $\Gamma N+G = B$.
 Приходим к следующему выражению для гамильтониана:
 %
 \begin{equation}
@@ -175,7 +175,7 @@ $$\hat{H} = -G S_x + A S_z^2 - E(2S_0 - 1) S_x + C(2 S_x^2 - S_z^2).$$
 В выражении (\ref{eq:spin_hamiltonian}) перейдем к дифференциальному представлению операторов:
 %
 \begin{equation}
-S_z = -i \dfrac{d}{d \phi}, \quad S_x = S \cos \phi - \sin \phi \dfrac{d}{d \phi}, \quad S_y = S \sin \phi + \cos \phi \dfrac{d}{d \phi}.
+S_z = -i \dfrac{d}{d \phi}, \quad S_x = s \cos \phi - \sin \phi \dfrac{d}{d \phi}, \quad S_y = s \sin \phi + \cos \phi \dfrac{d}{d \phi}.
 \label{eq:diff_repr}
 \end{equation}
 %
@@ -187,8 +187,8 @@ $$[S_x, S_y] = iS_z, \quad [S_z, S_x] = iS_y, \quad [S_y, S_z] = iS_x.$$
 %
 \begin{equation}
 \begin{array}{lcl}
-	S_x^2 & = & (S \cos \phi - \sin \phi \dfrac{d}{d \phi})^2 = \\
-	& = & S^2 \cos^2 \phi + S \sin^2 \phi + (\frac{1}{2} - S) \sin 2 \phi \dfrac{d}{d \phi} + \sin^2 \phi \dfrac{d^2}{d \phi^2}.
+	S_x^2 & = & (s \cos \phi - \sin \phi \dfrac{d}{d \phi})^2 = \\
+	& = & s^2 \cos^2 \phi + s \sin^2 \phi + (\frac{1}{2} - s) \sin 2 \phi \dfrac{d}{d \phi} + \sin^2 \phi \dfrac{d^2}{d \phi^2}.
 \end{array}
 \end{equation}
 %
@@ -196,8 +196,8 @@ $$[S_x, S_y] = iS_z, \quad [S_z, S_x] = iS_y, \quad [S_y, S_z] = iS_x.$$
 %
 \begin{equation*}
 \begin{array}{lcl}
-	\hat{H} & = & -(\alpha - \beta \sin^2 \phi) \dfrac{d^2}{d \phi^2} - (\beta (S - \frac{1}{2}) \sin 2 \phi - B \sin \phi) \dfrac{d}{d \phi} \\[10pt]
-	&& - BS \cos \phi - \beta S^2 \sin^2 \phi - \beta S \cos^2 \phi.
+	\hat{H} & = & -(\alpha - \beta \sin^2 \phi) \dfrac{d^2}{d \phi^2} - (\beta (s - \frac{1}{2}) \sin 2 \phi - B \sin \phi) \dfrac{d}{d \phi} \\[10pt]
+	&& - B s \cos \phi - \beta s^2 \sin^2 \phi - \beta s \cos^2 \phi.
 \end{array}
 \end{equation*}
 %
@@ -209,8 +209,8 @@ $$[S_x, S_y] = iS_z, \quad [S_z, S_x] = iS_y, \quad [S_y, S_z] = iS_x.$$
 %
 \begin{equation}
 \begin{array}{l}
-	(\alpha - \beta \sin^2 \phi) \dfrac{d^2 \Phi}{d \phi^2} + (\beta (S - \frac{1}{2}) \sin 2\phi - B \sin \phi) \dfrac{d \Phi}{d \phi} \\[10pt]
-	+ (E + BS \cos \phi + \beta S^2 \sin^2 \phi + \beta S \cos^2 \phi) = 0.
+	(\alpha - \beta \sin^2 \phi) \dfrac{d^2 \Phi}{d \phi^2} + (\beta (s - \frac{1}{2}) \sin 2\phi - B \sin \phi) \dfrac{d \Phi}{d \phi} \\[10pt]
+	+ (E + B s \cos \phi + \beta s^2 \sin^2 \phi + \beta s \cos^2 \phi) = 0.
 \end{array}
 \end{equation}
 
@@ -235,8 +235,8 @@ x = \int \limits_0^\phi \dfrac{d \phi'}{\sqrt{1 - \frac{\beta}{\alpha} \sin^2 \p
 %
 \begin{equation}
 \begin{array}{l}
-	\alpha \dfrac{d^2 \Phi}{d x^2} + \dfrac{-B~\sn x + 2 \beta S~\sn x~\cn x}{\dn x} \dfrac{d \Phi}{dx} \\[10pt]
-	+ (E + BS~\cn x + \beta S^2~\sn^2 x + \beta S~\cn^2 x) \Phi = 0.
+	\alpha \dfrac{d^2 \Phi}{d x^2} + \dfrac{-B~\sn x + 2 \beta s~\sn x~\cn x}{\dn x} \dfrac{d \Phi}{dx} \\[10pt]
+	+ (E + B s~\cn x + \beta s^2~\sn^2 x + \beta s~\cn^2 x) \Phi = 0.
 \end{array}
 \end{equation}
 %
@@ -253,20 +253,20 @@ x = \int \limits_0^\phi \dfrac{d \phi'}{\sqrt{1 - \frac{\beta}{\alpha} \sin^2 \p
 Коэффициент при первой производной $d/dx$ обращается в ноль при следующем условии на функцю $f$:
 %
 \begin{equation}
-f' = \dfrac{B~\sn x - 2 \beta S~\sn x~\cn x}{2 \alpha~\dn x}.
+f' = \dfrac{B~\sn x - 2 \beta s~\sn x~\cn x}{2 \alpha~\dn x}.
 \label{eq:f_condition}
 \end{equation}
 %
 Можно проверить (я проверил), что
 %
 \begin{equation}
-f = S \ln~\dn x - \frac{B}{2 \sqrt{\beta(\alpha - \beta)}} \arctan \left( \sqrt{\frac{\beta}{\alpha - \beta}}~\cn x \right)
+f = s \ln~\dn x - \frac{B}{2 \sqrt{\beta(\alpha - \beta)}} \arctan \left( \sqrt{\frac{\beta}{\alpha - \beta}}~\cn x \right)
 \end{equation}
 %
 удовлетворяет условию (\ref{eq:f_condition}).
 Выражение для второй производной:
 %
-$$f'' = \frac{1}{2 \alpha} \left( B~\cn x - 2\beta S (\cn^2 x - \sn^2 x) + \frac{\beta B~\sn^2 x~\cn x - 2 \beta^2 S~\sn^2 x~\cn^2 x}{\alpha~\dn^2 x} \right).$$
+$$f'' = \frac{1}{2 \alpha} \left( B~\cn x - 2\beta s (\cn^2 x - \sn^2 x) + \frac{\beta B~\sn^2 x~\cn x - 2 \beta^2 s~\sn^2 x~\cn^2 x}{\alpha~\dn^2 x} \right).$$
 %
 Приходим к следующему уранению:
 %
@@ -278,14 +278,14 @@ $$f'' = \frac{1}{2 \alpha} \left( B~\cn x - 2\beta S (\cn^2 x - \sn^2 x) + \frac
 с потенциалом
 %
 \begin{equation}
-V(x) = \frac{(\frac{1}{4}B^2 - \beta(\alpha - \beta) S (S+1))~\sn^2 x - \alpha B (S + \frac{1}{2})~\cn x}{\alpha~\dn^2 x}.
+V(x) = \frac{(\frac{1}{4}B^2 - \beta(\alpha - \beta) s (s+1))~\sn^2 x - \alpha B (s + \frac{1}{2})~\cn x}{\alpha~\dn^2 x}.
 \end{equation}
 %
 Введем обозначения $\Lambda = \frac{G}{\alpha S}$, $\lambda = \beta / \alpha$.
-Далее полагаем, что $E = 0$, $B = EN + G = G$, $S = N/2 \gg 1$, тогда уравнение (\ref{eq:shrod1}) можно переписать в виде
+Далее полагаем, что $\Gamma = 0$, $B = \Gamma N + G = G$, $s = N/2 \gg 1$, тогда уравнение (\ref{eq:shrod1}) можно переписать в виде
 %
 \begin{equation}
-\frac{d^2 \Psi}{dx^2} + (E - S^2 V(x)) \Psi = 0,
+\frac{d^2 \Psi}{dx^2} + (E - s^2 V(x)) \Psi = 0,
 \label{eq:shrod2}
 \end{equation}
 % 
@@ -295,12 +295,6 @@ V(x) = \frac{(\frac{1}{4}B^2 - \beta(\alpha - \beta) S (S+1))~\sn^2 x - \alpha B
 V(x) = \frac{(\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda))~\sn^2 x - \Lambda~\cn x}{\dn^2 x}.
 \end{equation}
 %
-%Линейное преобразование пространственной координаты: $\phi \to \phi + \pi$, $x \to x + 2K(\lambda)$, %потенциал изменится на
-%
-%\begin{equation}
-%V(x) = \frac{(\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda))~\sn^2 x - \Lambda~\cn x}{\dn^2 x}.
-%\end{equation}
-%
 Построим графики $V(x)$ для различных значений параметров $\Lambda$, $\lambda$.
 %
 \begin{figure}[Ht!]
@@ -308,18 +302,13 @@ V(x) = \frac{(\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda))~\sn^2 x - \Lambda~\
 \caption{$V(x)$ на 1-ом периоде функций Якоби ($[-2K; 2K]$)}
 \end{figure}
 %
-%\begin{figure}[Ht!]
-%\center{\includegraphics[width=1\linewidth]{pic/V_1period_shifted_asym.eps}}
-%\caption{На 1-ом периоде функций Якоби ($[-3K; K]$)}
-%\end{figure}
-%
 
 \subsection*{Фазовый переход в задаче о туннелировании}
 
 Рассмотрим уравнение Ньютона:
 %
 \begin{equation}
-\frac{1}{2} \dot{x}^2 = S^2 V(x) - E.
+\frac{1}{2} \dot{x}^2 = s^2 V(x) - E.
 \label{eq:newton}
 \end{equation}
 %
@@ -371,31 +360,31 @@ V_F (x) = -\lambda (1 - \lambda) \left( x^2 + \frac{2\lambda - 1}{3} x^4 + o(x^4
 Тогда первый интеграл уравнения движения для инстантона запсиывается в виде:
 %
 \begin{equation}
-\frac{1}{2 S^2} \dot{x}^2 = \lambda - \lambda (1 - \lambda) ~\sd^2 x = 1 - (1 - \lambda) ~\nd^2 x.
+\frac{1}{2 s^2} \dot{x}^2 = \lambda - \lambda (1 - \lambda) ~\sd^2 x = 1 - (1 - \lambda) ~\nd^2 x.
 \end{equation}
 %
 Интегрируем:
 %
 \begin{equation}
-S \sqrt{2} t + C = \int\frac{dx}{\sqrt{1 - (1 - \lambda) ~\nd^2 x}}
+s \sqrt{2} t + C = \int\frac{dx}{\sqrt{1 - (1 - \lambda) ~\nd^2 x}}
 \end{equation}
 %
 Сделаем замену $u = \sn x$, тогда $\cn x = \sqrt{1 - u^2}$, $\dn x = \sqrt{1 - \lambda u^2}$, $du = \cn x ~\dn x dx$.
 %
 \begin{equation}
-S \sqrt{2} t + C = \frac{1}{\sqrt{\lambda}} \int \frac{du}{1 - u^2} = \frac{1}{2\sqrt{\lambda}} (\log(1 + u) - \log(1 - u)).
+s \sqrt{2} t + C = \frac{1}{\sqrt{\lambda}} \int \frac{du}{1 - u^2} = \frac{1}{2\sqrt{\lambda}} (\log(1 + u) - \log(1 - u)).
 \end{equation}
 %
 Откуда, при условии $u(0) = 0$, получается
 %
 \begin{equation}
-u(t) = \sn x = \frac{e^{2S\sqrt{2 \lambda} t} - 1}{e^{2S\sqrt{2 \lambda} t} + 1}.
+u(t) = \sn x = \frac{e^{2 s \sqrt{2 \lambda} t} - 1}{e^{2S\sqrt{2 \lambda} t} + 1}.
 \end{equation}
 %
 Можно выразить $x(t)$ в явном виде:
 %
 \begin{equation}
-x(t) = \sn^{-1} \left( \frac{e^{2S\sqrt{2 \lambda} t} - 1}{e^{2S\sqrt{2 \lambda} t} + 1} \right) = F \left(\arcsin \left( \frac{e^{2S\sqrt{2 \lambda} t} - 1}{e^{2S\sqrt{2 \lambda} t} + 1} \right) , \lambda \right).
+x(t) = \sn^{-1} \left( \frac{e^{2s\sqrt{2 \lambda} t} - 1}{e^{2s\sqrt{2 \lambda} t} + 1} \right) = F \left(\arcsin \left( \frac{e^{2s\sqrt{2 \lambda} t} - 1}{e^{2s\sqrt{2 \lambda} t} + 1} \right) , \lambda \right).
 \label{eq:instanton_fock}
 \end{equation}
 %
@@ -423,16 +412,16 @@ V_J(x) = \frac{\frac{1}{4} \Lambda^2 ~\sn^2 x - \Lambda~\cn x}{\dn^2 x}.
 Уравнение квантового осциллятора
 %
 \begin{equation}
-\frac{d^2 \Psi}{dx^2} + (E + S^2 \Lambda - \left( \frac{S \Lambda}{2} \right)^2 x^2) \Psi = 0.
+\frac{d^2 \Psi}{dx^2} + (E + s^2 \Lambda - \left( \frac{s \Lambda}{2} \right)^2 x^2) \Psi = 0.
 \end{equation}
 %
-После замены $x \to \sqrt{\frac{S \Lambda}{2}} x$, $\tilde{E} = \frac{2}{S \Lambda} (E + S^2 \Lambda)$:
+После замены $x \to \sqrt{\frac{s \Lambda}{2}} x$, $\tilde{E} = \frac{2}{s \Lambda} (E + s^2 \Lambda)$:
 %
 \begin{equation}
 \frac{d^2 \Psi}{dx^2} + (\tilde{E} - x^2) \Psi = 0.
 \end{equation}
 %
-Уровни энергии: $\tilde{E} = 2n + 1$ или $E = S \Lambda (n + \frac{1}{2}) - S^2 \Lambda$.
+Уровни энергии: $\tilde{E} = 2n + 1$ или $E = s \Lambda (n + \frac{1}{2}) - s^2 \Lambda$.
 Собственные функции выражаются через полиномы Эрмита.
 
 \paragraph{Rabi: $\Lambda^2 \gg \Lambda \gg \lambda(1 - \lambda)$.}
@@ -457,14 +446,14 @@ V_R = \frac{1}{4} \Lambda^2 ~\sd^2 x.
 уравнение принимает вид:
 %
 \begin{equation}
-\frac{d^2 \Psi}{dx^2} + (E - \frac{S^2 \Lambda^2}{4 (1 - \lambda)} ~\cn^2 x) \Psi = 0.
+\frac{d^2 \Psi}{dx^2} + (E - \frac{s^2 \Lambda^2}{4 (1 - \lambda)} ~\cn^2 x) \Psi = 0.
 \end{equation}
 %
 Далее действуем как и раньше.
 Уравнение Ньютона:
 %
 \begin{equation}
-\frac{1}{2} \dot{x}^2 = S^2 V(x) - E.
+\frac{1}{2} \dot{x}^2 = s^2 V(x) - E.
 \end{equation}
 %
 $V(x) = \frac{\Lambda^2}{4(1 - \lambda)} ~\cn^2 x$.
@@ -488,16 +477,16 @@ V(x) = \frac{\Lambda^2}{4(1 - \lambda)} (1 - x^2 + \frac{1 + \lambda}{3} x^4 + o
 Уравнение квантового осциллятора
 %
 \begin{equation}
-\frac{d^2 \Psi}{dx^2} + (E - \left( \frac{S \Lambda}{2} \right)^2 x^2) \Psi = 0.
+\frac{d^2 \Psi}{dx^2} + (E - \left( \frac{s \Lambda}{2} \right)^2 x^2) \Psi = 0.
 \end{equation}
 %
-После замены $x \to \sqrt{\frac{S \Lambda}{2}} x$, $\tilde{E} = \frac{2}{S \Lambda} E$:
+После замены $x \to \sqrt{\frac{s \Lambda}{2}} x$, $\tilde{E} = \frac{2}{s \Lambda} E$:
 %
 \begin{equation}
 \frac{d^2 \Psi}{dx^2} + (\tilde{E} - x^2) \Psi = 0.
 \end{equation}
 %
-Уровни энергии: $\tilde{E} = 2n + 1$ или $E = S \Lambda (n + \frac{1}{2})$.
+Уровни энергии: $\tilde{E} = 2n + 1$ или $E = s \Lambda (n + \frac{1}{2})$.
 Собственные функции выражаются через полиномы Эрмита.
 
 \paragraph{Период малых колебаний термона.}
@@ -514,19 +503,19 @@ V(x) = \frac{\Lambda^2}{4(1 - \lambda)} (1 - x^2 + \frac{1 + \lambda}{3} x^4 + o
 Уравнение, описывающее мылые колебания:
 %
 \begin{equation}
-\ddot{x} - S^2 \left( \frac{1}{2} \Lambda^2 - (2\lambda - 1)\Lambda - 2 \lambda (1 - \lambda) \right) x = 0.
+\ddot{x} - s^2 \left( \frac{1}{2} \Lambda^2 - (2\lambda - 1)\Lambda - 2 \lambda (1 - \lambda) \right) x = 0.
 \end{equation}
 %
 Частота малых колебаний:
 %
 \begin{equation}
-\omega_0 = S \sqrt{2 \lambda (1 - \lambda) + (2\lambda - 1)\Lambda - \frac{1}{2} \Lambda^2}.
+\omega_0 = s \sqrt{2 \lambda (1 - \lambda) + (2\lambda - 1)\Lambda - \frac{1}{2} \Lambda^2}.
 \end{equation}
 %
 Период мылых колебаний
 %
 \begin{equation}
-\tau_0 = \frac{2 \pi}{\omega_0} = \frac{2 \pi}{S \sqrt{2 \lambda (1 - \lambda) + (2\lambda - 1)\Lambda - \frac{1}{2} \Lambda^2}}.
+\tau_0 = \frac{2 \pi}{\omega_0} = \frac{2 \pi}{s \sqrt{2 \lambda (1 - \lambda) + (2\lambda - 1)\Lambda - \frac{1}{2} \Lambda^2}}.
 \end{equation}
 %
 Условие, при котором существует симметричная double-well ловушка, поддерживающая существование термона в окрестности точки $x = 0$:
