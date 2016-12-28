@@ -1,0 +1,335 @@
+%% ****** Start of file apstemplate.tex ****** %
+%%
+%%
+%%   This file is part of the APS files in the REVTeX 4 distribution.
+%%   Version 4.1r of REVTeX, August 2010
+%%
+%%
+%%   Copyright (c) 2001, 2009, 2010 The American Physical Society.
+%%
+%%   See the REVTeX 4 README file for restrictions and more information.
+%%
+%
+% This is a template for producing manuscripts for use with REVTEX 4.0
+% Copy this file to another name and then work on that file.
+% That way, you always have this original template file to use.
+%
+% Group addresses by affiliation; use superscriptaddress for long
+% author lists, or if there are many overlapping affiliations.
+% For Phys. Rev. appearance, change preprint to twocolumn.
+% Choose pra, prb, prc, prd, pre, prl, prstab, prstper, or rmp for journal
+%  Add 'draft' option to mark overfull boxes with black boxes
+%  Add 'showpacs' option to make PACS codes appear
+%  Add 'showkeys' option to make keywords appear
+\documentclass[aps,prl,preprint,groupedaddress]{revtex4-1}
+%\documentclass[aps,prl,twocolumn,showpacs,superscriptaddress,groupedaddress]{revtex4}
+%\documentclass[aps,prl,preprint,superscriptaddress]{revtex4-1}
+%\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+% You should use BibTeX and apsrev.bst for references
+% Choosing a journal automatically selects the correct APS
+% BibTeX style file (bst file), so only uncomment the line
+% below if necessary.
+%\bibliographystyle{apsrev4-1}
+
+\begin{document}
+
+% Use the \preprint command to place your local institutional report
+% number in the upper righthand corner of the title page in preprint mode.
+% Multiple \preprint commands are allowed.
+% Use the 'preprintnumbers' class option to override journal defaults
+% to display numbers if necessary
+%\preprint{}
+
+%Title of paper
+\title{Quantum-Classical Phase Transition for Exciton-Polariton Josephson Junctions}
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current
+% author. Explanatory text should go in the []'s, actual e-mail
+% address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro foreach each type of information
+
+% \affiliation command applies to all authors since the last
+% \affiliation command. The \affiliation command should follow the
+% other information
+% \affiliation can be followed by \email, \homepage, \thanks as well.
+\author{lalala}
+%\email[]{Your e-mail address}
+%\homepage[]{Your web page}
+%\thanks{}
+%\altaffiliation{}
+\affiliation{}
+
+%Collaboration name if desired (requires use of superscriptaddress
+%option in \documentclass). \noaffiliation is required (may also be
+%used with the \author command).
+%\collaboration can be followed by \email, \homepage, \thanks as well.
+%\collaboration{}
+%\noaffiliation
+
+\date{\today}
+
+\begin{abstract}
+bla-bla-bla
+\end{abstract}
+
+% insert suggested PACS numbers in braces on next line
+\pacs{}
+% insert suggested keywords - APS authors don't need to do this
+%\keywords{}
+
+%\maketitle must follow title, authors, abstract, \pacs, and \keywords
+\maketitle
+
+\newcommand{\sn}{\textrm{sn}}
+\newcommand{\cn}{\textrm{cn}}
+\newcommand{\dn}{\textrm{dn}}
+\newcommand{\sd}{\textrm{sd}}
+\newcommand{\cd}{\textrm{cd}}
+\newcommand{\nd}{\textrm{nd}}
+\newcommand{\am}{\textrm{am}}
+% body of paper here - Use proper section commands
+% References should be done using the \cite, \ref, and \label commands
+\section{I.	Introduction}
+% Put \label in argument of \section for cross-referencing
+%\section{\label{}}
+%\subsection{}
+%\subsubsection{}
+For last decade  investigations of  exciton polariton Bose-Einstein condensates (BEC) in various type of semiconductor microstructures represent one of mainstreams of current photonic and semiconductor technologies, see e.g. ~\cite{1,2}.  The microcavity exciton polaritons are bosonic quasiparticles representing  admixtures of the quantized cavity mode and quantum wells excitons. Practically,  semiconductor microcavities are promising for various optoelectronic applications where quantum  matter-field interface  plays crucial role. In particular,  demonstrations of polariton laser with electrical pump ~\cite{3,4}, amplifiers ~\cite{5}, switches ~\cite{6},  transistors ~\cite{7}, polariton circuits and optical logic elements ~\cite{8,9}. Although exciton polariton condensates exhibits Bose-Einstein statistics under the phase transition condition and macroscopic occupation of the ground state at certain pumping rate that is less than for convenient lasers, they are not in true  thermodynamic equilibrium state ~\cite{10,11}.
+  
+Non-equilibrium, or, thermodynamically quasi-equilibrium  features of exciton polariton condensates play certain role in various manifestations of their collective  (many body) quantum states such as  superfluidity ~\cite{12,13},  quantized vortices ~\cite{14,15},  soliton formation ~\cite{16},  Josephson oscillations and macroscopic self-trapping ~\cite{17,18}. Since exciton polariton BEC’s in  present experiments examined at high enough (up to the room) temperatures the quantum  character of such a states should be examined even at equilibrium.
+
+The problem of distinguishability of statistically classical and quantum regimes for exciton polariton condensates behavior is very actual for practical purposes, see e.g. ~\cite{19}; especially for their possible applications for quantum information science purposes. Fast switching properties (the typical switching time of a few picoseconds), relatively strong nonlinear response and flexibility to external optical and/or electrical pump, spin degrees of freedom  made  microcavity polaritons potentially very promising for quantum computation and quantum information processing objectives,  see, e.g., ~\cite{21,22,23}.  In particular, we would like to mention here problems of design ultrafast quantum gates ~\cite{22,23}, creation of relatively long Rabi oscillations ~\cite{19, 20} and quantum annealing problem ~\cite{24} where collective (bosonic) character of polariton BEC could be used. Another promising area of potential applications of quantum exciton polariton states is connected with quantum metrology for which   designing  of quantum interferometers and gyroscopes  possessing  high precision measurements with quantum phase states is utilized, cf. ~\cite{25, 26}.
+  
+In the paper we consider generic problem of quantum-classical phase transition with  exciton polariton condensates occurring in semiconductor  microcavity in the presence of Josephson effect with them, cf. ~\cite{27}. In general  this area of research is based on dissipative tunneling problem or, tunneling at certain temperatures models, cf. ~\cite{28,29,30}. Evidently seminal studies on this topic relay to superconductor devices ~\cite{31} where macroscopic tunneling plays essential role. In particular, it worth to mention here Schrodinger cat state formation ~\cite{32} and design of quantum gates for quantum computing with  superconductor qubits where macroscopic  quantum coherent phase properties are used ~\cite{33}. Latterly the problem of quantum tunneling and quantum-classical phase transition problem have been applied to other two-level (spin) systems, like atomic BEC’s ~\cite{34}, and small ferromagnetic particles, ~\cite{35}. Strictly speaking main discussion is focused on investigation of quantum-classical escape rate transition that takes place in the presence of potential barrier at finite temperatures.
+  
+In the paper we propose  \textit{extended  model} for exciton polariton  Josephson junctions when energy of polariton-polariton scattering contributes into the tunneling parameter,  cf. ~\cite{36,37,38} and references therein.  In particularly, we pay our attention to temperature dependent critical phenomena occurring in the presence of macroscopic tunneling  . We aimed at elucidation of necessary criteria  to obtain   quantum phase regimes with trapped exciton polaritons  suitable for creation of exciton polariton qubit gates.
+
+This paper is arranged as follows. In Sec. II, we explain in details our model to realize Josephson junction with exciton polariton condensates.  The extended tight-binding model will be established in this case. In Sec. III we …..In the conclusion, we summarize the results obtained.
+
+\section{II. THE MODEL OD EXCITON POLARITON JOSEPHSON JUNCTION}
+We start by describing the problem of equilibrium exciton polariton condensate trapping in symmetric one dimensional double well potential  $U(x) = h ((x/x_0)^2 - 1)^2$, , sketched in Fig. 1; $2x_0$ defines 
+distance between potential minima, $h$ depth of the potential. The Hamiltonian for the system of weakly interacting exciton polaritons  in an external $U(x)$  can be written in the second quantized form as:
+\begin{equation}
+\hat{H} = \int \Big\{ -\dfrac{1}{2} \hat{\psi}^\dag \dfrac{d^2 \hat{\psi}}{dx^2} + \hat{\psi}^\dag \hat{\psi} U(x) + \dfrac{g}{2} \hat{\psi}^{\dag 2} \hat{\psi}^2  \Big\} dx.
+\label{eq:gpe_hamiltonian}
+\end{equation}
+where $\hat{\psi} \equiv \hat{\psi}(z,t)$ is polariton  field operator that annihilate a particle at the position $z$ and time $t$, $g$  is two-body (polariton-polariton) scattering length. In the paper we use so-called  two-mode representation of $\hat{\psi}$ supposing 
+\begin{equation}
+\hat{\psi} = \hat{\psi}_1(t) \Phi_1(x) + \hat{\psi}_2(t) \Phi_2(x),
+\label{eq:two_modes}
+\end{equation}
+where $\hat{\psi}_{1,2}$ are time dependent operators characterizing condensate at the left and at the right wells respectively; $\Phi_{1,2}(x)$ are condensate  wavefunctions which are responsible for it spatial distribution. It is instructive to recast $\Phi_{1,2}(x)$ as
+\begin{equation}
+\Phi_{1,2} = \dfrac{\Phi_+ \pm \Phi_-}{\sqrt{2}}
+\label{eq:conditions}
+\end{equation}
+where $\Phi_{\pm}(x) = \Phi_{\pm}(-x)$ are symmetric $\Phi_+$ and antisymmetric $\Phi_-$ real  wavefunctions obeying  stationary Gross-Pitaevskii equations, respectively
+\begin{equation}
+\mu_{\pm} \Phi_{\pm} = -\dfrac{1}{2} \dfrac{d^2 \Phi_{\pm}}{dx^2} + U(x) \Phi_{\pm} + g \Phi_{\pm}^3.
+\label{eq:stationary}
+\end{equation}
+and  normalization condition $\int \Phi_{\pm}^2 dx = 1$ $\mu_{\pm}$ are chemical  potentials. As a result an operator $\hat{\psi_1}^\dag\hat{\psi_1} + \hat{\psi_2}^\dag\hat{\psi_2} = N$ characterizes total number of particles (here and thereafter we omit “hat” design for simplicity). Substituting (\ref{eq:conditions}), (\ref{eq:two_modes}) into (\ref{eq:gpe_hamiltonian}) we arrive to 
+\begin{equation}
+\begin{array}{lcl}
+\hat{H} & = & \dfrac{G}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 +  \hat{\psi}_1 \hat{\psi}_2^\dag) + \dfrac{A}{2} (\hat{\psi}_1^{\dag 2} \hat{\psi}_1^2 + \hat{\psi}_2^{\dag 2} \hat{\psi}_2^2) \\[10pt]
+& & +\dfrac{\Gamma}{2} (\hat{\psi}_1^{\dag 2} \hat{\psi}_1 \hat{\psi}_2 + \hat{\psi}_1^\dag \hat{\psi}_1^2 \hat{\psi}_2^\dag + \hat{\psi}_1^\dag \hat{\psi}_2^\dag \hat{\psi}_2^2 + \hat{\psi}_1 \hat{\psi}_2^{\dag 2} \hat{\psi}_2) \\[10pt]
+& & +\dfrac{C}{2} (\hat{\psi}_1^{\dag 2} \hat{\psi}_2^2 + 4 \hat{\psi}_1^\dag \hat{\psi}_1 \hat{\psi}_2^\dag \hat{\psi}_2 + \hat{\psi}_1^2 \hat{\psi}_2^{\dag 2}).
+\end{array}
+\label{eq:hamiltonian}
+\end{equation}
+where  we made denotations 
+\begin{equation}
+\begin{array}{c}
+\gamma_{ij} = g \int \Phi_i^2 \Phi_j^2 dx, \quad i,j \in \{+,-\}; \\[10pt]
+\quad A = \dfrac{\gamma_{++} + \gamma_{--} + 6 \gamma_{+-}}{4}; \quad \Gamma = \dfrac{\gamma_{++} - \gamma_{--}}{2}; \\[10pt]
+C = \dfrac{\gamma_{++} + \gamma_{--} - 2\gamma_{+-}}{4}; \\[10pt]
+G = \mu_- - \mu_+ - 2\Gamma;\\[10pt]
+\end{array}
+\label{eq:subs}
+\end{equation}
+Hamiltonian (\ref{eq:hamiltonian}) represents extended model for internal Josephson junction effect with exciton polariton BEC trapped in double well potential. It is implies existence of quantum tunneling of the particles between wells with effective (nonlinear) tunneling rate $G_{eff} = \dfrac{1}{2}(G+\Gamma N - C\hat{\psi}_1^\dag\hat{\psi}_2)$. The contribution from relevant coefficients on can be estimated from variational ansatz 
+\begin{equation}
+\Phi_{\pm} = A_{\pm} \Big[\exp\Big(-\dfrac{(x-x_0)^2}{2a^2}\Big) \pm \exp\Big(-\dfrac{(x+x_0)^2}{2a^2}\Big)\Big]
+\label{eq:two_modes_eq}
+\end{equation}
+where  $a$ is width of condensate wavefunctions at each wells (we suppose them equal to each other),   defined from normalization conditions. In Fig.2 the behavior  of normalized coefficients $\dfrac{\gamma_{ij}}{g}$ $i,j \in {+,-}$ as a function of  half of intra-well distance $x_0$ is shown. It is important that at differences between them rapidly vanishes with increasing of distance  $x_0$. We can suppose $\Gamma = C = 0$ for $x_0 >> a$. This limit exactly corresponds to familiar problem of two weakly linked  condensates at zero temperature \underline{- see e.g. ~\cite{39} and cf.  }.
+\section{III. The Quantum Phase}
+To elucidate important quantum phase features  of our extended Josephson model  it is fruitful to recast Hamiltonian (\ref{eq:hamiltonian}) through the pseudo-spin operators defined as 
+\begin{subequations}
+\begin{align}
+\hat{S}_x = \dfrac{1}{2}(\hat{\psi}_1^\dag\hat{\psi}_2+\hat{\psi}_1\hat{\psi}_2^\dag) = s\cos(\phi)-\sin(\phi)\dfrac{d}{d\phi}, \\[10pt]
+\quad \hat{S}_y = \dfrac{i}{2}(\hat{\psi}_1^\dag\hat{\psi}_2-\hat{\psi}_1\hat{\psi}_2^\dag) = s\sin(\phi)+\cos(\phi)\dfrac{d}{d\phi}, \\[10pt]
+\hat{S}_z = \dfrac{1}{2}(\hat{\psi}_2^\dag\hat{\psi}_2+\hat{\psi}_1^\dag\hat{\psi}_1) = -i\dfrac{d}{d\phi},
+\end{align}
+\label{eq:pseudo_spin}
+\end{subequations}
+where $s = \dfrac{N}{2} >> 1$ is large \underline{ $C$ - number}, $\phi$ is phase variable. The operators determined in Eq. (\ref{eq:pseudo_spin}) obey familiar \underline{ SU(2)} algebra commutation relations
+\begin{equation}
+[S_x, S_y] = iS_z,  \quad[S_z, S_x] = iS_y,  \quad[S_y, S_z] = iS_x.
+\label{eq:commutation_relations}
+\end{equation}
+After straitforward calculations from (\ref{eq:hamiltonian}) one can obtain
+\begin{equation}
+\begin{array}{lcl}
+H & = & -(\alpha - \beta \sin^2 \phi) \dfrac{d^2}{d \phi^2} - (B \sin \phi + \beta (s - \frac{1}{2}) \sin 2 \phi) \dfrac{d}{d \phi} \\[10pt]
+&& + Bs \cos \phi - \beta s^2 \sin^2 \phi - \beta s \cos^2 \phi.
+\end{array}
+\label{eq:hamiltinian_s}
+\end{equation}
+where $\alpha = A - C = 2\gamma_{\pm} > 0$, $\beta = 2C > 0$ and $B = FN + G > 0$. Below we chose $x_0$ obeying to condition $\gamma_{++} \simeq \gamma_{--} = gamma$ supposing $\Gamma = 0$ for simplicity, see Fig.2.
+Hamiltonian (\ref{eq:hamiltinian_s}) corresponds to Schrodinger equation
+\begin{equation}
+\begin{array}{l}
+(\alpha - \beta \sin^2 \phi) \dfrac{d^2 \Phi}{d \phi^2} + (B \sin \phi + \beta (S - \frac{1}{2}) \sin 2\phi) \dfrac{d \Phi}{d \phi} \\[10pt]
++ (E - BS \cos \phi + \beta S^2 \sin^2 \phi + \beta S \cos^2 \phi) = 0.
+\end{array}
+\label{eq:Schrodinger}
+\end{equation}
+where $\Phi \equiv \Phi(phi)$ is  unknown $2\pi$-periodic wavefunction that characterizes quantum phase properties, cf. ~\cite{40}. Noticing that Eqs. (\ref{eq:hamiltinian_s}), (\ref{eq:Schrodinger}) can be obtained by applying  so-called phase-state representation, \underline{cf. [  ]}.
+\begin{equation}
+\ket{\psi} = \dfrac{1}{2\pi}\int_{-\infty}^{+\infty}d\phi\Phi(\phi)\ket{\phi}
+\end{equation}
+where
+\begin{equation}
+\ket{\phi} = \dfrac{1}{\sqrt{N!}}\Big[\exp^{i\phi/2}\psi_1^\dagger+\exp^{-i\phi/2}\psi_2^\dag\Big]^N\ket{0}_1\ket{0}
+\end{equation}
+is macroscopic coherent spin-state (macroscopic qubit state)  that plays important role in current quantum information protocols operating with $N$-particle condensates, cf. ~\cite{41}.
+It is possible to eliminate the term with first derivative in  Eq.(\ref{eq:Schrodinger}) applying the transformation
+\begin{equation}
+\Phi(\phi) = \Psi(x)\exp\Big[s\ln\dn{x}-\dfrac{\Lambda s}{2\sqrt{\lambda(1-\lambda)}}\arctan\Big(\sqrt{\dfrac{\lambda}{1-\lambda}}\cn{x}\Big)\Big]
+\label{eq:transformation_of_Phi}
+\end{equation}
+where $x = \int \limits_0^\phi \dfrac{d \phi'}{\sqrt{1 - \frac{\beta}{\alpha} \sin^2 \phi'}} = F(\phi, \sqrt{\beta / \alpha}) = F(\phi, \sqrt{\lambda})$ is new phase variable, $F(\phi, \sqrt{\lambda})$ is incomplete elliptic integral of the first kind.  In (\ref{eq:transformation_of_Phi}) we have introduced dimension-less vital parameters $\Lambda = \dfrac{G}{\alpha S}$, $\lambda = \dfrac{\beta}{\alpha}$ completely characterizing our model.
+Inserting (\ref{eq:transformation_of_Phi}) into (\ref{eq:Schrodinger}) we come to  convenient Schrodinger equation
+\begin{equation}
+\dfrac{d^2\Psi}{dx^2} + (E - V(x))\Psi = 0
+\label{eq:Schrodinger_usual}
+\end{equation}
+for quantum particle with mass $m_{eff} = \dfrac{1}{2}$,  normalized energy $E \equiv \dfrac{E}{\alpha}$ moving in the potential $V(x) = s^2V_0(x)$ with
+\begin{equation}
+V_0(x) = \dfrac{(\dfrac{1}{4}\Lambda^2-\lambda(1-\lambda))\sn^2{x}-\Lambda\cn{x}}{\dn^2{x}}
+\label{eq:potential}
+\end{equation}
+The results  known for quantum phase mesoscopic Josephson junction model can be recovered  from  (\ref{eq:Schrodinger_usual}), (\ref{eq:potential}) at $\lambda = 0$. 
+The dependence of $\lambda$-parameter  on  normalized  half of intra-well distance $\dfrac{x_0}{a}$ can be estimated from    (\ref{eq:subs}), (\ref{eq:two_modes_eq}) and reads as $\lambda = 0.5\Big(\exp\Big[\dfrac{2x_0^2}{a^2}\Big]-1\Big)^{-1}$. The limit $\lambda = 0$ obtained for infinitely large intra-well distances $x_0 \to \infty$. On the other hand, parameter grows rapidly at $\dfrac{x_0}{a} \ll 1$. Obviously, in this limit our Josephson junction model inherent based on relatively weak coupling between wells breaks down. Below we  examine case of $0 < \lambda < 1$ that could be obtained at moderate values $\dfrac{x_0}{a}$ of such as $\dfrac{x_0}{a} \geq 0.45$. 
+Analysis of the quantum phase for exciton polariton junctions we examine in three domains of  governed parameter $\Lambda$, cf.  ~\cite{40}. The dependences of  trapping potential $V_0(x)$ are shown in Fig. 3. 
+\subsection{Rabi regime}
+$\Lambda \gg 1$. In this limit the trapping potential reads
+\begin{equation}
+V_R(x) = \dfrac{1}{4}\Lambda^2\sd^2{x}
+\label{eq:rabi_potential}
+\end{equation}
+It is interesting to note that….
+\subsection{Fock regime}
+In this regime it is instructive to distinguish two limits.    First, we suppose that inequality $\lambda \ll \lambda < 1$.    In this case from (\ref{eq:potential}) one can obtain
+\begin{equation}
+V_F(x) = -\lambda(1-\lambda)\sd^2{x}
+\label{eq:fock1_potential}
+\end{equation}
+Another limit that could be studied within Fock regime is relevant to condition $\Lambda^2 < \lambda < \Lambda$. In this case  from (\ref{eq:potential}) we have 
+\begin{equation}
+V_0(x) = \dfrac{-\Lambda\cn{x}}{\dn^2{x}}
+\label{eq:fock2_potential}
+\end{equation}
+Equation (\ref{eq:fock2_potential}) for negligible    reproduces results for convenient quantum phase model ~\cite{40}. 
+\subsection{Josephson regime}
+$\Lambda \leq 1$. This regime represents intermediate  case between Rabi and Fock regimes.   In general all terms in (\ref{eq:potential}) should be kept.
+\section{IV. Quantum-classical phase transitions}
+Strictly speaking,  results  established in previous section are completely valid at  zero temperature. However, in current experiments exciton polariton condensate is observed at finite and high enough temperatures. In this section we find answer to vital question: when quantum approach to the phase problem for exciton polariton Josephson junction is valid?
+....
+\section{V. Conclusion}
+....
+% If in two-column mode, t his environment will change to single-column
+% format so that long equations can be displayed. Use
+% sparingly.
+%\begin{widetext}
+% put long equation here
+%\end{widetext}
+
+% figures should be put into the text as floats.
+% Use the graphics or graphicx packages (distributed with LaTeX2e)
+% and the \includegraphics macro defined in those packages.
+% See the LaTeX Graphics Companion by Michel Goosens, Sebastian Rahtz,
+% and Frank Mittelbach for instance.
+%
+% Here is an example of the general form of a figure:
+% Fill in the caption in the braces of the \caption{} command. Put the label
+% that you will use with \ref{} command in the braces of the \label{} command.
+% Use the figure* environment if the figure should span across the
+% entire page. There is no need to do explicit centering.
+
+% \begin{figure}
+% \includegraphics{}%
+% \caption{\label{}}
+% \end{figure}
+
+% Surround figure environment with turnpage environment for landscape
+% figure
+% \begin{turnpage}
+% \begin{figure}
+% \includegraphics{}%
+% \caption{\label{}}
+% \end{figure}
+% \end{turnpage}
+
+% tables should appear as floats within the text
+%
+% Here is an example of the general form of a table:
+% Fill in the caption in the braces of the \caption{} command. Put the label
+% that you will use with \ref{} command in the braces of the \label{} command.
+% Insert the column specifiers (l, r, c, d, etc.) in the empty braces of the
+% \begin{tabular}{} command.
+% The ruledtabular enviroment adds doubled rules to table and sets a
+% reasonable default table settings.
+% Use the table* environment to get a full-width table in two-column
+% Add \usepackage{longtable} and the longtable (or longtable*}
+% environment for nicely formatted long tables. Or use the the [H]
+% placement option to break a long table (with less control than 
+% in longtable).
+% \begin{table}%[H] add [H] placement to break table across pages
+% \caption{\label{}}
+% \begin{ruledtabular}
+% \begin{tabular}{}
+% Lines of table here ending with \\
+% \end{tabular}
+% \end{ruledtabular}
+% \end{table}
+
+% Surround table environment with turnpage environment for landscape
+% table
+% \begin{turnpage}
+% \begin{table}
+% \caption{\label{}}
+% \begin{ruledtabular}
+% \begin{tabular}{}
+% \end{tabular}
+% \end{ruledtabular}
+% \end{table}
+% \end{turnpage}
+
+% Specify following sections are appendices. Use \appendix* if there
+% only one appendix.
+%\appendix
+%\section{}
+
+% If you have acknowledgments, this puts in the proper section head.
+%\begin{acknowledgments}
+% put your acknowledgments here.
+%\end{acknowledgments}
+
+% Create the reference section using BibTeX:
+\bibliography{list}
+
+\end{document}
+%
+% ****** End of file apstemplate.tex ******
+
