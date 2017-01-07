@@ -170,7 +170,7 @@ where $a$ is width of condensate wavefunctions at each wells (we suppose them eq
 In Fig. \ref{pic:gamma_pm_vs_g} the behavior of normalized coefficients $\dfrac{\gamma_{ij}}{g}$ $i,j \in \{+,-\}$ as a function of half of intra-well distance $x_0$ is shown.
 It is important that at differences between them rapidly vanishes with increasing of distance $x_0$.
 We can suppose $\Gamma = C = 0$ for $x_0 >> a$.
-This limit exactly corresponds to familiar problem of two weakly linked condensates at zero temperature \underline{- see e.g. ~\cite{39} and cf. }.
+This limit exactly corresponds to familiar problem of two weakly linked condensates at zero temperature {\red see e.g. \cite{39} and cf. }.
 %
 \begin{figure}[ht]
 \center{\includegraphics[width=0.65\linewidth]{pic/ypm_x0.png}}
@@ -254,14 +254,14 @@ In (\ref{eq:transformation_of_phi}) we have introduced dimension-less vital para
 Inserting (\ref{eq:transformation_of_phi}) into (\ref{eq:schrodinger}) we come to convenient Schr\"odinger equation
 %
 \begin{equation}
-\dfrac{d^2\Psi}{dx^2} + (E - V(x))\Psi = 0
+\frac{d^2\Psi}{dz^2} + (E - V(z))\Psi = 0
 \label{eq:schrodinger_usual}
 \end{equation}
 %
-for quantum particle with mass $m_{eff} = \dfrac{1}{2}$, normalized energy $E \equiv \dfrac{E}{\alpha}$ moving in the potential $V(x) = s^2 V_0(x)$ with
+for quantum particle with mass $m_{eff} = \dfrac{1}{2}$, normalized energy $E \equiv \dfrac{E}{\alpha}$ moving in the potential $V(z) = s^2 V_0(z)$ with
 %
 \begin{equation}
-V_0(x) = \frac{ (\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda)) \sn^2{x} - \Lambda \cn{x}}{\dn^2{x}}
+V_0(z) = \frac{ (\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda)) \sn^2{z} - \Lambda \cn{z}}{\dn^2{z}}
 \label{eq:potential}
 \end{equation}
 %
@@ -310,12 +310,28 @@ First, we suppose that inequality $\Lambda \ll \lambda \ll 1$ is holds.
 In this case from (\ref{eq:potential}) one can obtain
 %
 \begin{equation}
-V_F(z) = -\lambda(1 - \lambda) \sd^2{z}
+V_F(z) = -\lambda(1 - \lambda) \sd^2{z}.
 \label{eq:fock1_potential}
 \end{equation}.
 %
 
-{\red Mathieu equaiton and it's spectrum}
+{\red
+Using the fact that $\lambda$ is small we can replace the potential (\ref{eq:fock1_potential}) with
+%
+\begin{equation}
+V_F(z) \sim -\lambda (1 - \lambda) \sin^2{z},
+\end{equation}
+%
+and our Schrodinger equation transforms to the so-called Mathieu equation
+%
+\begin{equation}
+\frac{d^2 \Psi}{d z^2} + (a - 2q  \cos{2z}) \Psi = 0.
+\end{equation}
+%
+where $a = E + s^2 \lambda(1 - \lambda) / 2$, $q = s^2 \lambda (1 - \lambda)/ 4$.
+We recall our boundary condition: $\Psi(z + 2\pi) = \Psi(z)$.
+So, spectrum consist of all Mathieu functions $ce_0(z, q)$, $ce_1(z, q)$, $se_1(z, q)$, \dots, which are $2\pi$-periodic, and corresponding eigenvalues $a$ can be found using series expansions in powers of $q$ (see Abramowitz and Stegun).
+}
 
 Another limit that could be studied within Fock regime is relevant to condition $\lambda \ll \Lambda \ll 1$.
 In this case from (\ref{eq:potential}) we have
