@@ -196,6 +196,45 @@ title(sprintf('\\Lambda = %g', Lambda));
 xlabel('z');
 ylabel('V_0(z)');
 
+%% Using CFDS to calculate \gamma_{\pm \pm} numerically
+clc; clear
+
+h = 10; x0 = 1;
+U = @(x) h * (x .^ 2 - x0^2) .^ 2;
+
+% Nonlinearity parameter
+g = 1;
+
+% Chemical potential
+% mu = 8;
+
+xspan = [-3 0];
+
+a = h;
+b = - 2 * (x0 ^ 2) * h;
+
+% Symmetric mode, mu = 5.7355, mu_corrected = -4.2645
+% I found this chemical potential with using of my finding normalized modes
+% procedure based on the asymptotic behaviour from the article Alfimov, Zezulin,
+% Nonlinearity 20, 2007. There the potential U(x) a x^4 - b x^2 was considered.
+mu = 5.7355;
+
+% I use chemical potential correction to put the double-well potential U(x)
+% into U(0) = 0.
+mu_corrected = mu - h * (x0 ^ 2);
+params = [mu_corrected, a, b, g];
+
+c_symmetric = get_symmetric_mode_parameter(params, xspan);
+[X, Phi_symmetric] = get_symmetric_mode(params, c_symmetric, xspan);
+
+%%
+
+[Grid, Phi, Norm] = CFDS( params, X, Phi_symmetric(:, 1).' );
+
+
+
+
+
 
 
 
