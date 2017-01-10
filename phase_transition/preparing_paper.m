@@ -229,6 +229,7 @@ c_symmetric = get_symmetric_mode_parameter(params, xspan);
 
 %%
 
+params = [mu_corrected, a-5, b+10, g];
 [Grid, Phi, Norm] = CFDS( params, X, Phi_symmetric(:, 1).' );
 
 

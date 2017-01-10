@@ -23,7 +23,7 @@ xspan = [X0(1), X0(end)];
 xgrid = xspan(1):xstep:xspan(2);
 Nx = length(xgrid);
 
-tstep = 0.03;
+tstep = 0.01;
 tspan = [0 100];
 tgrid = tspan(1):tstep:tspan(2);
 Nt = length(tgrid);
@@ -104,6 +104,9 @@ for i = 2:Nt
 	end
 	
 	plot(abs(U(i, :))); drawnow
+	
+	pause(1e-2);
+	
 	Norm(i) = simpson(abs(U(i, :)) .^ 2, xstep);
 	
 	% Logging
