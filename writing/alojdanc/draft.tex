@@ -30,7 +30,13 @@ i \dfrac{\partial \psi}{\partial t} = -\dfrac{1}{2} \dfrac{\partial^2 \psi}{\par
 \end{equation}
 %
 Здесь $\int |\psi|^2 dx = N$, где $N$ -- число атомов.
-Потенциал имеет вид $U(x) = h ((x/x_0)^2 - 1)^2$ (или, возможно, другой симметричный double-well потенциал).
+Потенциал имеет вид
+%
+\begin{equation}
+U(x) = h ((x/x_0)^2 - 1)^2.
+\label{eq:gpe_potential}
+\end{equation}
+%
 Гаильтониан этого уравнения выглядит следующим образом:
 %
 \begin{equation}
@@ -62,6 +68,17 @@ H = \int \Big\{ -\dfrac{1}{2} \psi^\dag \dfrac{d^2 \psi}{dx^2} + \psi^\dag \psi 
 %
 Полагаем, что для $\Phi_{\pm}$ выполняется условие нормировки $\int \Phi_{\pm}^2 dx = 1$, а значит, что и $\int \Phi_{1,2}^2 dx = 1$.
 Также $\int |\psi|^2 dx = \int |\psi_1 \Phi_1 + \psi_2 \Phi_2|^2 = |\psi_1|^2 + |\psi_2|^2 = N$.
+%
+На Рис. \ref{pic:potential_and_modes} показан пример симметричной и антисимметричной моды, $|| \Phi_{\pm} || = 1$.
+Они и соответствующие им значения $\mu_{\pm}$ были построены численно с помощью техники выхода из линейного приближения. 
+%
+\begin{figure}[Ht!]
+\center{\includegraphics[width=0.5\linewidth]{pic/potential_and_modes.eps}}
+\caption{Пример симметричной (толстая сплошная) $\Phi_+(x)$ и антисимметричной $\Phi_-(x)$ (пунктирная) мод уравнения (\ref{eq:stationary}) c параметрами потенциала (\ref{eq:gpe_potential}) $h = 10$, $x_0 = 1$. Значения хим. потенциалов $\mu_+ = 5.7355$, $\mu_- = 6.5653$.}
+\label{pic:potential_and_modes}
+\end{figure}
+%
+
 Теперь подставим выражение (\ref{eq:two_modes}) в гамильтониан (\ref{eq:gpe_hamiltonian}) и проинтегрируем.
 Выражение для гамильтониана принимает вид:
 %
@@ -296,6 +313,10 @@ V(x) = \frac{(\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda))~\sn^2 x - \Lambda~\
 \end{equation}
 %
 Построим графики $V(x)$ для различных значений параметров $\Lambda$, $\lambda$.
+
+Период потенциалов $V(x)$ равен $4K(\lambda)$, где $K(\lambda)$ -- полный эллиптический интеграл первого рода.
+Характеристики double-well ловушки: ловушка существует при $0 < \Lambda < 2*\lambda$; $V(0) = -\Lambda$; 
+
 %
 \begin{figure}[Ht!]
 \center{\includegraphics[width=1\linewidth]{pic/V_1period_shifted.eps}}

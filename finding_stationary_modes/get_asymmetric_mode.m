@@ -18,10 +18,10 @@ init = [ asympt_params(xstart)
 ode_params = @(x, f) ode(x, f, params);
 [X, Phi] = RK4(ode_params, xspan, init, 1024);
 
-X = [X -X(end:-1:1)];
+X = [X -X(end-1:-1:1)];
 Phi = [
 	Phi(:, 1), Phi(:, 2);
-	-Phi(end:-1:1, 1), Phi(end:-1:1, 2)
+	-Phi(end-1:-1:1, 1), Phi(end-1:-1:1, 2)
 ];
 
 end
