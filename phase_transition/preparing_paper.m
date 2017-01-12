@@ -196,46 +196,94 @@ title(sprintf('\\Lambda = %g', Lambda));
 xlabel('z');
 ylabel('V_0(z)');
 
-%% Using CFDS to calculate \gamma_{\pm \pm} numerically
+%% Phase transition diagram
+
+figure('Position', [100 100 325 250]); hold on
+axis([0 1 0 2]); xlabel('\lambda'); ylabel('\Lambda')
+set(gca, 'XTick', [0 0.5 1]); set(gca, 'YTick', [0 0.5 1 2]);
+
+Lambda = @(lambda) (1 - 16 * lambda + 16 * (lambda .^ 2) + ...
+	sqrt(1 + 32 * lambda - 32 * (lambda .^ 2))) ./ (4 * (2 * lambda - 1));
+
+% Avoid NaN at zero denominator
+lambda = 0.51:0.01:1;
+plot([0.5 lambda], [0 Lambda(lambda)], 'LineWidth', 2, 'Color', 'black');
+
+lambda = 0:0.01:1;
+plot(lambda, 2 * lambda, 'Color', 'black');
+
+plot([1 1], [0 2], 'Color', 'black');
+plot([0 0], [0 1], 'Color', 'black');
+
+%% S(T) plotting
 clc; clear
 
-h = 10; x0 = 1;
-U = @(x) h * (x .^ 2 - x0^2) .^ 2;
+s = 1; % ~ Number of particles
 
-% Nonlinearity parameter
-g = 1;
+% Potential
+lambda = 0.9; Lambda = 0.1; % 1st-order transition
+% lambda = 0.5; Lambda = 0.5; % 2nd-order transition
 
-% Chemical potential
-% mu = 8;
+V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
 
-xspan = [-3 0];
+% Put barrier into zero E0 = V(0)
+[~, V_min] = fminsearch(V, 0); % (!)
 
-a = h;
-b = - 2 * (x0 ^ 2) * h;
+Vb = @(x) V(x) - V_min;
 
-% Symmetric mode, mu = 5.7355, mu_corrected = -4.2645
-% I found this chemical potential with using of my finding normalized modes
-% procedure based on the asymptotic behaviour from the article Alfimov, Zezulin,
-% Nonlinearity 20, 2007. There the potential U(x) a x^4 - b x^2 was considered.
-mu = 5.7355;
+x = -2:0.01:2;
+plot(x, Vb(x));
 
-% I use chemical potential correction to put the double-well potential U(x)
-% into U(0) = 0.
-mu_corrected = mu - h * (x0 ^ 2);
-params = [mu_corrected, a, b, g];
+V0 = Vb(0);
 
-c_symmetric = get_symmetric_mode_parameter(params, xspan);
-[X, Phi_symmetric] = get_symmetric_mode(params, c_symmetric, xspan);
+% Normalized
+planck_const = 1;
+boltzmann_const = 1;
 
-%%
+% Energy level
+E = 0.001:0.005:V0; % 1st-order transition
+% E = 0.001:0.001:V0; % 2nd-order transition
 
-params = [mu_corrected, a-5, b+10, g];
-[Grid, Phi, Norm] = CFDS( params, X, Phi_symmetric(:, 1).' );
+T = zeros(1, length(E));
+S = zeros(1, length(E)); S0 = S;
+tau_p = zeros(1, length(E));
 
+fprintf('Total number of iteration: %i\n', length(E));
+for i = 1:length(E)
+	fprintf('%i\n', i);
+	
+	[xleft, xright] = roots_near_equilibrium(@(x) -s^2 * Vb(x) + E(i));
+	tau_p(i) = sqrt(2) * integral(@(x) 1 ./ sqrt(s^2 * Vb(x) - E(i)),...
+		xleft, xright, 'AbsTol', 1e-6);
 
+	T(i) = planck_const / (boltzmann_const * tau_p(i));
 
+	S(i) = 2 * sqrt(2) * integral(@(x) sqrt(s^2 * Vb(x) - E(i)),...
+		xleft, xright, 'AbsTol', 1e-6) + ...
+		E(i) * tau_p(i);
+	
+	S0(i) = V0 * tau_p(i);
+end
 
+T_thermal = min(T):0.001:(2*max(T));
+S_thermal = (planck_const * V0) ./ (boltzmann_const * T_thermal);
 
+% Plotting
+figure('Position', [100 100 650 225]);
 
+subplot(1, 2, 1); hold on
+xlabel('T'); ylabel('S_{min}(T)')
+
+plot(T, S, 'LineWidth', 2, 'Color', 'black');
+plot(T_thermal, S_thermal, '--', 'Color', 'black');
+
+subplot(1, 2, 2); hold on
+xlabel('E'); ylabel('\tau_p')
+
+plot(E, tau_p, 'LineWidth', 2, 'Color', 'black')
+
+%% Frequency of the small thermon oscillations
+omega0 = s * sqrt(-0.5 * Lambda^2 + (2 * lambda - 1) * Lambda + 2 * lambda * (1 - lambda));
 
 

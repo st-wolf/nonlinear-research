@@ -28,6 +28,10 @@
 \email{m.lebedev@lmc.ifmo.ru}
 \affiliation{ITMO University, St. Petersburg 197101, Russia}
 
+\author{D. A. Dolinina}
+\email{dasha.doly@gmail.com}
+\affiliation{ITMO University, St. Petersburg 197101, Russia}
+
 \date{\today}
 
 \begin{abstract}
@@ -86,7 +90,7 @@ In the conclusion, we summarize the results obtained.
 We start by describing the problem of equilibrium exciton polariton condensate trapping in symmetric one dimensional double well potential $U(x) = h ((x/x_0)^2 - 1)^2$, sketched on the Fig. \ref{pic:potential_sym_asym}; $2x_0$ defines distance between potential minima, $h$ depth of the potential.
 % 
 \begin{figure}[ht]
-\center{\includegraphics[width=0.65\linewidth]{pic/potential_sym_asym.png}}
+\center{\includegraphics[width=0.5\linewidth]{pic/potential_sym_asym.png}}
 \caption{
 Confined double-well potential for exciton polariton coupled condensate channels with symmetric $(\Phi_+(x))$ and asymmetric $(\Phi_-(x))$ wavefunctions obtained numerically by solving stationary GPE (\ref{eq:stationary}).
 The dimensionless parameters for the calculations are: $h = 10$, $x_0 = 1$, $\mu_+ = 5.7355$, $\mu_- = 6.5653$.
@@ -141,11 +145,10 @@ Substituting (\ref{eq:basic_modes}), (\ref{eq:two_modes}) into (\ref{eq:gpe_hami
 where we made some denotations
 %
 \begin{equation}
-\begin{array}{c}
+\begin{array}{l}
 \gamma_{ij} = g \int \Phi_i^2 \Phi_j^2 dx, \quad i,j \in \{+,-\}; \\
-\quad A = \dfrac{\gamma_{++} + \gamma_{--} + 6 \gamma_{+-}}{4}; \quad \Gamma = \dfrac{\gamma_{++} - \gamma_{--}}{2}; \\
-C = \dfrac{\gamma_{++} + \gamma_{--} - 2\gamma_{+-}}{4}; \\
-G = \mu_- - \mu_+ - 2\Gamma.
+A = \frac{1}{4} (\gamma_{++} + \gamma_{--} + 6 \gamma_{+-}); \quad \Gamma = \frac{1}{2} (\gamma_{++} - \gamma_{--}); \\
+C = \frac{1}{4} (\gamma_{++} + \gamma_{--} - 2\gamma_{+-}); \quad G = \mu_- - \mu_+ - 2\Gamma.
 \end{array}
 \label{eq:subs}
 \end{equation}
@@ -173,7 +176,7 @@ We can suppose $\Gamma = C = 0$ for $x_0 >> a$.
 This limit exactly corresponds to familiar problem of two weakly linked condensates at zero temperature {\red see e.g. \cite{Raghavan} and cf. }.
 %
 \begin{figure}[ht]
-\center{\includegraphics[width=0.65\linewidth]{pic/ypm_x0.png}}
+\center{\includegraphics[width=0.5\linewidth]{pic/ypm_x0.png}}
 \caption{Dependence of $\gamma_{ij} / g$ versus $x_0 / a$ \label{pic:gamma_pm_vs_g}}
 \end{figure}
 %
@@ -184,9 +187,9 @@ To elucidate important quantum phase features of our extended Josephson model it
 % 
 \begin{subequations}
 \begin{align}
-\hat{S}_x = \dfrac{1}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 + \hat{\psi}_1 \hat{\psi}_2^\dag) = s \cos(\phi) - \sin(\phi) \dfrac{d}{d \phi}, \\
-\quad \hat{S}_y = \dfrac{i}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 - \hat{\psi}_1 \hat{\psi}_2^\dag) = s \sin(\phi) + \cos(\phi) \dfrac{d}{d \phi}, \\
-\hat{S}_z = \dfrac{1}{2} (\hat{\psi}_2^\dag \hat{\psi}_2 + \hat{\psi}_1^\dag \hat{\psi}_1) = -i\dfrac{d}{d \phi},
+\hat{S}_x = & \dfrac{1}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 + \hat{\psi}_1 \hat{\psi}_2^\dag) = s \cos{\phi} - \sin{\phi} \dfrac{d}{d \phi}, \\
+\quad \hat{S}_y = & \dfrac{i}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 - \hat{\psi}_1 \hat{\psi}_2^\dag) = s \sin{\phi} + \cos{\phi} \dfrac{d}{d \phi}, \\
+\hat{S}_z = & \dfrac{1}{2} (\hat{\psi}_2^\dag \hat{\psi}_2 + \hat{\psi}_1^\dag \hat{\psi}_1) = -i\dfrac{d}{d \phi},
 \end{align}
 \label{eq:pseudo_spin}
 \end{subequations}
@@ -246,9 +249,9 @@ It is possible to eliminate the term with first derivative in Eq.(\ref{eq:schrod
 where
 %
 \begin{equation}
-z = \int \limits_0^\phi \dfrac{d \xi}{\sqrt{1 - \lambda \sin^2 \xi}} = F(\phi, \sqrt{\lambda})
+z = \int \limits_0^\phi \dfrac{d \xi}{\sqrt{1 - \lambda \sin^2 \xi}} = F(\phi, \lambda)
 \end{equation}
-is new phase variable; $F(\phi, \sqrt{\lambda})$ is incomplete elliptic integral of the first kind.
+is new phase variable; $F(\phi, \lambda)$ is incomplete elliptic integral of the first kind.
 In (\ref{eq:transformation_of_phi}) we have introduced dimension-less vital parameters $\Lambda = \dfrac{G}{\alpha s}$, $\lambda = \dfrac{\beta}{\alpha}$ completely characterizing our model.
 
 Inserting (\ref{eq:transformation_of_phi}) into (\ref{eq:schrodinger}) we come to convenient Schr\"odinger equation
@@ -352,7 +355,7 @@ Here we suppose that {\red $\Lambda < 1$}.
 This regime represents intermediate case between Rabi and Fock limits --- see Fig. \ref{phase_potential}b.
 In general all terms in (\ref{eq:potential}) should be kept.
 The behavior of effective potential $V_0(z)$ depends on the ratio between parameters $\Lambda$ and $\lambda$.
-If $2\lambda < \Lambda$ the $V_0(z)$ posses minima at $z = 0$ and $V(0) = -\Lambda$.
+If $\Lambda < 2\lambda$ the $V_0(z)$ posses minima at $z = 0$ and $V(0) = -\Lambda$.
 Frequency of small amplitude ($z \ll 1$) oscillations can be find from (\ref{eq:potential}) and looks like
 {\red equation for small oscillations}
 
@@ -365,7 +368,7 @@ In the other limit, for $2 \lambda > \Lambda$, two minima of $V_0(z)$ with coord
 %
 appears both for Josephson and Fock regimes, cf. Fig. \ref{phase_potential}b,c.  
 The depth of the potential minima depends on the $\lambda$ parameter.
-It is interesting to note that for {\red $\lambda > \dots$} potential $V_0(z)$ presumes local minimum at \dots
+It is interesting to note that for {\red $\Lambda > 1 + 2\lambda + \sqrt{1 + 8\lambda}$} potential $V_0(z)$ presumes local minimum at {\red $\pm 2 K(\lambda)$}.
 
 Practically two minima located at the points $A$ and $B$ of $W$-shape quantum phase potential in Fig. \ref{phase_potential}b can be used for initialization of exciton polariton qubit states $\ket{0}$ and $\ket{1}$ similarly to superconductor flux qubits, respectively, {\red cf.[ ]}.
 However, in our case such qubits much more easier to tailor by external optical or electrical pump {\red [ ]}.
@@ -379,11 +382,131 @@ Strictly speaking, results established in previous section are completely valid 
 However, in current experiments exciton polariton condensate is observed at finite and high enough temperatures.
 In this section we find answer to vital question: when quantum approach to the phase problem for exciton polariton Josephson junction is valid?
 
+Here we describe our approach to study the order of the phase transition and its temperature.
+According to works of Owerre, Chudnovsky, Garanin et al. order of these transition can be determined from the period of oscillation $\tau(E)$ near the bottom of the potential.
+Monotonically increasing $\tau(E)$ gives a second-order transition while nonmonotonic behaviour of $\tau(E)$ give a first-order transition.
+
+We determiine the temperature of the transition like Owerre does.
+At very low temperature, transition occur by quantum tunneling through the barrieer and the rate is governed by $\Gamma \sim e^{-B}$, where $B$ is the instanton action.
+At high temperature the particle has the possibility of hopping over the barrier, in this case the rate is governed by $\Gamma \sim e^{-\Delta V / T}$, where $\Delta V$ is the energy barrier.
+At a critical point these two transition rate are equal, there exist a crossover (first-order transition) temperature $T_{I}$ from quantum to a thermal regime, it's estimated as $T_{I} = \Delta V / B$.
+
+The crossover temperature in the case of second-order transition can be estimated as $T_{II} = \omega_0 / 2 \pi$, where $\omega_0$ is a oscillation frequency of the thermon near the top of the barrier.
+
+First, let's find out the dependence of the order on the parameters $\lambda$, $\Lambda$.
+Expand the potential $V_0(z)$ into a Taylor series:
+%
+\begin{equation}
+\begin{array}{lcl}
+V_0(z) & = & \left( \frac{1}{4}\Lambda^2 - \lambda (1 - \lambda) \right) \left( z^2 + \frac{2\lambda - 1}{3} z^4 + o(z^4) \right) \\ && - \Lambda \left( 1 + \frac{2\lambda - 1}{2} z^2 + \frac{16\lambda^2 - 16\lambda + 1}{24} z^4 + o(z^4) \right) \\
+& = & -\Lambda + \left( \frac{1}{4} \Lambda^2  - \frac{2\lambda - 1}{2} \Lambda - \lambda (1 - \lambda) \right) z^2 \\
+&& + \left( \frac{2\lambda - 1}{12} \Lambda^2 - \frac{16\lambda^2 - 16\lambda + 1}{24} \Lambda - \frac{\lambda (\lambda - 1) (2\lambda - 1)}{3} \right) z^4 + o(z^4).
+\end{array}
+\label{eq:potential_teylor}
+\end{equation}
+%
+Classical equation of motion for the thermon reads as
+%
+\begin{equation}
+\ddot{z} = s^2 \frac{d V_0}{dz}.
+\label{eq:thermon}
+\end{equation}
+%
+Equation for the small ocsillation near the top of the barrier:
+%
+\begin{equation}
+\ddot{z} - s^2 \left( \tfrac{1}{2} \Lambda^2 - (2\lambda - 1) \Lambda - 2 \lambda (1 - \lambda) \right) z = 0.
+\label{eq:thermon_small}
+\end{equation}
+%
+It follows from (\ref{eq:thermon_small}) that, as mentioned above, when $\Lambda \ge 2\lambda$ there is no barrier at $z = 0$.
+
+It's possible to show (for ex. using Poincare-Lindstedt method), that local behaviour of $\tau(E)$ is determined by the sign of the 4th degree in expansion (\ref{eq:potential_teylor}).
+If potential has the form $-x^2 - x^4$ than $\tau(E)$ increase near the critical value $E_0$ (where the thermon vanish) and the 1st order phase transition take place.
+In other case, if potential has the form $-x^2 + x^4$ than $\tau(E)$ decrease near the $E_0$ and the 2nd order phase transition occurs.
+So, the border between 1st and 2nd phase transition is determined by the equaiton
+%
+\begin{equation}
+\frac{2\lambda - 1}{12} \Lambda^2 - \frac{16\lambda^2 - 16\lambda + 1}{24} \Lambda - \frac{\lambda (\lambda - 1) (2\lambda - 1)}{3} = 0.
+\end{equation}
+%
+Taking in account the barrier existence condition, and conditions on $\lambda$, $\Lambda$ parameters one can derive the analytic expression of the border
+%
+\begin{equation}
+\Lambda = \frac{1 - 16\lambda + 16\lambda^2 + \sqrt{1 + 32\lambda - 32\lambda^2}}{4(2\lambda - 1)}.
+\label{eq:order_border}
+\end{equation}
+%
+We summarize our results on a picture below.
+%
+\begin{figure}[ht]
+\center{\includegraphics[width=0.5\linewidth]{pic/phase_transition_diagram.eps}}
+\caption{Phase transition diagram}
+\end{figure}
+%
+
+Consider the imaginary-time action
+%
+\begin{equation}
+S(T) = \oint (\tfrac{1}{2} \dot{z}^2 + s^2 V_0(z)) d \tau
+\label{eq:thermon_action_1}
+\end{equation}
+%
+Periodic, with $\tau_p = \hbar / k_B T$, solutions of (\ref{eq:thermon}) satisfy the relation
+%
+\begin{equation}
+\tfrac{1}{2} \dot{z}^2 = s^2 V_0(z) - E(\tau_p),
+\label{eq:total_energy}
+\end{equation}
+%
+where $\tau_p$ is a thermon period corresponding to the energy level $E(\tau_p)$;
+%
+\begin{equation}
+\tau_p(E) = \sqrt{2} \int_{z_1(E)}^{z_2(E)} \sqrt{s^2 V_0(z) - E} ~dz,
+\label{eq:thermon_period}
+\end{equation}
+%
+here $z_{1,2}(E)$ -- turning points.
+Using (\ref{eq:total_energy}) rewrite (\ref{eq:thermon_action_1}) in a form 
+%
+\begin{equation}
+S(T) = 2\sqrt{2} \int_{z_1(E)}^{z_2(E)} \sqrt{s^2 V_0(z) - E} ~dz + E \tau_p (E).
+\label{eq:thermon_action_2}
+\end{equation}
+%
+We draw dependence $S(T)$ and $\tau_p(E)$ for the cases of the 1st and 2nd order phase transition.
+For the sake of convenience we suppose that $V_0(z) = 0$ at minima surrounding the barrier.
+So, $E = 0$ corrensponds to the separatrices instanton solution (May be we should make corresponding transformation earlier).
+%
+\begin{figure}[ht]
+\center{\includegraphics[width=\linewidth]{pic/action_period_1st_order_transition.eps}}
+\caption{1st-order transition, $\lambda = 0.9$, $\Lambda = 0.1$}
+\end{figure}
+%
+\begin{figure}[ht]
+\center{\includegraphics[width=\linewidth]{pic/action_period_2nd_order_transition.eps}}
+\caption{2nd-order transition, $\lambda = 0.5$, $\Lambda = 0.5$}
+\end{figure}
+%
+
+Now let's compute the temperature of the phase transition.
+It follows from (\ref{eq:thermon_small}) that the frequency of small thermon oscillation near the top of the barrier can be computted as follows
+%
+\begin{equation}
+\omega_0 = s \sqrt{2 \lambda (1 - \lambda) + (2 \lambda - 1) \Lambda - \tfrac{1}{2} \Lambda^2}.
+\label{eq:period_small}
+\end{equation}
+%
+The temperature of the 2nd-order transition can be estimated as
+\begin{equation}
+T_{II} = (s  / 2 \pi) \sqrt{2 \lambda (1 - \lambda) + (2 \lambda - 1) \Lambda - \tfrac{1}{2} \Lambda^2}.
+\end{equation}
+
 \dots
 
 \section{Conclusion \label{sec:conclusion}}
 
-\dots
+\pagebreak
 
 % Create the reference section using BibTeX:
 \bibliography{list}
