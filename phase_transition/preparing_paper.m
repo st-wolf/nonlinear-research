@@ -286,4 +286,18 @@ plot(E, tau_p, 'LineWidth', 2, 'Color', 'black')
 %% Frequency of the small thermon oscillations
 omega0 = s * sqrt(-0.5 * Lambda^2 + (2 * lambda - 1) * Lambda + 2 * lambda * (1 - lambda));
 
+%% Owerre potential
+clc; clear
 
+lambda = 0.8; Lambda = 0.2;
+V_owerre = @(x) lambda * ((cn(x, lambda) - (Lambda / (2 * lambda))) .^ 2) ./ (dn(x, lambda) .^ 2);
+V_me = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
+
+[~, V_min] = fminsearch(V_me, 0); % (!)
+
+x = -10:0.01:10;
+
+figure; hold on;
+plot(x, V_owerre(x), 'Color', 'black', 'LineWidth', 2);
+plot(x, V_me(x) - V_min, 'Color', 'red');
