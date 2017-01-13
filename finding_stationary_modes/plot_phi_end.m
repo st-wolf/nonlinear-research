@@ -1,6 +1,6 @@
 function plot_phi_end( params, xspan )
 
-C = linspace(0, 2, 100);
+C = linspace(0, 1, 50);
 Phi_end = zeros(1, length(C));
 
 for i = 1:length(C)

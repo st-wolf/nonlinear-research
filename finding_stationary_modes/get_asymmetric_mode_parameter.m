@@ -6,7 +6,7 @@ function [ c_asymmetric ] = get_asymmetric_mode_parameter( params, xspan )
 
 get_phi_end_params = @(C) get_phi_end(params, C, xspan);
 
-c0 = 0.01; cstep = 1;
+c0 = 0.01; cstep = 0.1;
 phi_end_0 = get_phi_end_params(c0);
 
 c1 = c0 + cstep;
