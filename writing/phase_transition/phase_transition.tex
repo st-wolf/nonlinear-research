@@ -257,11 +257,11 @@ In (\ref{eq:transformation_of_phi}) we have introduced dimension-less vital para
 Inserting (\ref{eq:transformation_of_phi}) into (\ref{eq:schrodinger}) we come to convenient Schr\"odinger equation
 %
 \begin{equation}
-\frac{d^2\Psi}{dz^2} + (E - V(z))\Psi = 0
+\frac{1}{2 m} \frac{d^2\Psi}{dz^2} + (E - V(z))\Psi = 0
 \label{eq:schrodinger_usual}
 \end{equation}
 %
-for quantum particle with mass $m_{eff} = \dfrac{1}{2}$, normalized energy $E \equiv \dfrac{E}{\alpha}$ moving in the potential $V(z) = s^2 V_0(z)$ with
+for quantum particle with ``mass'' $m = \dfrac{1}{2 \alpha}$, energy $E$, moving in the potential $V(z) = \alpha s^2 V_0(z)$ with
 %
 \begin{equation}
 V_0(z) = \frac{ (\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda)) \sn^2{z} - \Lambda \cn{z}}{\dn^2{z}}
@@ -331,7 +331,7 @@ and our Schrodinger equation transforms to the so-called Mathieu equation
 \frac{d^2 \Psi}{d z^2} + (a - 2q  \cos{2z}) \Psi = 0.
 \end{equation}
 %
-where $a = E + s^2 \lambda(1 - \lambda) / 2$, $q = s^2 \lambda (1 - \lambda)/ 4$.
+where $a = E / \alpha + s^2 \lambda(1 - \lambda) / 2$, $q = s^2 \lambda (1 - \lambda)/ 4$.
 We recall our boundary condition: $\Psi(z + 2\pi) = \Psi(z)$.
 So, spectrum consist of all Mathieu functions $ce_0(z, q)$, $ce_1(z, q)$, $se_1(z, q)$, \dots, which are $2\pi$-periodic, and corresponding eigenvalues $a$ can be found using series expansions in powers of $q$ (see Abramowitz and Stegun).
 }
@@ -355,22 +355,21 @@ Here we suppose that {\red $\Lambda < 1$}.
 This regime represents intermediate case between Rabi and Fock limits --- see Fig. \ref{phase_potential}b.
 In general all terms in (\ref{eq:potential}) should be kept.
 The behavior of effective potential $V_0(z)$ depends on the ratio between parameters $\Lambda$ and $\lambda$.
-If $\Lambda < 2\lambda$ the $V_0(z)$ posses minima at $z = 0$ and $V(0) = -\Lambda$.
-Frequency of small amplitude ($z \ll 1$) oscillations can be find from (\ref{eq:potential}) and looks like
-{\red equation for small oscillations}
+If $\Lambda \ge 2\lambda$ the $V_0(z)$ posses minima at $z = 0$ and $V(0) = -\Lambda$.
+Frequency of small amplitude ($z \ll 1$) oscillations can be find from (\ref{eq:potential}) and looks like {\red equation for small oscillations}.
 
-In the other limit, for $2 \lambda > \Lambda$, two minima of $V_0(z)$ with coordinates
+In the other limit, for $\Lambda < 2 \lambda$, two minima of $V_0(z)$ with coordinates
 %
 \begin{equation}
-\cn{z_{min}} = \frac{\Lambda (2 \lambda - 1)}{0.5 \Lambda^2 - 2 \lambda (1 - \lambda)}
+\cn{z_{min}} = \frac{\Lambda}{2 \lambda}
 \label{eq:z_minima}
 \end{equation}
 %
 appears both for Josephson and Fock regimes, cf. Fig. \ref{phase_potential}b,c.  
 The depth of the potential minima depends on the $\lambda$ parameter.
-It is interesting to note that for {\red $\Lambda > 1 + 2\lambda + \sqrt{1 + 8\lambda}$} potential $V_0(z)$ presumes local minimum at {\red $\pm 2 K(\lambda)$}.
+It is interesting to note that for {\red $\Lambda > 1 + 2\lambda + \sqrt{1 + 8\lambda}$} potential $V_0(z)$ presumes local minimum at $\pm 2 K(\lambda)$.
 
-Practically two minima located at the points $A$ and $B$ of $W$-shape quantum phase potential in Fig. \ref{phase_potential}b can be used for initialization of exciton polariton qubit states $\ket{0}$ and $\ket{1}$ similarly to superconductor flux qubits, respectively, {\red cf.[ ]}.
+Practically two minima located at the points $A$ and $B$ of $W$-shape quantum phase potential in Fig. \ref{phase_potential}b can be used for initialization of exciton polariton qubit states $\ket{0}$ and $\ket{1}$ similarly to superconductor flux qubits, respectively, {\red cf. [ ]}.
 However, in our case such qubits much more easier to tailor by external optical or electrical pump {\red [ ]}.
 Another interesting phenomena that can be obtained with potential in Fig. \ref{phase_potential}b is connected with some analogies in cosmology and quantum field theory.
 In particular, in our recent work {\red [ ]} we discuss Higgs field generation by using exciton polaritons in semiconductor Bragg mirror structures as an on table analog of known cosmological phenomenon, {\red cf. [ ]}.
@@ -389,17 +388,25 @@ Monotonically increasing $\tau(E)$ gives a second-order transition while nonmono
 We determiine the temperature of the transition like Owerre does.
 At very low temperature, transition occur by quantum tunneling through the barrieer and the rate is governed by $\Gamma \sim e^{-B}$, where $B$ is the instanton action.
 At high temperature the particle has the possibility of hopping over the barrier, in this case the rate is governed by $\Gamma \sim e^{-\Delta V / T}$, where $\Delta V$ is the energy barrier.
-At a critical point these two transition rate are equal, there exist a crossover (first-order transition) temperature $T_{I}$ from quantum to a thermal regime, it's estimated as $T_{I} = \Delta V / B$.
+At a critical point these two transition rate are equal, there exist a crossover (first-order transition) temperature $T_{c}^{(1)}$ from quantum to a thermal regime, it's estimated as $T_{c}^{(1)} = \Delta V / B$.
 
-The crossover temperature in the case of second-order transition can be estimated as $T_{II} = \omega_0 / 2 \pi$, where $\omega_0$ is a oscillation frequency of the thermon near the top of the barrier.
+The crossover temperature in the case of second-order transition can be estimated as $T_{c}^{(2)} = \omega_0 / 2 \pi$, where $\omega_0$ is a oscillation frequency of the thermon near the top of the barrier.
 
 First, let's find out the dependence of the order on the parameters $\lambda$, $\Lambda$.
 Expand the potential $V_0(z)$ into a Taylor series:
 %
+% \begin{equation}
+% \begin{array}{lcl}
+% V_0(z) & = & \left( \frac{1}{4}\Lambda^2 - \lambda (1 - \lambda) \right) \left( z^2 + \frac{2\lambda - 1}{3} z^4 + o(z^4) \right) \\ && - \Lambda \left( 1 + \frac{2\lambda - 1}{2} z^2 + \frac{16\lambda^2 - 16\lambda + 1}{24} z^4 + o(z^4) \right) \\
+% & = & -\Lambda + \left( \frac{1}{4} \Lambda^2  - \frac{2\lambda - 1}{2} \Lambda - \lambda (1 - \lambda) \right) z^2 \\
+% && + \left( \frac{2\lambda - 1}{12} \Lambda^2 - \frac{16\lambda^2 - 16\lambda + 1}{24} \Lambda - \frac{\lambda (\lambda - 1) (2\lambda - 1)}{3} \right) z^4 + o(z^4).
+% \end{array}
+% \label{eq:potential_teylor}
+% \end{equation}
+%
 \begin{equation}
 \begin{array}{lcl}
-V_0(z) & = & \left( \frac{1}{4}\Lambda^2 - \lambda (1 - \lambda) \right) \left( z^2 + \frac{2\lambda - 1}{3} z^4 + o(z^4) \right) \\ && - \Lambda \left( 1 + \frac{2\lambda - 1}{2} z^2 + \frac{16\lambda^2 - 16\lambda + 1}{24} z^4 + o(z^4) \right) \\
-& = & -\Lambda + \left( \frac{1}{4} \Lambda^2  - \frac{2\lambda - 1}{2} \Lambda - \lambda (1 - \lambda) \right) z^2 \\
+V_0(z) & = & -\Lambda + \left( \frac{1}{4} \Lambda^2  - \frac{2\lambda - 1}{2} \Lambda - \lambda (1 - \lambda) \right) z^2 \\
 && + \left( \frac{2\lambda - 1}{12} \Lambda^2 - \frac{16\lambda^2 - 16\lambda + 1}{24} \Lambda - \frac{\lambda (\lambda - 1) (2\lambda - 1)}{3} \right) z^4 + o(z^4).
 \end{array}
 \label{eq:potential_teylor}
@@ -408,14 +415,14 @@ V_0(z) & = & \left( \frac{1}{4}\Lambda^2 - \lambda (1 - \lambda) \right) \left( 
 Classical equation of motion for the thermon reads as
 %
 \begin{equation}
-\ddot{z} = s^2 \frac{d V_0}{dz}.
+m \ddot{z} = \alpha s^2 \frac{d V_0}{dz}.
 \label{eq:thermon}
 \end{equation}
 %
 Equation for the small ocsillation near the top of the barrier:
 %
 \begin{equation}
-\ddot{z} - s^2 \left( \tfrac{1}{2} \Lambda^2 - (2\lambda - 1) \Lambda - 2 \lambda (1 - \lambda) \right) z = 0.
+m \ddot{z} - \alpha s^2 \left( \tfrac{1}{2} \Lambda^2 - (2\lambda - 1) \Lambda - 2 \lambda (1 - \lambda) \right) z = 0.
 \label{eq:thermon_small}
 \end{equation}
 %
@@ -448,21 +455,21 @@ We summarize our results on a picture below.
 Consider the imaginary-time action
 %
 \begin{equation}
-S(T) = \oint (\tfrac{1}{2} \dot{z}^2 + s^2 V_0(z)) d \tau
+S(T) = \oint (\tfrac{1}{2} m \dot{z}^2 + V(z)) d \tau
 \label{eq:thermon_action_1}
 \end{equation}
 %
 Periodic, with $\tau_p = \hbar / k_B T$, solutions of (\ref{eq:thermon}) satisfy the relation
 %
 \begin{equation}
-\tfrac{1}{2} \dot{z}^2 = s^2 V_0(z) - E(\tau_p),
+\tfrac{1}{2} m \dot{z}^2 = V(z) - E(\tau_p),
 \label{eq:total_energy}
 \end{equation}
 %
 where $\tau_p$ is a thermon period corresponding to the energy level $E(\tau_p)$;
 %
 \begin{equation}
-\tau_p(E) = \sqrt{2} \int_{z_1(E)}^{z_2(E)} \sqrt{s^2 V_0(z) - E} ~dz,
+\tau_p(E) = \sqrt{2 m} \int_{z_1(E)}^{z_2(E)} \sqrt{V(z) - E} ~dz,
 \label{eq:thermon_period}
 \end{equation}
 %
@@ -470,7 +477,7 @@ here $z_{1,2}(E)$ -- turning points.
 Using (\ref{eq:total_energy}) rewrite (\ref{eq:thermon_action_1}) in a form 
 %
 \begin{equation}
-S(T) = 2\sqrt{2} \int_{z_1(E)}^{z_2(E)} \sqrt{s^2 V_0(z) - E} ~dz + E \tau_p (E).
+S(T) = 2 \sqrt{2 m} \int_{z_1(E)}^{z_2(E)} \sqrt{V(z) - E} ~dz + E \tau_p (E).
 \label{eq:thermon_action_2}
 \end{equation}
 %
@@ -479,8 +486,14 @@ For the sake of convenience we suppose that $V_0(z) = 0$ at minima surrounding t
 So, $E = 0$ corrensponds to the separatrices instanton solution (May be we should make corresponding transformation earlier).
 %
 \begin{figure}[ht]
-\center{\includegraphics[width=\linewidth]{pic/action_period_combined.eps}}
-\caption{(a) 1st-order transition, $\lambda = 0.9$, $\Lambda = 0.1$; (b) 2nd-order transition, $\lambda = 0.5$, $\Lambda = 0.5$}
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{pic/action_period_1st_order_transition.eps} \\ (a)}
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=1\linewidth]{pic/action_period_2nd_order_transition.eps} \\ (b)}
+\end{minipage}
+\caption{(a) 1st-order transition, $\lambda = 0.9$, $\Lambda = 0.1$; (b) 2nd-order transition, $\lambda = 0.5$, $\Lambda = 0.5$; parameters: $\hbar = 1$, $k_B = 1$, $\alpha = 1$, $s = 1$; the solid liine correspond to the thermon action, $S_T(T)$; the dashed line corresponds to the thermodynamic action, $S_0(T) = \hbar \Delta V / k_b T$. \label{pic:action_period}}
 \end{figure}
 %
 
@@ -488,14 +501,44 @@ Now let's compute the temperature of the phase transition.
 It follows from (\ref{eq:thermon_small}) that the frequency of small thermon oscillation near the top of the barrier can be computted as follows
 %
 \begin{equation}
-\omega_0 = s \sqrt{2 \lambda (1 - \lambda) + (2 \lambda - 1) \Lambda - \tfrac{1}{2} \Lambda^2}.
+\omega_0 = 2 \alpha s \sqrt{\lambda (1 - \lambda) + \tfrac{1}{2} (2 \lambda - 1) \Lambda - \tfrac{1}{4} \Lambda^2}.
 \label{eq:period_small}
 \end{equation}
 %
-The temperature of the 2nd-order transition can be estimated as
+The temperature of the 2nd-order transition can be computed as
+%
 \begin{equation}
-T_{II} = (s  / 2 \pi) \sqrt{2 \lambda (1 - \lambda) + (2 \lambda - 1) \Lambda - \tfrac{1}{2} \Lambda^2}.
+T_{c}^{(2)} = (\alpha s / \pi) \sqrt{\lambda (1 - \lambda) + (2 \lambda - 1) \tfrac{\Lambda}{2} - \tfrac{1}{4} \Lambda^2}.
 \end{equation}
+%
+
+The temperature of the 1st-order transition can be estimated as
+%
+\begin{equation}
+T_{c}^{(1)} = \frac{\Delta V}{B},
+\end{equation}
+%
+where $\Delta V$ -- high of the potential barrier and $B$ is a instanton action which can be calculated as $B = S(E_{min})$.
+Excluding some constant form the hamiltonian we can rewrite our potential in a form
+%
+\begin{equation}
+\widetilde{V}_0(z) = \frac{\lambda (\cn{z} - \tfrac{\Lambda}{2 \lambda})^2}{\dn^2{z}}.
+\end{equation}
+%
+It's convenient, because when the barrier exist at the point $z = 0$, ($\Lambda < 2 \lambda$), $\widetilde{V}_0(z_{min}) = 0$ and $E_{min} = 0$.
+Action of the instanton trajectory can be obtained by integration
+%
+\begin{equation}
+\begin{array}{c}
+B = S(E_{min}) = 2 \sqrt{2 m} \int_{-z_{min}}^{+z_{min}} \sqrt{\alpha s^2 \widetilde{V}_0(z)} ~dz = \\
+= 2 s \left[ \log \frac{2 \sqrt{\lambda} + \sqrt{4 \lambda^2 - \Lambda^2}}{2 \sqrt{\lambda} - \sqrt{4 \lambda^2 - \Lambda^2}} - \frac{\Lambda}{\sqrt{\lambda (1 - \lambda)}} \arctan \left( \frac{\sqrt{(1 - \lambda) (4 \lambda^2 - \Lambda^2)}}{\Lambda} \right) \right];
+\end{array}
+\end{equation}
+%
+here $z_{min} = \frac{\Lambda}{2 \lambda}$.
+So, $T_{c}^{(1)} = \frac{\Delta V}{B}$, $\Delta V = \alpha s^2 \widetilde{V}_0(0) = \alpha s^2 \lambda (1 - \frac{\Lambda}{2 \lambda})^2$.
+You can see on Fig.\ref{pic:action_period}(a) an example of such estimation (left red line).
+It's differ form real value of tempereture (right red line) by $\sim 1.2\%$.
 
 \dots
 

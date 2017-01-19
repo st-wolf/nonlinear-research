@@ -219,12 +219,14 @@ plot([0 0], [0 1], 'Color', 'black');
 clc; clear
 
 s = 1; % ~ Number of particles
+alpha = 1; % Parameter, lambda = beta / alpha
+mass = 1 / (2 * alpha);
 
 % Potential
 lambda = 0.9; Lambda = 0.1; % 1st-order transition
 % lambda = 0.5; Lambda = 0.5; % 2nd-order transition
 
-V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
 
 % Put barrier into zero E0 = V(0)
@@ -232,6 +234,7 @@ V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2)
 
 Vb = @(x) V(x) - V_min;
 
+figure
 x = -2:0.01:2;
 plot(x, Vb(x));
 
@@ -254,13 +257,13 @@ for i = 1:length(E)
 	fprintf('%i\n', i);
 	
 	[xleft, xright] = roots_near_equilibrium(@(x) -s^2 * Vb(x) + E(i));
-	tau_p(i) = sqrt(2) * integral(@(x) 1 ./ sqrt(s^2 * Vb(x) - E(i)),...
-		xleft, xright, 'AbsTol', 1e-6);
+	tau_p(i) = sqrt(2 * mass) * integral(@(x) 1 ./ sqrt(alpha * s^2 * Vb(x) - E(i)),...
+		xleft, xright, 'AbsTol', 1e-8);
 
 	T(i) = planck_const / (boltzmann_const * tau_p(i));
 
-	S(i) = 2 * sqrt(2) * integral(@(x) sqrt(s^2 * Vb(x) - E(i)),...
-		xleft, xright, 'AbsTol', 1e-6) + ...
+	S(i) = 2 * sqrt(2 * mass) * integral(@(x) sqrt(alpha * s^2 * Vb(x) - E(i)),...
+		xleft, xright, 'AbsTol', 1e-8) + ...
 		E(i) * tau_p(i);
 	
 	S0(i) = V0 * tau_p(i);
@@ -283,8 +286,25 @@ xlabel('E'); ylabel('\tau_p')
 
 plot(E, tau_p, 'LineWidth', 2, 'Color', 'black')
 
-%% Frequency of the small thermon oscillations
-omega0 = s * sqrt(-0.5 * Lambda^2 + (2 * lambda - 1) * Lambda + 2 * lambda * (1 - lambda));
+%% Transition temperature
+
+% 2nd order
+% Frequency of the small thermon oscillations
+omega0 = 2 * alpha * s * sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
+T_2nd = omega0 / (2 * pi);
+
+subplot(1, 2, 1)
+plot([T_2nd T_2nd], [min(S_thermal) max(S)]);
+
+% 1st order
+% Action on the thermon
+B = 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) / ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
+	- (Lambda / sqrt(lambda * (1 - lambda))) * atan((sqrt(1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
+
+T_1st = V0 / B;
+
+subplot(1, 2, 1)
+plot([T_1st T_1st], [-min(S_thermal) max(S)]);
 
 %% Owerre potential
 clc; clear
@@ -301,3 +321,24 @@ x = -10:0.01:10;
 figure; hold on;
 plot(x, V_owerre(x), 'Color', 'black', 'LineWidth', 2);
 plot(x, V_me(x) - V_min, 'Color', 'red');
+
+%% Check minimum of the potential
+clc; clear
+
+lambda = 0.1; Lambda = 0.1;
+
+V_min_exp = -(4 * lambda^2 * (1 - lambda) + Lambda^2 + Lambda^4 / (4 * lambda)) / (4 * lambda * (1 - lambda) + Lambda^2);
+
+V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2) - V_min_exp;
+
+% cn_x_min = Lambda * (2 * lambda - 1) / (0.5 * Lambda^2 - 2 * lambda * (1 - lambda));
+cn_x_min = Lambda / (2 * lambda);
+sn_x_min = sqrt(1 - cn_x_min^2);
+dn_x_min = sqrt(1 - lambda * (sn_x_min^2));
+
+V_min = (((1/4) * Lambda^2 - lambda * (1 - lambda)) * (sn_x_min^2) - Lambda * cn_x_min) / (dn_x_min^2);
+
+x = -3:0.01:3;
+plot(x, V(x), x, 0 * ones(1, length(x)));
+% plot(x, V(x));
