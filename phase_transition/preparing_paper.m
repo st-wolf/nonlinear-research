@@ -77,7 +77,7 @@ set(h_axis(1), 'XLabel', 'x');
 %% Phase potential in elliptic coordinate with two parameters: \lambda, \Lambda
 clc; clear
 
-lambda = 0.9; Lambda = 2;
+lambda = 0.7; Lambda = 0.61;
 V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
 
@@ -206,7 +206,7 @@ Lambda = @(lambda) (1 - 16 * lambda + 16 * (lambda .^ 2) + ...
 	sqrt(1 + 32 * lambda - 32 * (lambda .^ 2))) ./ (4 * (2 * lambda - 1));
 
 % Avoid NaN at zero denominator
-lambda = 0.51:0.01:1;
+lambda = 0.501:0.001:1;
 plot([0.5 lambda], [0 Lambda(lambda)], 'LineWidth', 2, 'Color', 'black');
 
 lambda = 0:0.01:1;
@@ -215,7 +215,7 @@ plot(lambda, 2 * lambda, 'Color', 'black');
 plot([1 1], [0 2], 'Color', 'black');
 plot([0 0], [0 1], 'Color', 'black');
 
-%% S(T) plotting
+%% S(T) plotting, barrier at z = 0, minima at z_{min} = \cn^{-1} (\Lambda / (2 \lambda))
 clc; clear
 
 s = 1; % ~ Number of particles
@@ -223,8 +223,9 @@ alpha = 1; % Parameter, lambda = beta / alpha
 mass = 1 / (2 * alpha);
 
 % Potential
-lambda = 0.9; Lambda = 0.1; % 1st-order transition
+% lambda = 0.9; Lambda = 0.1; % 1st-order transition
 % lambda = 0.5; Lambda = 0.5; % 2nd-order transition
+lambda = 0.6; Lambda = 0; % 1st
 
 V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
@@ -234,9 +235,9 @@ V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(
 
 Vb = @(x) V(x) - V_min;
 
-figure
-x = -2:0.01:2;
-plot(x, Vb(x));
+% figure
+% x = -100:0.01:100;
+% plot(x, Vb(x));
 
 V0 = Vb(0);
 
@@ -245,8 +246,7 @@ planck_const = 1;
 boltzmann_const = 1;
 
 % Energy level
-E = 0.001:0.005:V0; % 1st-order transition
-% E = 0.001:0.001:V0; % 2nd-order transition
+E = linspace(0.001, V0, 150);
 
 T = zeros(1, length(E));
 S = zeros(1, length(E)); S0 = S;
@@ -258,12 +258,12 @@ for i = 1:length(E)
 	
 	[xleft, xright] = roots_near_equilibrium(@(x) -s^2 * Vb(x) + E(i));
 	tau_p(i) = sqrt(2 * mass) * integral(@(x) 1 ./ sqrt(alpha * s^2 * Vb(x) - E(i)),...
-		xleft, xright, 'AbsTol', 1e-8);
+		xleft, xright, 'AbsTol', 1e-6);
 
 	T(i) = planck_const / (boltzmann_const * tau_p(i));
 
 	S(i) = 2 * sqrt(2 * mass) * integral(@(x) sqrt(alpha * s^2 * Vb(x) - E(i)),...
-		xleft, xright, 'AbsTol', 1e-8) + ...
+		xleft, xright, 'AbsTol', 1e-6) + ...
 		E(i) * tau_p(i);
 	
 	S0(i) = V0 * tau_p(i);
@@ -301,10 +301,19 @@ plot([T_2nd T_2nd], [min(S_thermal) max(S)]);
 B = 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) / ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
 	- (Lambda / sqrt(lambda * (1 - lambda))) * atan((sqrt(1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
 
-T_1st = V0 / B;
+Delta = Lambda / (2 * lambda);
+B_owerre = s * (log((1 + sqrt(lambda * (1 - Delta^2))) / (1 - sqrt(lambda * (1 - Delta^2)))) ...
+	- 2 * Delta * sqrt(lambda / (1 - lambda)) * atan(sqrt((1 - lambda) * (1 - Delta^2)) / Delta));
+
+DV = alpha * (s^2) * lambda * (1 - Lambda / (2 * lambda));
+T_1st = DV / B_owerre;
 
 subplot(1, 2, 1)
 plot([T_1st T_1st], [-min(S_thermal) max(S)]);
+
+%% S(T) plotting, barrier at (?), minima at z_{min} = \pm 2K(\lambda)
+
+
 
 %% Owerre potential
 clc; clear
@@ -340,5 +349,83 @@ dn_x_min = sqrt(1 - lambda * (sn_x_min^2));
 V_min = (((1/4) * Lambda^2 - lambda * (1 - lambda)) * (sn_x_min^2) - Lambda * cn_x_min) / (dn_x_min^2);
 
 x = -3:0.01:3;
-plot(x, V(x), x, 0 * ones(1, length(x)));
-% plot(x, V(x));
+plot(x, V(x)); grid on
+
+%% Temperature dependances, fix. lambda
+clc; clear
+alpha = 1; s = 1;
+
+% 2nd order
+% Frequency of the small thermon oscillations
+omega0 = @(lambda, Lambda) 2 * alpha * s * sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
+T_2nd = @(lambda, Lambda) omega0(lambda, Lambda) / (2 * pi);
+
+% 1st order
+% Action on the thermon
+B = @(lambda, Lambda) 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) / ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
+	- (Lambda / sqrt(lambda * (1 - lambda))) * atan((sqrt(1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
+V0 = @(lambda, Lambda) alpha * s^2 * (1 - Lambda / (2 * lambda))^2;
+T_1st = @(lambda, Lambda) V0(lambda, Lambda) / B(lambda, Lambda);
+
+lambda = 0.9;
+Lambda = 0:0.01:(2 * lambda);
+
+t_1st = zeros(1, length(Lambda));
+t_2nd = zeros(1, length(Lambda));
+for i = 1:length(Lambda)
+	t_1st(i) = T_1st(lambda, Lambda(i));
+	t_2nd(i) = T_2nd(lambda, Lambda(i));
+end
+
+figure('Position', [100 100 325 225]); hold on; grid on
+xlabel('\Lambda'); ylabel('T_{c}^{(1)}, T_{c}^{(2)}');
+title(sprintf('\\lambda = %g', lambda))
+
+plot(Lambda, t_1st, '--', 'Color', 'k', 'LineWidth', 1);
+plot(Lambda, t_2nd, 'Color', 'k', 'LineWidth', 1);
+
+% Border
+Lambda_border =  (1 - 16 * lambda + 16 * (lambda .^ 2) + ...
+	sqrt(1 + 32 * lambda - 32 * (lambda .^ 2))) ./ (4 * (2 * lambda - 1));
+
+plot([Lambda_border Lambda_border], [0 max(t_1st)], 'Color', 'red');
+
+%% Temperature dependances, fix. Lambda
+clc; clear
+alpha = 1; s = 1;
+
+% 2nd order
+% Frequency of the small thermon oscillations
+omega0 = @(lambda, Lambda) 2 * alpha * s * sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
+T_2nd = @(lambda, Lambda) omega0(lambda, Lambda) / (2 * pi);
+
+% 1st order
+% Action on the thermon
+B = @(lambda, Lambda) 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) / ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
+	- (Lambda / sqrt(lambda * (1 - lambda))) * atan((sqrt(1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
+V0 = @(lambda, Lambda) alpha * s^2 * (1 - Lambda / (2 * lambda))^2;
+T_1st = @(lambda, Lambda) V0(lambda, Lambda) / B(lambda, Lambda);
+
+Lambda = 0.01;
+lambda = 0.5*Lambda:0.01:1;
+
+t_1st = zeros(1, length(lambda));
+t_2nd = zeros(1, length(lambda));
+for i = 1:length(lambda)
+	t_1st(i) = T_1st(lambda(i), Lambda);
+	t_2nd(i) = T_2nd(lambda(i), Lambda);
+end
+
+figure('Position', [100 100 325 225]); hold on; grid on
+xlabel('\lambda'); ylabel('T_{c}^{(1)}, T_{c}^{(2)}');
+title(sprintf('\\Lambda = %g', Lambda))
+
+plot(lambda, t_1st, '--', 'Color', 'k', 'LineWidth', 1);
+plot(lambda, t_2nd, 'Color', 'k', 'LineWidth', 1);
+
+% Border
+lambda_border1 = 0.5;
+% lambda_border2 = 1;
+
+plot([lambda_border1 lambda_border1], [0 max(t_1st)], 'Color', 'red');
+% plot([lambda_border2 lambda_border2], [0 max(t_1st)], 'Color', 'red');
