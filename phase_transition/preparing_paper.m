@@ -77,14 +77,18 @@ set(h_axis(1), 'XLabel', 'x');
 %% Phase potential in elliptic coordinate with two parameters: \lambda, \Lambda
 clc; clear
 
-lambda = 0.7; Lambda = 0.61;
+lambda = 0.8; Lambda = 0.5;
 V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
 
 K = ellipk(sqrt(lambda));
 x = -(4*K):0.01:(4*K);
 
-plot(x, V(x)); grid on
+plot(x, V(x)); hold on; grid on
+x_max = inv_cn(-2 * (1 - lambda) / Lambda, lambda);
+
+plot([-x_max -x_max], [0 V(x_max)], 'Color', 'red');
+plot([+x_max +x_max], [0 V(x_max)], 'Color', 'red');
 
 %% Rabi regime
 Lambda = 100;
@@ -223,9 +227,8 @@ alpha = 1; % Parameter, lambda = beta / alpha
 mass = 1 / (2 * alpha);
 
 % Potential
-% lambda = 0.9; Lambda = 0.1; % 1st-order transition
+lambda = 0.9; Lambda = 0.1; % 1st-order transition
 % lambda = 0.5; Lambda = 0.5; % 2nd-order transition
-lambda = 0.6; Lambda = 0; % 1st
 
 V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
@@ -246,7 +249,7 @@ planck_const = 1;
 boltzmann_const = 1;
 
 % Energy level
-E = linspace(0.001, V0, 150);
+E = linspace(0.001, V0 - 0.001, 150);
 
 T = zeros(1, length(E));
 S = zeros(1, length(E)); S0 = S;
@@ -256,13 +259,13 @@ fprintf('Total number of iteration: %i\n', length(E));
 for i = 1:length(E)
 	fprintf('%i\n', i);
 	
-	[xleft, xright] = roots_near_equilibrium(@(x) -s^2 * Vb(x) + E(i));
-	tau_p(i) = sqrt(2 * mass) * integral(@(x) 1 ./ sqrt(alpha * s^2 * Vb(x) - E(i)),...
+	[xleft, xright] = roots_near_x0(@(x) -Vb(x) + E(i), 0);
+	tau_p(i) = sqrt(2 * mass) * integral(@(x) 1 ./ sqrt(Vb(x) - E(i)),...
 		xleft, xright, 'AbsTol', 1e-6);
 
 	T(i) = planck_const / (boltzmann_const * tau_p(i));
 
-	S(i) = 2 * sqrt(2 * mass) * integral(@(x) sqrt(alpha * s^2 * Vb(x) - E(i)),...
+	S(i) = 2 * sqrt(2 * mass) * integral(@(x) sqrt(Vb(x) - E(i)),...
 		xleft, xright, 'AbsTol', 1e-6) + ...
 		E(i) * tau_p(i);
 	
@@ -298,22 +301,20 @@ plot([T_2nd T_2nd], [min(S_thermal) max(S)]);
 
 % 1st order
 % Action on the thermon
-B = 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) / ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
-	- (Lambda / sqrt(lambda * (1 - lambda))) * atan((sqrt(1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
+B = 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) ...
+	/ ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
+	- (Lambda / sqrt(lambda * (1 - lambda))) ...
+	* atan(sqrt((1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
 
-Delta = Lambda / (2 * lambda);
-B_owerre = s * (log((1 + sqrt(lambda * (1 - Delta^2))) / (1 - sqrt(lambda * (1 - Delta^2)))) ...
-	- 2 * Delta * sqrt(lambda / (1 - lambda)) * atan(sqrt((1 - lambda) * (1 - Delta^2)) / Delta));
+B_num = 2 * s * sqrt(lambda) ...
+	* integral(@(x) (sqrt(1 - x .^ 2) - Delta) ./ (sqrt(1 - x .^ 2) .* (1 - lambda * (x .^ 2))), ...
+	-sqrt(1 - Delta^2), +sqrt(1 - Delta^2), 'AbsTol', 1e-6);
 
 DV = alpha * (s^2) * lambda * (1 - Lambda / (2 * lambda));
-T_1st = DV / B_owerre;
+T_1st = DV / B;
 
-subplot(1, 2, 1)
-plot([T_1st T_1st], [-min(S_thermal) max(S)]);
-
-%% S(T) plotting, barrier at (?), minima at z_{min} = \pm 2K(\lambda)
-
-
+% subplot(1, 2, 1)
+% plot([T_1st T_1st], [-min(S_thermal) max(S)]);
 
 %% Owerre potential
 clc; clear
@@ -352,8 +353,13 @@ x = -3:0.01:3;
 plot(x, V(x)); grid on
 
 %% Temperature dependances, fix. lambda
+% Using iterational process for the obtaining the 1-st order transition
+% temparature: time-consuming computation
 clc; clear
 alpha = 1; s = 1;
+mass = 1 / (2 * alpha);
+planck_const = 1;
+boltzmann_const = 1;
 
 % 2nd order
 % Frequency of the small thermon oscillations
@@ -362,33 +368,65 @@ T_2nd = @(lambda, Lambda) omega0(lambda, Lambda) / (2 * pi);
 
 % 1st order
 % Action on the thermon
-B = @(lambda, Lambda) 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) / ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
-	- (Lambda / sqrt(lambda * (1 - lambda))) * atan((sqrt(1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
+B = @(lambda, Lambda) 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) ...
+	/ ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
+	- (Lambda / sqrt(lambda * (1 - lambda))) ...
+	* atan(sqrt((1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
+
 V0 = @(lambda, Lambda) alpha * s^2 * (1 - Lambda / (2 * lambda))^2;
-T_1st = @(lambda, Lambda) V0(lambda, Lambda) / B(lambda, Lambda);
 
-lambda = 0.9;
-Lambda = 0:0.01:(2 * lambda);
+lambda = 0.75;
 
-t_1st = zeros(1, length(Lambda));
-t_2nd = zeros(1, length(Lambda));
-for i = 1:length(Lambda)
-	t_1st(i) = T_1st(lambda, Lambda(i));
-	t_2nd(i) = T_2nd(lambda, Lambda(i));
+% Border
+Lambda_border =  (1 - 16 * lambda + 16 * (lambda .^ 2) + ...
+	sqrt(1 + 32 * lambda - 32 * (lambda .^ 2))) ./ (4 * (2 * lambda - 1));
+
+Lambda_1st = 0:0.01:Lambda_border;
+t_1st = zeros(1, length(Lambda_1st));
+
+fprintf('1st-order transition; total number of iterations: %i\n', length(Lambda_1st));
+for i = 1:length(Lambda_1st)
+	fprintf('%i\n', i);
+	
+	V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda_1st(i) ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+	- Lambda_1st(i) * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
+
+	[~, V_min] = fminsearch(V, 0); % (!)
+
+	Vb = @(x) V(x) - V_min;
+	V0 = Vb(0);
+	
+	E = iterational_process(Vb, V0, mass, 0.5 * V0);
+	[xleft, xright] = roots_near_x0(@(x) -Vb(x) + E, 0);
+	period = sqrt(2 * mass) * integral(@(x) 1 ./ sqrt(Vb(x) - E),...
+		xleft, xright, 'AbsTol', 1e-6);
+	t_1st(i) = planck_const / (boltzmann_const * period);
+end
+
+t_1st_estimation = zeros(1, length(Lambda_1st));
+for i = 1:length(Lambda_1st)
+	t_1st_estimation(i) = V0(lambda, Lambda_1st(i)) / B(lambda, Lambda_1st(i));
+end
+
+Lambda_2nd = Lambda_border:0.01:(2 * lambda);
+t_2nd = zeros(1, length(Lambda_2nd));
+
+fprintf('2nd-order transition; total number of iterations: %i\n', length(Lambda_2nd));
+for i = 1:length(Lambda_2nd)
+	fprintf('%i\n', i);
+	
+	t_2nd(i) = T_2nd(lambda, Lambda_2nd(i));
 end
 
 figure('Position', [100 100 325 225]); hold on; grid on
 xlabel('\Lambda'); ylabel('T_{c}^{(1)}, T_{c}^{(2)}');
 title(sprintf('\\lambda = %g', lambda))
 
-plot(Lambda, t_1st, '--', 'Color', 'k', 'LineWidth', 1);
-plot(Lambda, t_2nd, 'Color', 'k', 'LineWidth', 1);
+plot(Lambda_1st, t_1st, '--', 'Color', 'k', 'LineWidth', 1);
+plot(Lambda_2nd, t_2nd, 'Color', 'k', 'LineWidth', 1);
 
-% Border
-Lambda_border =  (1 - 16 * lambda + 16 * (lambda .^ 2) + ...
-	sqrt(1 + 32 * lambda - 32 * (lambda .^ 2))) ./ (4 * (2 * lambda - 1));
-
-plot([Lambda_border Lambda_border], [0 max(t_1st)], 'Color', 'red');
+plot([Lambda_border Lambda_border], [0 t_1st(end)], 'Color', 'red');
+plot(Lambda_1st, t_1st_estimation, 'Color', [0 0.5 0.2], 'LineWidth', 2)
 
 %% Temperature dependances, fix. Lambda
 clc; clear
@@ -424,8 +462,117 @@ plot(lambda, t_1st, '--', 'Color', 'k', 'LineWidth', 1);
 plot(lambda, t_2nd, 'Color', 'k', 'LineWidth', 1);
 
 % Border
-lambda_border1 = 0.5;
-% lambda_border2 = 1;
+% lambda_border = (?);
+% plot([lambda_border lambda_border], [0 max(t_1st)], 'Color', 'red');
 
-plot([lambda_border1 lambda_border1], [0 max(t_1st)], 'Color', 'red');
-% plot([lambda_border2 lambda_border2], [0 max(t_1st)], 'Color', 'red');
+%% Testing value of action on the instanton trajectory
+clc; clear
+
+s = 1; lambda = 0.5; Lambda = 0.5;
+Delta = Lambda / (2 * lambda);
+
+B = 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) ...
+	/ ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
+	- (Lambda / sqrt(lambda * (1 - lambda))) ...
+	* atan(sqrt((1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
+
+B_num = 2 * s * sqrt(lambda) ...
+	* integral(@(x) (sqrt(1 - x .^ 2) - Delta) ./ (sqrt(1 - x .^ 2) .* (1 - lambda * (x .^ 2))), ...
+	-sqrt(1 - Delta^2), +sqrt(1 - Delta^2), 'AbsTol', 1e-6);
+
+%% Another phase transition: roots
+clc; clear
+
+s = 1; alpha = 1;
+mass = 1 / (2 * alpha);
+
+planck_const = 1;
+boltzmann_const = 1;
+
+lambda = 0.9; Lambda = 0.5;
+Vb = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2) - Lambda;
+
+x_max = inv_cn(-2 * (1 - lambda) / Lambda, lambda);
+
+V0 = Vb(x_max);
+
+% Energy level
+E = linspace(0.005, V0 - 0.001, 150);
+
+T = zeros(1, length(E));
+S = zeros(1, length(E)); S0 = S;
+tau_p = zeros(1, length(E));
+
+fprintf('Total number of iteration: %i\n', length(E));
+for i = 1:length(E)
+	fprintf('%i\n', i);
+	
+	[xleft, xright] = roots_near_x0(@(x) Vb(x) - E(i), x_max);
+	tau_p(i) = sqrt(2 * mass) * integral(@(x) 1 ./ sqrt(Vb(x) - E(i)),...
+		xleft, xright, 'AbsTol', 1e-6);
+
+	T(i) = planck_const / (boltzmann_const * tau_p(i));
+
+	S(i) = 2 * sqrt(2 * mass) * integral(@(x) sqrt(Vb(x) - E(i)),...
+		xleft, xright, 'AbsTol', 1e-6) + ...
+		E(i) * tau_p(i);
+	
+	S0(i) = V0 * tau_p(i);
+end
+
+T_thermal = min(T):0.001:(2*max(T));
+S_thermal = (planck_const * V0) ./ (boltzmann_const * T_thermal);
+
+% Plotting
+figure('Position', [100 100 650 225]);
+
+subplot(1, 2, 1); hold on
+xlabel('T'); ylabel('S_{min}(T)')
+
+plot(T, S, 'LineWidth', 2, 'Color', 'black');
+plot(T_thermal, S_thermal, '--', 'Color', 'black');
+
+subplot(1, 2, 2); hold on
+xlabel('E'); ylabel('\tau_p')
+
+plot(E, tau_p, 'LineWidth', 2, 'Color', 'black')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
