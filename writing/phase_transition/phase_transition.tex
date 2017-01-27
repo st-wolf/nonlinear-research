@@ -86,7 +86,7 @@ We aimed at elucidation of necessary criteria to obtain quantum phase regimes wi
 This paper is arranged as follows.
 In Sec. \ref{sec:model} we explain in details our model to realize Josephson junction with exciton polariton condensates.
 The extended tight-binding model will be established in this case.
-In Sec. \ref{sec:quantum_phase} we \dots.
+In Sec. \ref{sec:quantum_phase} we {\red \dots }.
 In the conclusion, we summarize the results obtained.
 
 \section{THE MODEL OD EXCITON POLARITON JOSEPHSON JUNCTION \label{sec:model}}
@@ -289,7 +289,7 @@ Below we are not interesting in this regime.
 This regime represents intermediate case between Rabi and Fock limits --- see Fig. \ref{phase_potential}b.
 The behavior of the phase depends on the ratio between parameters $\Lambda$ and $\lambda$.
 If $\Lambda \ge 2\lambda$ the $V_0(z)$ posses minima at $z = 0$ and $V(0) = -\Lambda$.
-Frequency of small amplitude ($z \ll 1$) oscillations can be obtained from (\ref{eq:potential}) and looks like {\red equation for small oscillations}.
+Frequency of small amplitude ($z \ll 1$) oscillations can be obtained from (\ref{eq:potential}) and looks like { \red $\omega_{0, quantum} = 2 \alpha s \sqrt{\frac{1}{4} \Lambda^2 - \frac{\Lambda}{2} (2\lambda - 1) - \lambda(1 - \lambda)}$ }.
 
 In the other limit, for $\Lambda < 2 \lambda$, quantum particle is trapped at two minima of $V_0(z)$ $W$ -- like potential with coordinates $\cn{z_{min}} = \frac{\Lambda}{2 \lambda}$ and appearing for both of Josephson and Fock regimes, cf. Fig. \ref{phase_potential}b,c.  
 The depth of the potential minima depends on the $\lambda$ parameter.
@@ -388,8 +388,8 @@ Expansion of the potential $V(z)$ excluding constant value $V(0)$ gives:
 %
 \begin{equation}
 \begin{array}{lcl}
-V_0(z) & = &\left( \frac{1}{4} \Lambda^2  - \frac{2\lambda - 1}{2} \Lambda - \lambda (1 - \lambda) \right) z^2 \\
-&& + \left( \frac{2\lambda - 1}{12} \Lambda^2 - \frac{16\lambda^2 - 16\lambda + 1}{24} \Lambda - \frac{\lambda (1 - \lambda) (2\lambda - 1)}{3} \right) z^4 + o(z^4).
+V(z) & = & \alpha s^2 \Big[ \left( \frac{1}{4} \Lambda^2  - \frac{2\lambda - 1}{2} \Lambda - \lambda (1 - \lambda) \right) z^2 \\
+&& + \left( \frac{2\lambda - 1}{12} \Lambda^2 - \frac{16\lambda^2 - 16\lambda + 1}{24} \Lambda - \frac{\lambda (1 - \lambda) (2\lambda - 1)}{3} \right) z^4 + o(z^4) \Big].
 \end{array}
 \label{eq:potential_teylor}
 \end{equation}
@@ -465,6 +465,52 @@ Since the $\Lambda$-parameter is inversionally proportional to the density of ex
 \label{pic:temperatures}
 \end{figure}
 %
+
+{\red
+
+Another type of barrier --- upper barrier.
+Exist when $\Lambda > 2(1 - \lambda)$.
+Potential presumes local minima at $\pm 2K(\lambda)$ and local maxima at $z_{max} = \pm \cn^{-1} \left( -\frac{2(1 - \lambda)}{\Lambda} \right)$.
+Equation for the thermon yeilds small ocsilation frequency near the bottom $z_{max}$ of the inverted potential $\omega_0 = \alpha s \sqrt{\frac{\Lambda^2}{1 - \lambda} - 4(1 - \lambda)}$.
+The crossover temperature of second-order phase transition
+%
+\begin{equation}
+T_{c}^{(2)} = (\hbar \alpha s / 2 \pi k_B) \sqrt{\frac{\Lambda^2}{1 - \lambda} - 4(1 - \lambda)}.
+\label{eq:second_order_2}
+\end{equation}
+%
+With the aim of analytical determining of the phase transition order let's write the Taylor series for $V(z)$ near the vicinity of $z_{max}$.
+Expansion of the potential $V(z)$ excluding constant value $V(z_{max})$ gives:
+%
+\begin{equation}
+V(\tilde{z}) = \alpha s^2 \Big[ -\tfrac{1}{4} \left( \tfrac{\Lambda^2}{1 - \lambda} - 4(1 - \lambda) \right) \tilde{z}^2 
++ \tfrac{1}{2} \tfrac{\Lambda \sqrt{\Lambda^2 - 4(1 - \lambda)^2}}{\sqrt{1 - \lambda} \sqrt{\Lambda^2 + 4 \lambda (1 - \lambda}} \tilde{z}^3 + o(\tilde{z}^4) \Big],
+\label{eq:potential_teylor_2}
+\end{equation}
+%
+where $\tilde{z} = z - z_{max}$.
+It follows from (\ref{eq:potential_teylor_2}) that $-V(\tilde{z})$ aways has the form $\tilde{z}^2 - \tilde{z}^3$, as $\Lambda > 0$, so in this case only second-order phase transition occurs.
+We plot typical behaviour of the $\tau(E)$, $S(T)$ and $T_{c}^{(2)}$ on Figs. \ref{pic:action_period_2}, \ref{pic:temperatures_2}, and summarize our results on the Fig. \ref{pic:phase_boundary_combined}.
+%
+\begin{figure}[ht]
+\center{\includegraphics[width=0.5\linewidth]{pic/action_period_2nd_order_transition_b2.eps}}
+\caption{\dots}
+\label{pic:action_period_2}
+\end{figure}
+%
+\begin{figure}[ht]
+\center{\includegraphics[width=0.5\linewidth]{pic/phase_transition_temperatures_b2.eps}}
+\caption{\dots}
+\label{pic:temperatures_2}
+\end{figure}
+%
+\begin{figure}[ht]
+\center{\includegraphics[width=0.5\linewidth]{pic/phase_transition_diagram_combined.eps}}
+\caption{\dots \label{pic:phase_boundary_combined}}
+\end{figure}
+%
+
+}
 
 \section{Phase transitions in the presence of non-equilibrium processes 
 \label{sec:phase_transition}}

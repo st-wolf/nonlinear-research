@@ -77,18 +77,19 @@ set(h_axis(1), 'XLabel', 'x');
 %% Phase potential in elliptic coordinate with two parameters: \lambda, \Lambda
 clc; clear
 
-lambda = 0.8; Lambda = 0.5;
+lambda = 0.25; Lambda = 1.5;
 V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
 
 K = ellipk(sqrt(lambda));
 x = -(4*K):0.01:(4*K);
 
-plot(x, V(x)); hold on; grid on
-x_max = inv_cn(-2 * (1 - lambda) / Lambda, lambda);
+figure('Position', [100 100 325 225]); hold on
+plot(x, V(x), 'Color', 'black'); hold on
 
-plot([-x_max -x_max], [0 V(x_max)], 'Color', 'red');
-plot([+x_max +x_max], [0 V(x_max)], 'Color', 'red');
+% x_max = inv_cn(-2 * (1 - lambda) / Lambda, lambda);
+% plot([-x_max -x_max], [0 V(x_max)], 'Color', 'red');
+% plot([+x_max +x_max], [0 V(x_max)], 'Color', 'red');
 
 %% Rabi regime
 Lambda = 100;
@@ -200,7 +201,7 @@ title(sprintf('\\Lambda = %g', Lambda));
 xlabel('z');
 ylabel('V_0(z)');
 
-%% Phase transition diagram
+%% Phase transition diagram, combined for two barriers
 
 figure('Position', [100 100 325 250]); hold on
 axis([0 1 0 2]); xlabel('\lambda'); ylabel('\Lambda')
@@ -215,6 +216,7 @@ plot([0.5 lambda], [0 Lambda(lambda)], 'LineWidth', 2, 'Color', 'black');
 
 lambda = 0:0.01:1;
 plot(lambda, 2 * lambda, 'Color', 'black');
+plot(lambda, 2 * (1 - lambda), 'Color', 'black');
 
 plot([1 1], [0 2], 'Color', 'black');
 plot([0 0], [0 1], 'Color', 'black');
@@ -480,7 +482,7 @@ B_num = 2 * s * sqrt(lambda) ...
 	* integral(@(x) (sqrt(1 - x .^ 2) - Delta) ./ (sqrt(1 - x .^ 2) .* (1 - lambda * (x .^ 2))), ...
 	-sqrt(1 - Delta^2), +sqrt(1 - Delta^2), 'AbsTol', 1e-6);
 
-%% Another phase transition: roots
+%% Another phase transition: S(T), tau_p(E)
 clc; clear
 
 s = 1; alpha = 1;
@@ -489,7 +491,7 @@ mass = 1 / (2 * alpha);
 planck_const = 1;
 boltzmann_const = 1;
 
-lambda = 0.9; Lambda = 0.5;
+lambda = 0.9; Lambda = 0.75;
 Vb = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2) - Lambda;
 
@@ -498,7 +500,7 @@ x_max = inv_cn(-2 * (1 - lambda) / Lambda, lambda);
 V0 = Vb(x_max);
 
 % Energy level
-E = linspace(0.005, V0 - 0.001, 150);
+E = linspace(0.05, V0 - 0.001, 150);
 
 T = zeros(1, length(E));
 S = zeros(1, length(E)); S0 = S;
@@ -538,12 +540,54 @@ xlabel('E'); ylabel('\tau_p')
 
 plot(E, tau_p, 'LineWidth', 2, 'Color', 'black')
 
+%% Check the period of the thermon
 
+omega0 = alpha * s * sqrt((Lambda^2) / (1 - lambda) - 4 * (1 - lambda));
+period = 2 * pi / omega0;
 
+%% Temperature
+clc; clear
 
+alpha = 1; s = 1;
 
+omega0 = @(lambda, Lambda) alpha * s * sqrt((Lambda^2) / (1 - lambda) - 4 * (1 - lambda));
+T_2nd = @(lambda, Lambda) omega0(lambda, Lambda) / (2 * pi);
 
+lambda = 0.9;
+Lambda_2nd = (2 * (1 - lambda)):0.01:2;
 
+t_2nd = zeros(1, length(Lambda_2nd));
+
+fprintf('2nd-order transition; total number of iterations: %i\n', length(Lambda_2nd));
+for i = 1:length(Lambda_2nd)
+	fprintf('%i\n', i);
+	
+	t_2nd(i) = T_2nd(lambda, Lambda_2nd(i));
+end
+
+figure('Position', [100 100 325 225]); hold on; grid on
+xlabel('\Lambda'); ylabel('T_{c}^{(2)}');
+title(sprintf('\\lambda = %g', lambda))
+
+plot(Lambda_2nd, t_2nd, 'Color', 'k', 'LineWidth', 1);
+
+%% Chech the signs in a Taylor series
+% \Lambda > 2(1 - \lambda)
+clc; clear
+
+eps = 1e-3;
+
+lambda = 0.9;
+Lambda = 1;
+
+Vb = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2) - Lambda;
+	
+z_max = inv_cn(-2 * (1 - lambda) / Lambda, lambda);
+		
+d1f = @(x) (Vb(x + eps) - Vb(x - eps)) / eps;
+d2f = @(x) (Vb(x + eps) - 2 * Vb(x) + Vb(x - eps)) / (eps^2);
+d3f = @(x) (Vb(x + 2 * eps) - 2 * Vb(x + eps) + 2 * Vb(x - eps) - Vb(x - 2 * eps)) / (2 * eps^2);
 
 
 
