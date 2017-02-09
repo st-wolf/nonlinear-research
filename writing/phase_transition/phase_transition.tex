@@ -403,11 +403,11 @@ Phase boundary between 1st and 2nd order phase transition is determined by the r
 \label{eq:order_border}
 \end{equation}
 %
-We summarize our results in the Fig.\ref{pic:phase_boundary}. 
+We summarize our results in the Fig.\ref{pic:phase_boundary_combined}. 
 %
 \begin{figure}[ht]
-\center{\includegraphics[width=0.5\linewidth]{pic/phase_transition_diagram.eps}}
-\caption{Diagram of the phase boundary for  first- and second-order  phase transitions in $\Lambda$, $\lambda$ - parameter plane. \label{pic:phase_boundary}}
+\center{\includegraphics[width=0.5\linewidth]{pic/phase_transition_diagram_combined.eps}}
+\caption{Diagram of the phase boundary for  first- and second-order  phase transitions in $\Lambda$,$\lambda$-parameter plane \label{pic:phase_boundary_combined}}
 \end{figure}
 %
 
@@ -439,7 +439,7 @@ The inset demonstrate monotonic dependence of thermon period $\tau_p$ on energy 
 Closest to the critical point with energy $E=E_0$ thermon undergoes small amplitude oscillations.  
   
 In Fig. \ref{pic:action_period}b we represent results exhibiting first-order phase transition.
-It is clearly seen that the first derivative of $S_{min}$ is discontinuous in this case and the dependence of thermon period $\tau_p$ on energy $E$ is non-monotonic (see inset in Fig. \ref{pic:phase_boundary}b).
+It is clearly seen that the first derivative of $S_{min}$ is discontinuous in this case and the dependence of thermon period $\tau_p$ on energy $E$ is non-monotonic (see inset in Fig. \ref{pic:action_period}b).
 The critical temperature $T_{c}^{(1)}$ belongs to the temperature domain $T_{min} < T_{c}^{(1)} < T_{max}$ and can be find out numerically by solving Eqs.(\ref{eq:thermon_period}) - (\ref{eq:thermal_action}) under the condition $S_T = S_0$.
  
 Analytically critical temperature $T_{c}^{(1)}$ one possible to approach as $T_{c}^{(1)} = \Delta V / B$, where $B$ is a instanton action that can be represented as $B = S(E_{min})$.
@@ -466,8 +466,6 @@ Since the $\Lambda$-parameter is inversionally proportional to the density of ex
 \end{figure}
 %
 
-{\red
-
 Another type of barrier --- upper barrier.
 Exist when $\Lambda > 2(1 - \lambda)$.
 Potential presumes local minima at $\pm 2K(\lambda)$ and local maxima at $z_{max} = \pm \cn^{-1} \left( -\frac{2(1 - \lambda)}{\Lambda} \right)$.
@@ -490,30 +488,22 @@ V(\tilde{z}) = \alpha s^2 \Big[ -\tfrac{1}{4} \left( \tfrac{\Lambda^2}{1 - \lamb
 %
 where $\tilde{z} = z - z_{max}$.
 It follows from (\ref{eq:potential_teylor_2}) that $-V(\tilde{z})$ aways has the form $\tilde{z}^2 - \tilde{z}^3$, as $\Lambda > 0$, so in this case only second-order phase transition occurs.
-We plot typical behaviour of the $\tau(E)$, $S(T)$ and $T_{c}^{(2)}$ on Figs. \ref{pic:action_period_2}, \ref{pic:temperatures_2}, and summarize our results on the Fig. \ref{pic:phase_boundary_combined}.
+We plot typical behaviour of the $\tau(E)$, $S(T)$ and $T_{c}^{(2)}$ on Figs. \ref{pic:action_period_temperature_2}, and summarize our results on the Fig. \ref{pic:phase_boundary_combined}.
 %
 \begin{figure}[ht]
-\center{\includegraphics[width=0.5\linewidth]{pic/action_period_2nd_order_transition_b2.eps}}
-\caption{\dots}
-\label{pic:action_period_2}
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=\linewidth]{pic/action_period_2nd_order_transition_b2.eps} \\ (a)}
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.49\linewidth}
+\center{\includegraphics[width=\linewidth]{pic/phase_transition_temperatures_b2.eps} \\ (b)}
+\end{minipage}
+\caption{\dots \label{pic:action_period_temperature_2}}
 \end{figure}
 %
-\begin{figure}[ht]
-\center{\includegraphics[width=0.5\linewidth]{pic/phase_transition_temperatures_b2.eps}}
-\caption{\dots}
-\label{pic:temperatures_2}
-\end{figure}
-%
-\begin{figure}[ht]
-\center{\includegraphics[width=0.5\linewidth]{pic/phase_transition_diagram_combined.eps}}
-\caption{\dots \label{pic:phase_boundary_combined}}
-\end{figure}
-%
-
-}
-
 \section{Phase transitions in the presence of non-equilibrium processes 
 \label{sec:phase_transition}}
+
 
 \dots
 

@@ -589,30 +589,136 @@ d1f = @(x) (Vb(x + eps) - Vb(x - eps)) / eps;
 d2f = @(x) (Vb(x + eps) - 2 * Vb(x) + Vb(x - eps)) / (eps^2);
 d3f = @(x) (Vb(x + 2 * eps) - 2 * Vb(x + eps) + 2 * Vb(x - eps) - Vb(x - 2 * eps)) / (2 * eps^2);
 
+%% Dynamic transition
+clc; clear
+
+omega_m = 0; u = 5;
+kapa = 0.002;
+
+df = @(t, f) [2*f(3); 2*omega_m*f(3) - u*exp(-2*kapa*t)*f(1)*f(3); -2*f(1) - 2*omega_m*f(2) + u*exp(-2*kapa*t)*f(1)*f(2)];
+
+f0 = [0.87; 0.493; 0];
+% f0 = [0.29 0.957 0];
+
+[T, F] = RK4(df, [0 100], f0, 2048);
+
+plot3(F(:, 1), F(:, 2), F(:, 3), 'green'); hold on;
+
+% S0 = sqrt((F(:, 1).^2) + (F(:, 2).^2) + (F(:, 3).^2));
+% plot(T, F(:, 1) ./ S0); hold on
+
+% omega_m = 0; u = 5;
+% df = @(t, f) [2*f(3); 2*omega_m*f(3) - u*f(1)*f(3); -2*f(1) - 2*omega_m*f(2) + u*f(1)*f(2)];
+% f0 = [0.29; 0.957; 0];
+% [T, F] = RK4(df, [0 20], f0, 2048);
+% plot3(F(:, 1), F(:, 2), F(:, 3), 'Color', 'red');
+
+%%
+clc; clear
+
+alpha = 1; beta = 0.9; B = 1;
+kappa = 0.002;
+
+a = @(t) alpha * exp(-2*kappa*t);
+b = @(t) beta * exp(-2*kappa*t);
+
+df = @(t, f) [2*b(t) * f(2) * f(3) - B*f(3);
+	-2*a(t) * f(1) * f(3);
+	2*(a(t) - b(t)) * f(1) * f(2) + B * f(1)];
+
+R = 1;
+S10 = 0; S20 = 0.62;
+S30 = sqrt(R^2 - S10^2 - S20^2); 
+f0 = [S10; S20; S30];
+
+[T, F] = RK4(df, [0 250], f0, 4*1024);
+S0 = sqrt(F(:, 1) .^ 2 + F(:, 2) .^ 2 + F(:, 3) .^ 2);
+
+figure; hold on
+% plot3(F(:, 1), F(:, 2), F(:, 3), 'red');
+plot(T, atan(F(:, 3) ./ F(:, 2)), 'black', 'LineWidth', 2);
 
 
+%%
 
+a = @(t) alpha * exp(-2*kappa*t);
+b = @(t) beta * exp(-2*kappa*t);
 
+dg = @(t,g) [b(t)*(1 - g(1)^2) * sin(2 * g(2)) - B * sqrt(1 - g(1)^2) * sin(g(2));
+	2*g(1) * (a(t) - b(t) * (cos(g(2))^2)) + B * g(1) * cos(g(2)) / sqrt(1 - g(1)^2)];
 
+G10 = 0;
+G20 = atan(S30 / S20);
 
+g0 = [G10; G20];
 
+[T, G] = RK4(dg, [0 250], g0, 4*1024);
 
+plot(T, G(:, 2), 'red'); hold on
 
+%%
+omega = @(t) sqrt((B - 2*b(t)) .* (2*a(t) - 2*b(t) + B));
 
+t_adiab = 170;
+phi_adiab = 0.02838;
 
+A = phi_adiab * sqrt(omega(t_adiab)) / cos(omega(t_adiab) * t_adiab);
+phi = @(t) A ./ sqrt(omega(t)) .* cos(omega(t) .* t);
 
+t_phi = 170:0.1:250;
+plot(t_phi, phi(t_phi));
 
+%% Phase portrait on the sphere
+% clc; clear
 
+alpha = 1; beta = 0.9; B = 0.18;
+kappa = 0.0;
 
+df = @(t, f) [2*beta * f(2) * f(3) * exp(-2*kappa*t) - B*f(3);
+	-2*alpha * f(1) * f(3) * exp(-2*kappa*t);
+	2*(alpha - beta) * exp(-2*kappa*t) * f(1) * f(2) + B * f(1)];
 
+R = 1;
 
+figure; hold on
+xlabel('S_z'); ylabel('S_x'); zlabel('S_y');
 
+for S30 = -0.6:0.1:0.6
+	S20 = sqrt(R^2 - S30^2); S10 = 0;
+	f0 = [S10; S20; S30];
 
+	[T, F] = RK4(df, [0 25], f0, 1024);
+	S0 = sqrt((F(:, 1).^2) + (F(:, 2).^2) + (F(:, 3).^2));
 
+	plot3(F(1:5:end, 1), F(1:5:end, 2), F(1:5:end, 3));
+end
 
+for S30 = -0.3:0.05:0.3
+	S20 = -sqrt(R^2 - S30^2); S10 = 0;
+	f0 = [S10; S20; S30];
 
+	[T, F] = RK4(df, [0 25], f0, 1024);
+	S0 = sqrt((F(:, 1).^2) + (F(:, 2).^2) + (F(:, 3).^2));
 
+	plot3(F(1:5:end, 1), F(1:5:end, 2), F(1:5:end, 3));
+end
 
+%% System of equations
+B = 2.05; kappa = 0.0;
+f0 = [0.0211; 0.9835; 0.1799];
+
+df = @(t, f) [2*beta * f(2) * f(3) * exp(-2*kappa*t) - B*f(3);
+	-2*alpha * f(1) * f(3) * exp(-2*kappa*t);
+	2*(alpha - beta) * exp(-2*kappa*t) * f(1) * f(2) + B * f(1)];
+
+[T, F] = RK4(df, [0 140], f0, 4*1024);
+% plot3(F(:, 1), F(:, 2), F(:, 3), 'green');
+plot(T, atan(F(:, 3) ./ F(:, 2)), 'black');
+
+%% Legend
+legend('B = 1, \kappa = 0.005', 'B = 2.05, \kappa = 0', 'B = 1, \kappa = 0.0')
+title('\Delta \phi = arctan(-S_x / S_y)')
+xlabel('t'); ylabel('\Delta \phi')
 
 
 
