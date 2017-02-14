@@ -502,10 +502,103 @@ We plot typical behaviour of the $\tau(E)$, $S(T)$ and $T_{c}^{(2)}$ on Figs. \r
 \end{figure}
 %
 \section{Phase transitions in the presence of non-equilibrium processes 
-\label{sec:phase_transition}}
+\label{sec:non-equilibrium}}
 
+Consider the influence of the dissipation in our system.
+Supposing that $\Gamma = 0$, system with dissipation can be derived from hamiltonian and reads as
+%
+\begin{equation}
+\begin{array}{lcl}
+i \psi_{1, t} & = & -i \kappa \psi_1 +  \alpha |\psi_1|^2 \psi_1 - (B/2 - \beta \psi_1^* \psi_2) \psi_2; \\
+i \psi_{2, t} & = & -i \kappa \psi_2 + \alpha |\psi_2|^2 \psi_2 - (B/2 - \beta \psi_2^* \psi_1) \psi_1.
+\end{array}
+\end{equation}
+%
+Change of variables: $\psi_{1,2} = \Psi_{1,2} \exp(-\kappa t)$.
+System takes form
+%
+\begin{equation}
+\begin{array}{lcl}
+i \Psi_{1, t} & = & \alpha(t) |\Psi_1|^2 \Psi_1 - (B/2 - \beta(t) \Psi_1^* \Psi_2) \Psi_2; \\
+i \Psi_{2, t} & = & \alpha(t) |\Psi_2|^2 \Psi_2 - (B/2 - \beta(t) \Psi_2^* \Psi_1) \Psi_1.
+\end{array}
+\end{equation}
+%
+It's equivalent to the non-dissipative system with time dependent parameters $\alpha(t) = \alpha \exp(-2 \kappa t)$, $\beta(t) = \beta \exp(-2 \kappa t)$.
+Hamiltoninan in terms of Stocks operators (\ref{eq:pseudo_spin}):
+%
+\begin{equation}
+\hat{H} = \alpha(t) \hat{S}_z^2 + \beta(t) \hat{S}_x^2 - B \hat{S}_x.
+\end{equation}
+%
+Equaitions on the mean-values of operators:
+% 
+\begin{equation}
+\begin{array}{lcl}
+\dot{S}_z & = &  2 \beta(t) S_x S_y - B S_y; \\
+\dot{S}_x & = & -2 \alpha(t) S_z S_y; \\
+\dot{S}_y & = & 2(\alpha(t) - \beta(t)) S_z S_z + B S_z.
+\end{array}
+\end{equation}
+%
+Invariant of the system
+%
+\begin{equation}
+S_x^2 + S_y^2 + S_z^2 = S_0^2 = R^2,
+\end{equation}
+%
+where $R$ -- is a radius of the Poincare sphere.
+Non-dissipative system has a bifurcation at the critical values of $\beta^* = B / 2R$.
 
-\dots
+It can be transformed to the equation on the phase difference $\phi$ and $S_z$ as follows
+%
+\begin{equation}
+\begin{array}{lcl}
+\dot{S}_z & = & B \sqrt{1 - S_z^2} \sin \phi - 2 \beta(t) (1 - S_z^2) \sin \phi \cos \phi; \\[10pt]
+\dot{\phi} & = &  -2 \alpha(t) S_z + 2 \beta(t) S_z \cos^2 \phi - \dfrac{B S_z \cos \phi}{\sqrt{1 - S_z^2}}.
+\end{array}
+\end{equation}
+%
+We studied its dynamic numerically.
+%
+\begin{figure}[ht]
+\center{\includegraphics[width=0.7\linewidth]{pic/phase_potential_dissipation.eps}}
+\caption{\dots}
+\label{pic:phase}
+\end{figure}
+%
+Non-dissipative system hase two different regimes depend on different values of $B$: blue and red.
+Case blue ($\beta > \beta^*$) corresponds to the existence of barrier, and the red case ($\beta < \beta^*$) corresponds to the absence of the barrier.
+
+Linearization ($z \ll 1$, $\phi \ll 1$) of the system:
+%
+\begin{equation}
+\begin{array}{lcl}
+\dot{z} & = & (B - 2\beta(t)) \phi; \\
+\dot{\phi} & = & (2 \beta(t) - 2 \alpha(t) - B) z.
+\end{array}
+\end{equation}
+%
+Adiabaticity condition:
+%
+\begin{equation}
+\dfrac{1}{\omega^2(t)} \Big| \dfrac{d \omega}{d t} \Big| \ll 1.
+\end{equation}
+%
+It allows us to reduce linear system to the harmonic oscillator equaiton with slowly evolving frequency:
+%
+\begin{equation}
+\ddot{\phi} + \omega^2(t) \phi = 0,
+\end{equation}
+%
+$\omega(t) = (B - 2\beta(t))(B - 2 \beta(t) + 2 \alpha(t))$.
+We can approximate its solution as
+%
+\begin{equation}
+\phi(\tau) \approx A / \sqrt{\omega(\tau)} \cos (\omega(\tau) \tau),
+\end{equation}
+%
+where $\tau$ is the time elapsed after the oscillation sets in, and $A$ is an amplitude of oscillations at the moment $\tau = 0$.
 
 \section{Conclusion \label{sec:conclusion}}
 
