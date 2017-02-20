@@ -74,6 +74,46 @@ set(h_axis(1), 'XLabel', 'x');
 
 % Then click Edit -> Current object properties -> Undock -> Compress
 
+%% gamma_{+-} with variational approximation
+clc; clear
+
+% Variational anzatz
+phi_p = @(x, x0, a) (exp(-((x - x0) .^ 2) / (2 * a^2)) ...
+    +exp(-((x + x0) .^ 2) / (2 * a^2)));
+
+phi_m = @(x, x0, a) (exp(-((x - x0) .^ 2) / (2 * a^2)) ...
+    -exp(-((x + x0) .^ 2) / (2 * a^2)));
+
+get_int = @(f) integral(f, -40, 40, 'RelTol', 1e-10, 'AbsTol', 1e-6);
+
+h = 1;
+U = @(x, x0) h * ((x / x0) .^ 2 - 1) .^ 2;
+
+a = 3;
+x0 = 0:0.1:10;
+
+gamma_pp = zeros(1, length(a));
+gamma_pm = gamma_pp; gamma_mm = gamma_pp;
+
+for i = 1:length(x0)
+    phi_p_norm = sqrt( get_int(@(x) phi_p(x, x0(i), a) .^ 2) );
+    phi_m_norm = sqrt( get_int(@(x) phi_m(x, x0(i), a) .^ 2) );
+    
+    fp = @(x) (1 / phi_p_norm) * phi_p(x, x0(i), a); % phi_p_normalized
+    fm = @(x) (1 / phi_m_norm) * phi_m(x, x0(i), a); % phi_m_normalized
+    
+    gamma_pp(i) = get_int(@(x) (fp(x) .^ 4) );
+    gamma_pm(i) = get_int(@(x) (fp(x) .^ 2) .* (fm(x) .^ 2));
+    gamma_mm(i) = get_int(@(x) (fm(x) .^ 4) );
+end
+
+figure('Position', [100 100 325 225]); hold on
+x = x0 / a;
+plot(x, gamma_pp, x, gamma_pm, x, gamma_mm);
+xlabel('x_0 / a')
+ylabel('\gamma_{ij} / g')
+legend('\gamma_{++}', '\gamma{+-}', '\gamma_{--}')
+
 %% Phase potential in elliptic coordinate with two parameters: \lambda, \Lambda
 clc; clear
 
@@ -129,15 +169,15 @@ ylabel('V_0(z)');
 
 %% Josephson regime
 
-% Lambda = 0.5;
+Lambda = 0.5;
 lambda = [0 0.25 0.5 0.9];
 linewidth = [2 2 1 1];
 linestyle = {'--'; '-'; '--'; '-'};
 
-figure('Position', [100 100 500 225]); hold on
+% figure('Position', [100 100 500 225]); hold on
 
 % No legend
-% figure('Position', [100 100 325 225]); hold on
+figure('Position', [100 100 325 225]); hold on
 
 for i = 1:length(lambda)
 	V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda(i) * (1 - lambda(i))) * (sn(x, lambda(i)) .^ 2) ...
@@ -155,7 +195,7 @@ h_legend = legend(...
 	  sprintf('\\lambda = %g', lambda(4))  ...
 );
 
-set(h_legend, 'location', 'northeastoutside');
+% set(h_legend, 'location', 'northeastoutside');
 
 % Axis
 plot([-2*K, 2*K], [0 0], '--', 'Color', 'k');
@@ -174,7 +214,7 @@ linestyle = {'--'; '-'; '--'; '-'};
 figure('Position', [100 100 500 225]); hold on
 
 % No legend
-% figure('Position', [100 100 325 225]); hold on
+figure('Position', [100 100 325 225]); hold on
 
 for i = 1:length(lambda)
 	V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda(i) * (1 - lambda(i))) * (sn(x, lambda(i)) .^ 2) ...
@@ -192,7 +232,7 @@ h_legend = legend(...
 	  sprintf('\\lambda = %g', lambda(4))  ...
 );
 
-set(h_legend, 'location', 'northeastoutside');
+% set(h_legend, 'location', 'northeastoutside');
 
 % Axis
 plot([-2*K, 2*K], [0 0], '--', 'Color', 'k');
@@ -229,10 +269,13 @@ alpha = 1; % Parameter, lambda = beta / alpha
 mass = 1 / (2 * alpha);
 
 % Potential
-lambda = 0.9; Lambda = 0.1; % 1st-order transition
+lambda = 0.5; Lambda = 0.5; % 1st-order transition
 % lambda = 0.5; Lambda = 0.5; % 2nd-order transition
 
-V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+% V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+%	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
+
+ V = @(x) ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
 
 % Put barrier into zero E0 = V(0)
@@ -262,12 +305,13 @@ for i = 1:length(E)
 	fprintf('%i\n', i);
 	
 	[xleft, xright] = roots_near_x0(@(x) -Vb(x) + E(i), 0);
-	tau_p(i) = sqrt(2 * mass) * integral(@(x) 1 ./ sqrt(Vb(x) - E(i)),...
+	tau_p(i) = integral(@(x) 1 ./ sqrt(Vb(x) - E(i)),...
 		xleft, xright, 'AbsTol', 1e-6);
 
-	T(i) = planck_const / (boltzmann_const * tau_p(i));
+	% T(i) = planck_const / (boltzmann_const * tau_p(i));
+	T(i) = 1 / tau_p(i);
 
-	S(i) = 2 * sqrt(2 * mass) * integral(@(x) sqrt(Vb(x) - E(i)),...
+	S(i) = 2 * integral(@(x) sqrt(Vb(x) - E(i)),...
 		xleft, xright, 'AbsTol', 1e-6) + ...
 		E(i) * tau_p(i);
 	
@@ -275,19 +319,20 @@ for i = 1:length(E)
 end
 
 T_thermal = min(T):0.001:(2*max(T));
-S_thermal = (planck_const * V0) ./ (boltzmann_const * T_thermal);
+% S_thermal = (planck_const * V0) ./ (boltzmann_const * T_thermal);
+S_thermal = V0 ./ T_thermal;
 
 % Plotting
 figure('Position', [100 100 650 225]);
 
 subplot(1, 2, 1); hold on
-xlabel('T'); ylabel('S_{min}(T)')
+xlabel('T / T_0'); ylabel('S_{min}')
 
 plot(T, S, 'LineWidth', 2, 'Color', 'black');
 plot(T_thermal, S_thermal, '--', 'Color', 'black');
 
 subplot(1, 2, 2); hold on
-xlabel('E'); ylabel('\tau_p')
+xlabel('E'); ylabel('h \tau_p / \alpha s')
 
 plot(E, tau_p, 'LineWidth', 2, 'Color', 'black')
 
