@@ -22,14 +22,14 @@ alpha = 1; beta = 0.9; B = 1; R = 1;
 lambda_1 = beta / alpha;
 Lambda_1 = B / (alpha * R); % s = R (?)
 
-alpha_dissip = @(t, alpha, kappa) alpha * exp(-kappa * t);
-beta_dissip  = @(t, beta, kappa) beta  * exp(-kappa * t);
+alpha_dissip = @(t, alpha, kappa) (alpha / B) * exp(-2 * kappa * t);
+beta_dissip  = @(t, beta, kappa) (beta / B) * exp(-2 * kappa * t);
 
 % S = [S_z; S_x; S_y]
 dS = @(t, S, alpha, beta, kappa) [
-	2 * beta_dissip(t, beta, kappa) * S(2) * S(3) - B * S(3);
+	2 * beta_dissip(t, beta, kappa) * S(2) * S(3) - S(3);
 	-2 * alpha_dissip(t, alpha, kappa) * S(1) * S(3);
-	2 * (alpha_dissip(t, alpha, kappa) - beta_dissip(t, beta, kappa)) * S(1) * S(2) + B * S(1)
+	2 * (alpha_dissip(t, alpha, kappa) - beta_dissip(t, beta, kappa)) * S(1) * S(2) + S(1)
 ];
 
 % S_x^2 + S_y^2 + S_z^2 = S_0^2 = R^2
@@ -63,7 +63,7 @@ phase = atan(S_barrier(:, 3) ./ S_barrier(:, 2));
 plot(T, phase, 'Color', 'blue');
 
 % (III) Phase in a new regime without dissipation
-t_new_regime = 200; % Look at the figure
+t_new_regime = 250; % Look at the figure
 new_alpha = alpha_dissip(t_new_regime, alpha, kappa);
 new_beta  = beta_dissip(t_new_regime, beta, kappa);
 
@@ -91,8 +91,7 @@ legend( ...
 	sprintf('\\kappa = 0, \\lambda = %g, \\Lambda = %g', lambda_1, Lambda_1), ...
 	sprintf('\\kappa = 0, \\lambda = %g, \\Lambda = %g', lambda_2, Lambda_2))
 
-title('\Delta \phi = arctan(-S_y / S_x)')
-xlabel('t'); ylabel('\Delta \phi')
+xlabel('t'); ylabel('\phi')
 
 %% Potential transformation
 V = @(x) alpha * (R^2) * ( ((1/4) * (Lambda_1 ^ 2) - lambda_1 * (1 - lambda_1)) * (sn(x, lambda_1) .^ 2) ...

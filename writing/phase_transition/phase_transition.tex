@@ -21,22 +21,31 @@
 \title{Quantum-Classical Phase Transition for Exciton-Polariton Josephson Junctions}
 
 \author{M. E. Lebedev}
-\email{m.lebedev@lmc.ifmo.ru}
 \affiliation{ITMO University, St. Petersburg 197101, Russia}
 
 \author{D. A. Dolinina}
-\email{dasha.doly@gmail.com}
 \affiliation{ITMO University, St. Petersburg 197101, Russia}
 
+\author{S. M. Arakelian}
+\affiliation{Vladimir State University named after A. G. and N. G. Stoletovs, Gorkii Street 87, Vladimir, Russia}
+
+\author{Tien-Chang Lu}
+\affiliation{Department of Photonics, National Chiao Tung University, Hsinchu 300, Taiwan}
+
+\author{A. V. Kavokin}
+\affiliation{Spin Optics Laboratory, St. Petersburg State University, Ul’anovskaya, Peterhof, St. Petersburg 198504, Russia}
+\affiliation{School of Physics and Astronomy, University of Southampton, SO17 1BJ Southampton, United Kingdom}
 
 \author{A. P. Alodjants}
 \email{alexander\_ap@list.ru}
 \affiliation{ITMO University, St. Petersburg 197101, Russia}
+\affiliation{Vladimir State University named after A. G. and N. G. Stoletovs, Gorkii Street 87, Vladimir, Russia}
 
 \date{\today}
 
 \begin{abstract}
-We consider the quantum phase problem for low branch exciton polariton condensate Josephson junctions operating at finite temperatures and polariton lifetime. The process of quantum tunneling we characterized by thermon lifetime. We have shown that classical (thermal) activation and quantum tunneling for the phase  represent two regimes depending on polariton condensate parameters and distance between the junctions. The transition between this two regimes   exhibits universal features of first or second order phase transition depending on the potential shape for the relative phase. Notably, scale of the crytical temperature  characterized by polariton interaction strength only. We have shown that polariton condensate junction device runs in classical way for ten of Kelvins temperatures and typical polariton densities used in current experiments with narrow band semiconductor samples. Purely  quantum phase regime can be obtained even in the presence of dissipation at one or two order lower temperatures and relatively short operating time scales (few of picoseconds), and   opens kindly new possibilities for exciton polariton BEC applications in scalable quantum computing and quantum metrology.   
+We consider the problem of achievement of quantum regime for  relative phase of trapped in W -- potential low branch exciton polariton condensates taken at finite temperatures and finite polariton lifetime. Non-standard Bose-Hubbard model of  exciton polariton Josephson junction (EPJJ) that produces complex potential energy landscape (PEL) consisting from set of barriers and wells for the phase is proposed. We have shown that classical (thermal) activation and quantum tunneling for the phase  represent two regimes depending on temperature, polariton condensate density and distance between the junctions. The transition between this two regimes   exhibits universal features of first or second order phase transition (PT) depending on the PEL for relative phase. In the presence of dissipation quantum system exhibits non-equilibrium PT from quantum (where tunneling is possible) to the classical regime where tunneling is escaped. The obtained results are discussed in details in the framework of quantum annealing problem with exciton polariton condensates.   
+ 
 \end{abstract}
 
 \pacs{\dots}
@@ -57,42 +66,40 @@ We consider the quantum phase problem for low branch exciton polariton condensat
 
 \section{Introduction \label{sec:introduction}}
 
-For last decade investigations of exciton polariton Bose-Einstein condensates (BEC) in various type of semiconductor microstructures represent one of mainstreams of current photonic and semiconductor technologies, see e.g. \cite{Sanvitto,Guillet}.
+For last decade investigations of exciton polariton Bose-Einstein condensates (BEC) in various type of semiconductor microstructures represent important mainstream of current photonic and semiconductor technologies, see e.g. \cite{Sanvitto,Guillet}.
 The microcavity exciton polaritons are bosonic quasiparticles representing  admixtures of the quantized cavity mode and quantum wells excitons.
 Practically, semiconductor microcavities are promising for various optoelectronic applications where quantum  matter-field interface plays crucial role.
-In particular, demonstrations of polariton laser with electrical pump \cite{Bhattacharya,Schneider}, amplifiers \cite{Niemietz}, switches \cite{Amo_2010}, transistors \cite{Ballarini}, polariton circuits and optical logic elements \cite{Sturm,Liew}.
-Although exciton polariton condensates exhibits Bose-Einstein statistics under the phase transition condition and macroscopic occupation of the ground state at certain pumping rate that is less than for convenient lasers, they are not in true thermodynamic equilibrium state \cite{Byrnes_2014,Sun}.
-  
-Non-equilibrium, or, thermodynamically quasi-equilibrium features of exciton polariton condensates play certain role in various manifestations of their collective (many body) quantum states such as superfluidity \cite{Carusotto_2013,Amo_2009}, quantized vortices \cite{Lagoudakis_2008,Lagoudakis_2009}, soliton formation \cite{Sich}, Josephson oscillations and macroscopic self-trapping \cite{Abbarchi,Lagoudakis_2010}.
-Since exciton polariton BEC's in present experiments examined at high enough (up to the room) temperatures the quantum character of such a states should be examined even at equilibrium.
+In particular, it is worth to mention demonstrations of polariton laser with electrical pump \cite{Bhattacharya,Schneider}, amplifiers \cite{Niemietz}, switches \cite{Amo_2010}, transistors \cite{Ballarini}, polariton circuits and optical logic elements \cite{Sturm,Liew}.
+Although exciton polariton condensates exhibits Bose-Einstein statistics under the phase transition (PT) condition and macroscopic occupation of the ground state at certain pumping rate that is less than for convenient lasers, they are not in true thermodynamic equilibrium state \cite{Byrnes_2014,Sun}. Non-equilibrium features of exciton polariton condensates play important role in various manifestations of their collective (many body) states such as superfluidity \cite{Carusotto_2013,Amo_2009}, quantized vortices \cite{Lagoudakis_2008,Lagoudakis_2009}, soliton formation \cite{Sich}, Josephson oscillations and macroscopic self-trapping \cite{Abbarchi,Lagoudakis_2010}.
 
-The problem of distinguishability of statistically classical and quantum regimes for exciton polariton condensates behavior is very actual for their practical purposes, see e.g. \cite{Dominici}; especially for their possible applications for quantum information science purposes.
+Recently Yongbao Sun et al,  in Ref. \cite{Snoke_2017} reports observation of quasi-equilibrium low branch exciton polariton condensate in high Q-factor microcavity possessing very high photon lifetime, that is $135ps$. Notably, exciton polaritons with long lifetime are promising candidates for current quantum technologies, cf. \cite{Demirchyan}. However, since exciton polariton BEC's in present experiments are observed at high enough (up to the room) temperatures the quantum abilities of such a states should be examined even at full thermal equilibrium. 
+    
+The problem of distinguishability of statistically classical and quantum regimes for exciton polariton condensates behavior is very actual for their practical purposes and especially for their possible applications in quantum information science, see e.g. \cite{Dominici}.
 Fast switching properties (the typical switching time of a few picoseconds), relatively strong nonlinear response and flexibility to external optical and/or electrical pump, spin degrees of freedom made microcavity polaritons potentially very promising for quantum computation and quantum information processing objectives, see, e.g. \cite{Demirchyan,Pagel,Kyriienko,Solnyshkov_2015, Dominici}.
-Especially it is important to stress quantum annealing problem \cite{Yan} that is very actual now and where collective (bosonic) character of polariton BEC could be used.
-In particular, as it is shown recently in \cite{Lewenstein} global minimum of energy landscape can be reached at finite temperatures via a combination of thermal annealing and quantum tunneling. 
 
-Another promising area of potential applications of quantum exciton polariton states is connected with quantum metrology purposes for which designing of quantum interferometers and gyroscopes possessing high precision measurements with quantum phase states is utilized, cf. \cite{Pezze, Gulevich}.
+Especially it is important to stress here quantum annealing problem physically based on searching algorithm for the global minimum of a potential energy landscape (PEL) consisting from set of barriers and wells, see e.g.  \cite{Santoro, Das}. In purely classical  (thermal) regime physical system overcomes arbitrary barrier at finite temperature with the help of thermal activation process if the thermal energy is enough. Contrary, in quantum limit the same system undergoes quantum tunneling through the barrier. Obviously, the shape of the barrier plays essential role in this case, cf. \cite{Das, Lewenstein}. In order, as it is shown recently  in \cite{Lewenstein} annealing algorithm implies in general case combination of thermal annealing and quantum tunneling. The     
+collective (bosonic) character of polariton condensation could be used in this case to acceleration of search physical algorithm \cite{Yan}.  
   
-In the paper we consider generic problem  of quantum-classical phase transition (see e.g.\cite{Chudnovsky_1997}) with exciton polariton condensates occurring in semiconductor microcavity in the presence of Josephson effect, cf. \cite{Aleiner, Shelykh_2008, Borgh_2010}.
-In general this problem relates to dissipative tunneling problem or, tunneling at finite (non-zero) temperatures models, cf. \cite{Caldeira, Larkin, Riseborough}.
-Traditionally  seminal studies on this topic are based on consideration of superconductor devices \cite{Ankerhold} where macroscopic tunneling plays essential role.
-In particular, it is worth to mention here Schr\"odinger cat state formation \cite{Leggett} and design of quantum gates for quantum computing with superconductor qubits where macroscopic quantum coherent phase properties are used \cite{Makhlin}.
-Latterly the problem of quantum tunneling and quantum-classical phase transition problem have been applied to other two-level (spin) systems, like atomic BEC's \cite{Zhang}, and small ferromagnetic particles, \cite{Owerre}.
+In the paper we consider generic problem  of quantum-classical phase transition (PT) with exciton polariton condensates occurring in semiconductor microcavity in the presence of Josephson effect, cf. \cite{Chudnovsky_1997,Aleiner, Shelykh_2008, Borgh_2010}. To be more specific we examine simply two junction model.
+ 
+In general this problem relates to dissipative tunneling problem or, tunneling at finite (non-zero) temperatures, cf. \cite{Caldeira, Larkin, Riseborough}.
+Traditionally,  studies in this field are limited by consideration of superconductor devices \cite{Ankerhold} where macroscopic quantum tunneling phenomena plays essential role.
+In particular, it is worth to mention here Schr\"odinger cat state formation \cite{Leggett} and design of quantum gates with superconductor qubits for quantum computing where macroscopic quantum coherence for the phase is important \cite{Makhlin}.
+Recently the problem of quantum tunneling and quantum-classical PT problem have been applied to other two-level (spin) systems, like atomic BEC's \cite{Zhang}, and small ferromagnetic particles, \cite{Owerre}.
 Strictly speaking main discussion is focused on investigation of quantum-classical escape rate transition that takes place in the presence of potential barrier at finite temperatures.
   
-In the paper we propose \textit{extended model} for exciton polariton Josephson junctions that relates to so-called non-standard Bose-Hubbard models (see \cite{Dutta} and references therein) when energy of polariton-polariton scattering contributes into the tunneling parameter, cf. \cite{Aleiner, Shelykh_2008, Borgh_2010, Solnyshkov_2008, Sarchi}.
+In the paper we propose \textit{extended model} for exciton polariton Josephson junctions (EPJJs) that relates to so-called non-standard Bose-Hubbard models (see \cite{Dutta} and references therein) when energy of polariton-polariton scattering contributes into the tunneling parameter matrix elements, cf. \cite{Aleiner, Shelykh_2008, Borgh_2010, Solnyshkov_2008, Sarchi}.
 In particularly, we pay our attention to temperature dependent quantum critical phenomena occurring in the presence of macroscopic tunneling.
-We aimed at elucidation of necessary criteria to obtain quantum phase regimes with trapped exciton polaritons suitable for creation of exciton polariton qubit gates.
+We aimed at elucidation of necessary criteria to obtain quantum phase regimes with trapped exciton polaritons suitable for quantum annealing purposes and creation of exciton polariton qubit gates.
 
 This paper is arranged as follows.
-In Sec. \ref{sec:model} we explain in details our model to realize Josephson junction with exciton polariton condensates.
-The extended tight-binding model will be established in this case.
-In Sec. \ref{sec:quantum_phase} we {\red \dots }.
-In the conclusion, we summarize the results obtained.
+In Sec. \ref{sec:model} we explain in details  extended model of EPJJ under the tight-binding approach. 
+In Sec. \ref{sec:quantum_phase} we give description of quantum phase for our model and discuss various regimes for it. Section \ref{sec:quantum_classical} establishes main results obtained in the paper. In order, we consider quantum-classical PT problem for various PEL's for quantum phase in the framework of our model at finite temperatures.  The influence of non-equilibrium effects with microcavity exciton polaritons possessing finite lifetime is discussed in \ref{sec:non-equilibrium}.      
+In Conclusion we summarize the results obtained.
 
-\section{THE MODEL OD EXCITON POLARITON JOSEPHSON JUNCTION \label{sec:model}}
+\section{THE MODEL OF EPJJ \label{sec:model}}
 
-We start by describing the problem of equilibrium exciton polariton condensate trapping in symmetric one dimensional double-well potential $U(x) = h ((x/x_0)^2 - 1)^2$; $2x_0$ defines distance between potential minima, $h$ depth of the potential.
+We start by describing the problem of equilibrium exciton polariton condensate trapping in symmetric one dimensional double-well potential $U(x) = h ((x/x_0)^2 - 1)^2$; $2x_0$ defines distance between potential minima, $h$ is depth of the potential.
 % 
 %\begin{figure}[ht]
 %\center{\includegraphics[width=0.5\linewidth]{pic/potential_sym_asym.png}}
@@ -100,17 +107,16 @@ We start by describing the problem of equilibrium exciton polariton condensate t
 %Confined double-well potential for exciton polariton coupled condensate channels with symmetric $(\Phi_+(x))$ and asymmetric $(\Phi_-(x))$ wavefunctions obtained numerically by solving stationary GPE (\ref{eq:stationary}).
 %The dimensionless parameters for the calculations are: $h = 10$, $x_0 = 1$, $\mu_+ = 5.7355$, $\mu_- = 6.5653$.
 %\label{pic:potential_sym_asym}
-
 %\end{figure}
 %
-The Hamiltonian for the system of weakly interacting exciton polaritons in an external $U(x)$ can be written in the second quantized form as:
+The Hamiltonian for the system of weakly interacting exciton polaritons trapped in an external potential $U(x)$ can be written in the second quantized form as:
 %
 \begin{equation}
-\hat{H} = \int \Big\{ -\dfrac{\hbar^2}{2m} \hat{\psi}^\dag \dfrac{d^2 \hat{\psi}}{dx^2} + \hat{\psi}^\dag \hat{\psi} U(x) + \dfrac{g}{2} \hat{\psi}^{\dag 2} \hat{\psi}^2  \Big\} dx,
+\hat{H} = \int \hat{\psi}^\dag\Big\{ -\dfrac{\hbar^2}{2m_{pol}}  \dfrac{d^2 }{dx^2} + U(x) + \dfrac{g}{2} \hat{\psi}^{\dag} \hat{\psi}  \Big\}\hat{\psi} dx,
 \label{eq:gpe_hamiltonian}
 \end{equation}
 %
-where $\hat{\psi} \equiv \hat{\psi}(x, t)$ is a polariton field operator that annihilate a particle at the position $x$ and time $t$, $g$ is two-body (polariton-polariton) scattering length.
+where $\hat{\psi} \equiv \hat{\psi}(x, t)$ is a polariton field operator that annihilate a particle at the position $x$ and time $t$, $g$ describes two-body (polariton-polariton) scattering length, $m_{pol}$ is low branch polariton effective mass.
 In the paper we use so-called two-mode representation of $\hat{\psi}$ - operator supposing
 %
 \begin{equation}
@@ -119,23 +125,22 @@ In the paper we use so-called two-mode representation of $\hat{\psi}$ - operator
 \end{equation}
 %
 where $\hat{\psi}_{1,2}$ are time dependent operators characterizing condensate at the left and at the right wells respectively; $\Phi_{1,2}(x)$ are condensate wavefunctions which are responsible for it spatial distribution.
-It's instructive to recast $\Phi_{1,2}(x)$ as
+It's instructive to represent  $\Phi_{1,2}(x)$ as
 %
 \begin{equation}
 \Phi_{1,2} = \dfrac{\Phi_+ \pm \Phi_-}{\sqrt{2}}
 \label{eq:basic_modes}
 \end{equation}
 %
-where $\Phi_{\pm}(x) = \pm \Phi_{\pm}(-x)$ are symmetric ($\Phi_+$) and antisymmetric ($\Phi_-$) real wavefunctions obeying stationary Gross-Pitaevskii equations $\mu_{\pm} \Phi_{\pm} = -\dfrac{\hbar^2}{2m} \dfrac{d^2 \Phi_{\pm}}{dx^2} + U(x) \Phi_{\pm} + g \Phi_{\pm}^3$.
+where $\Phi_{\pm}(x) = \pm \Phi_{\pm}(-x)$ are symmetric ($\Phi_+$) and antisymmetric ($\Phi_-$) real wavefunctions obeying stationary Gross-Pitaevskii (GP) equations $\mu_{\pm} \Phi_{\pm} = -\dfrac{\hbar^2}{2m_{pol}} \dfrac{d^2 \Phi_{\pm}}{dx^2} + U(x) \Phi_{\pm} + g \Phi_{\pm}^3$
 %
 %\begin{equation}
 %\mu_{\pm} \Phi_{\pm} = -\dfrac{\hbar^2}{2m} \dfrac{d^2 \Phi_{\pm}}{dx^2} + U(x) \Phi_{\pm} + g \Phi_{\pm}^3.
 %\label{eq:stationary}
 %\end{equation}
 %
-and normalization condition $\int \Phi_{\pm}^2 dx = 1$.
-Here $\mu_{\pm}$ are chemical potentials.
-As a result an operator $\hat{\psi_1}^\dag\hat{\psi_1} + \hat{\psi_2}^\dag\hat{\psi_2} = N$ characterizes total number of particles (here and thereafter we omit ``hat'' design for simplicity).
+and normalization condition $\int \Phi_{\pm}^2 dx = 1$; $\mu_{\pm}$ is chemical potential.
+As a result an operator $N=\hat{\psi_1}^\dag\hat{\psi_1} + \hat{\psi_2}^\dag\hat{\psi_2}$ characterizes total number of particles.
 Substituting (\ref{eq:basic_modes}), (\ref{eq:two_modes}) into (\ref{eq:gpe_hamiltonian}) we arrive to
 % 
 \begin{equation}
@@ -147,28 +152,28 @@ Substituting (\ref{eq:basic_modes}), (\ref{eq:two_modes}) into (\ref{eq:gpe_hami
 \label{eq:hamiltonian}
 \end{equation}
 %
-where we made some denotations $\gamma_{ij} = g \int \Phi_i^2 \Phi_j^2 dx, i,j \in \{+,-\}$;
-$A = \frac{1}{4} (\gamma_{++} + \gamma_{--} + 6 \gamma_{+-})$; $\Gamma = \frac{1}{2} (\gamma_{++} - \gamma_{--})$; $C = \frac{1}{4} (\gamma_{++} + \gamma_{--} - 2\gamma_{+-})$; $G = \mu_- - \mu_+ - 2\Gamma$.
+where we made denotations $\gamma_{ij} = g \int \Phi_i^2 \Phi_j^2 dx, i,j \in \{+,-\}$,
+$A = \frac{1}{4} (\gamma_{++} + \gamma_{--} + 6 \gamma_{+-})$, $\Gamma = \frac{1}{2} (\gamma_{--} - \gamma_{++})$, $C = \frac{1}{4} (\gamma_{++} + \gamma_{--} - 2\gamma_{+-})$, $G = \mu_- - \mu_+ - 2\Gamma$.
 
-Hamiltonian (\ref{eq:hamiltonian}) represents extended model for internal Josephson junction effect with exciton polariton BEC trapped in double-well potential.
+Hamiltonian (\ref{eq:hamiltonian}) represents extended model for internal Josephson junction effect with exciton polariton condensates trapped in double-well potential.
 The ``additional'' terms with $\Gamma$ and $C$ in (\ref{eq:hamiltonian}) characterize density induced and pair tunneling, respectively.
 Generally, our model implies existence of quantum tunneling of the particles between wells with effective (nonlinear) tunneling rate $G_{eff} = \dfrac{1}{2}(G+\Gamma N - C\hat{\psi}_1^\dag\hat{\psi}_2)$.
 The contribution from relevant coefficients on can be estimated from variational ansatz
 %
 \begin{equation}
-\Phi_{\pm} = A_{\pm} \Big[ \exp \Big( -\dfrac{(x - x_0)^2}{2 a^2} \Big) \pm \exp \Big( -\dfrac{(x + x_0)^2}{2 a^2} \Big) \Big]
+\Phi_{\pm} = A_{\pm} \Big[ \exp \Big( -\dfrac{(x - x_0)^2}{2 a^2} \Big) \pm \exp \Big( -\dfrac{(x + x_0)^2}{2 a^2} \Big) \Big],
 \label{eq:two_modes_eq}
 \end{equation}
 %
 where $a$ is width of condensate wavefunctions at each wells (we suppose them equal to each other), defined from normalization conditions.
-In Fig. \ref{pic:gamma_pm_vs_g} the behavior of normalized coefficients $\dfrac{\gamma_{ij}}{g}$ $i,j \in \{+,-\}$ as a function of half of intra-well distance $x_0$ is shown.
-It is important that at differences between them rapidly vanishes with increasing of distance $x_0$.
+In Fig. \ref{pic:gamma_pm_vs_g} the behavior of normalized coefficients $\dfrac{\gamma_{ij}}{g}$ $i,j \in \{+,-\}$ as a function of half of inter-well distance $x_0$ is shown.
+It is important that differences between various $\gamma_{ij}$ rapidly vanish with increasing the inter-well distance $2x_0$.
 We can suppose $\Gamma = C = 0$ for $x_0 >> a$.
 This limit exactly corresponds to familiar problem of two weakly linked condensates at zero temperature, see e.g. \cite{Aleiner, Shelykh_2008, Borgh_2010, Raghavan}.
 %
 \begin{figure}[ht]
 \center{\includegraphics[width=0.5\linewidth]{pic/ypm_x0.eps}}
-\caption{Dependence of $\gamma_{ij} / g$ on $x_0 / a$ \label{pic:gamma_pm_vs_g}}
+\caption{Dependences of normalized matrix elements $\gamma_{ij} / g$ on $x_0 / a$. \label{pic:gamma_pm_vs_g}}
 \end{figure}
 %
 
@@ -180,14 +185,12 @@ To elucidate purely quantum phase features of our extended Josephson model it is
 \begin{align}
 \hat{S}_x = & \dfrac{1}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 + \hat{\psi}_1 \hat{\psi}_2^\dag) = s \cos{\phi} - \sin{\phi} \dfrac{d}{d \phi}, \\
 \quad \hat{S}_y = & \dfrac{i}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 - \hat{\psi}_1 \hat{\psi}_2^\dag) = s \sin{\phi} + \cos{\phi} \dfrac{d}{d \phi}, \\
-\hat{S}_z = & \dfrac{1}{2} (\hat{\psi}_2^\dag \hat{\psi}_2 + \hat{\psi}_1^\dag \hat{\psi}_1) = -i\dfrac{d}{d \phi},
+\hat{S}_z = & \dfrac{1}{2} (\hat{\psi}_2^\dag \hat{\psi}_2 - \hat{\psi}_1^\dag \hat{\psi}_1) = -i\dfrac{d}{d \phi},
 \end{align}
 \label{eq:pseudo_spin}
 \end{subequations}
-%
 where  $\phi$ is the phase variable.
 The operators determined in Eq. (\ref{eq:pseudo_spin}) obey familiar $SU(2)$ algebra commutation relations $[S_i, S_j] = i\epsilon_{ijk}S_k,  i,j,k=x,y,z$.
-
 After straitforward calculations from (\ref{eq:hamiltonian}) one can obtain
 %
 \begin{equation}
@@ -199,12 +202,12 @@ H & = & -(\alpha - \beta \sin^2 \phi) \dfrac{d^2}{d \phi^2} - (\beta(s-\dfrac{1}
 \end{equation}
 %
 where $\alpha = A - C = 2\gamma_{\pm} > 0$, $\beta = 2C > 0$ and $B = \Gamma N + G > 0$.
-Below we chose $x_0$ obeying to condition $\gamma_{++} \simeq \gamma_{--} = \gamma$ supposing $\Gamma = 0$ for simplicity, see Fig. \ref{pic:gamma_pm_vs_g}. We also assume macroscopically large particle number, that is $s = \dfrac{N}{2} >> 1$ is C - number. Using (\ref{eq:hamiltinian_s})  for Schrodinger equation we obtain   
+Below we chose $x_0$ obeying to condition $\gamma_{++} \simeq \gamma_{--} = \gamma$ supposing $\Gamma = 0$ for simplicity, see Fig. \ref{pic:gamma_pm_vs_g}. We also assume macroscopically large particle number, i.e. the $s = N/2 >> 1$ is C - number. Using (\ref{eq:hamiltinian_s})  for Schrodinger equation we obtain   
 %
 \begin{equation}
 \begin{array}{l}
 (\alpha - \beta \sin^2 \phi) \dfrac{d^2 \Phi}{d \phi^2} + (\beta s\sin{2\phi}-B\sin{\phi})) \dfrac{d \Phi}{d \phi} \\
-+ s(B \cos \phi + \beta s \sin^2 \phi) = 0.
++ (E + B s \cos \phi + \beta s^2 \sin^2 \phi) \Phi = 0,
 \end{array}
 \label{eq:schrodinger}
 \end{equation}
@@ -226,12 +229,12 @@ where $\Phi \equiv \Phi(\phi)$ is unknown $2\pi$-periodic wavefunction that char
 It is possible to eliminate the term with first derivative in Eq. (\ref{eq:schrodinger}) applying the transformation
 %
 \begin{equation}
-\Phi(\phi) = \Psi(z) \exp \Big( s \ln \dn{z} - \dfrac{\Lambda s}{2 \sqrt{\lambda (1 - \lambda)}} \arctan \Big( \sqrt{\dfrac{\lambda}{1 - \lambda}} \cn{z} \Big) \Big)
+\Phi(\phi) = \Psi(z) \exp \Big( s \ln \dn{z} - \dfrac{\Lambda s}{2 \sqrt{\lambda (1 - \lambda)}} \arctan \Big( \sqrt{\dfrac{\lambda}{1 - \lambda}} \cn{z} \Big) \Big),
 \label{eq:transformation_of_phi}
 \end{equation}
 %
 where $z = \int \limits_0^\phi \dfrac{d \xi}{\sqrt{1 - \lambda \sin^2 \xi}} = F(\phi, \lambda)$ is new phase variable; $F(\phi, \lambda)$ is incomplete elliptic integral of the first kind.
-In (\ref{eq:transformation_of_phi}) we have introduced dimension-less parameters $\Lambda = \dfrac{G}{\alpha s}$, $\lambda = \dfrac{\beta}{\alpha}$ playing crucial role in our model.
+In (\ref{eq:transformation_of_phi}) we have introduced dimension-less parameters $\Lambda = \dfrac{G}{\alpha s}$, $\lambda = \dfrac{\beta}{\alpha}$ playing crucial role for our model.
 Inserting (\ref{eq:transformation_of_phi}) into (\ref{eq:schrodinger}) we arrive to Schr\"odinger-like equation
 % 
 \begin{equation}
@@ -239,37 +242,40 @@ Inserting (\ref{eq:transformation_of_phi}) into (\ref{eq:schrodinger}) we arrive
 \label{eq:schrodinger_usual}
 \end{equation}
 %
-for quantum particle with the ``mass''  $m = \dfrac{\hbar^2}{2 \alpha}$ and energy $E$, that moves in the potential $V(z) = \alpha s^2 V_0(z)$ with
+characterizing quantum particle with the ``mass''  $m = \dfrac{\hbar^2}{2 \alpha}$ and energy $E$, that moves in the potential $V(z) = \alpha s^2 V_0(z)$ with
 %
 \begin{equation}
-V_0(z) = \frac{ (\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda)) \sn^2{z} - \Lambda \cn{z}}{\dn^2{z}}
+V_0(z) = \frac{ (\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda)) \sn^2{z} - \Lambda \cn{z}}{\dn^2{z}}.
 \label{eq:potential}
 \end{equation}
 %
 
-The results known for quantum phase mesoscopic Josephson junction model can be recovered from (\ref{eq:hamiltonian}), (\ref{eq:potential}) at $\lambda = 0$.
-The dependence of the $\lambda$ parameter on normalized half of intra-well distance $\dfrac{x_0}{a}$ can be estimated from (\ref{eq:two_modes_eq}) and reads as $\lambda = 0.5 \Big( \exp \Big[ \dfrac{2 x_0^2}{a^2} \Big] - 1 \Big)^{-1}$.
-The limit $\lambda = 0$ corresponds to  infinitely large intra-well distances with $x_0 \to \infty$.
-On the other hand, parameter grows rapidly at $\dfrac{x_0}{a} \ll 1$.
-Obviously, in this limit our Josephson junction model inherent based on relatively weak coupling between wells breaks down.
-Below we examine case of $0 < \lambda < 1$ that could be obtained at moderate values $\dfrac{x_0}{a}$ of such as $\dfrac{x_0}{a} \geq 0.45$. 
+The dependences of trapping potential $V_0(z)$ on phase variable $z$ are shown in Fig. \ref{phase_potential}. The period of the functions is  $4K(\lambda)$.
+The dependence of the $\lambda$ parameter on normalized half of inter-well distance $\dfrac{x_0}{a}$ can be estimated from (\ref{eq:two_modes_eq}) and reads as $\lambda = 0.5 \Big( \exp \Big[ \dfrac{2 x_0^2}{a^2} \Big] - 1 \Big)^{-1}$. The results known for quantum phase mesoscopic Josephson junction model can be recovered from (\ref{eq:hamiltonian}), (\ref{eq:potential}) at $\lambda = 0$ and shown by red curves in  Fig.\ref{phase_potential}. This limit corresponds to  infinitely large inter-well distances, with $x_0 \to \infty$.
+On the other hand, $\lambda$ -- parameter grows rapidly at $\dfrac{x_0}{a} \ll 1$.
+Obviously, in this limit our EPJJ model that based on assumption of relatively weak coupling between the wells breaks down.
 
-Analysis of the quantum phase could be examined in three domains of vital parameter $\Lambda$, cf. \cite{Anglin}.
-The dependences of trapping potential $V_0(x)$ are shown in Fig. \ref{phase_potential}.
-The period of the functions is determined as $4K(\lambda)$.
+Below we are focusing on $\lambda$ -- parameters which belong to segment of $0 < \lambda < 1$ and might be obtained at moderate values of $\dfrac{x_0}{a}$ which are $\dfrac{x_0}{a} \geq 0.45$. 
+
 %
 \begin{figure}[ht]
 \begin{center}\includegraphics[width=1\linewidth]{pic/potentials.eps}
 \end{center}
 \caption{
-Effective potential $V_0(z)$ for (a) $\Lambda = 100$, (b) $\Lambda = 0.5$ , and (c) $\Lambda = 0.01$ as a function of  elliptic integral phase coordinate $z$.
-Points $\pm z_{min}$ and $\pm z_{max}$ in (b) corresponds to global minima and maxima of the potential, correspondingly, occurring with periodicity $4K(\lambda)$. \label{phase_potential}}
+Effective dimension-less potential $V_0(z)$ for (a) $\Lambda = 100$, (b) $\Lambda = 0.5$ , and (c) $\Lambda = 0.01$ as a function of  elliptic integral phase coordinate $z$.
+Points $\pm z_{min}$ and $\pm z_{max}$ in (b) relay to global minima and maxima of the potential, correspondingly, occurring with periodicity $4K(\lambda)$. \label{phase_potential}}
 \end{figure}
 %
 
+Analysis of the quantum phase can be performed  in three domains determined by vital $\Lambda$--parameter values, cf. \cite{Anglin}.
+
 \textit{Rabi regime} $\Lambda \gg 1$. In this limit the trapping potential reads $V_R(z) = \dfrac{1}{4} \Lambda^2 \sd^2{z}$.
-Physically, for any value of $\lambda$ -- parameter taken from the domain $\lambda <1$ we can obtain phase (Rabi) oscillations.
+Physically, for any value of $\lambda$ -- parameter taken from the domain 0$<\lambda <1$ we can obtain (Rabi) oscillations for quantum phase.
 In particular, small amplitude oscillations which are inherent to familiar Rabi regime can be achieved for negligable $\lambda$ --- see Fig. \ref{phase_potential}a and cf. \cite{Anglin}.
+
+\textit{Fock regime} $\Lambda \ll 1/N^2$.
+In purely quantum limit the two mode system approaches by the state $\ket{\psi} \propto (\psi_1^\dag)^s (\psi_1^\dag)^s \ket{0}_1 \ket{0}_2$ with the phase wavefunction $\Phi(\phi) \to (2\pi)^{-1/2}$.
+In this regime, when inequality $\Lambda \ll \lambda < 1$ is holds, Eq.(\ref{eq:schrodinger_usual}) transforms into Mathieu equation that implies spectrum consisting from all Mathieu functions.
 
 \textit{Josephson regime} $1/N^2\ll\Lambda <1$.
 This regime represents intermediate case between Rabi and Fock limits --- see Fig. \ref{phase_potential}b.
@@ -277,13 +283,10 @@ The behavior of the phase depends on the ratio between parameters $\Lambda$ and 
 If $\Lambda \ge 2\lambda$ the $V_0(z)$ posses only one minima at $z = 0$ and $V(0) = -\Lambda$. 
 %Frequency of small amplitude ($z \ll 1$) oscillations %can be obtained from (\ref{eq:potential}) and looks like { \red $\omega_{0, quantum} = \frac{2 \alpha s}{\hbar} \sqrt{\frac{1}{4} \Lambda^2 - \frac{\Lambda}{2} (2\lambda - 1) - \lambda(1 - \lambda)}$ }.
 
-In the other limit, for $\Lambda < 2 \lambda$, quantum particle is trapped at two minima of $V_0(z)$ that correspond to $W$ -- like potential with coordinates $\cn{z_{min}} = \frac{\Lambda}{2 \lambda}$ and appearing for both of Josephson and Fock regimes, cf. Fig. \ref{phase_potential}b,c.  
+In the other limit, for $\Lambda < 2 \lambda$, quantum "particle" is trapped at two minima of $V_0(z)$ that corresponds to $W$ -- like potential with coordinates $\cn{z_{min}} = \frac{\Lambda}{2 \lambda}$ and appearing for both of Josephson and Fock regimes, cf. Fig. \ref{phase_potential}b,c.  
 The depth of the potential minima depends on the $\lambda$ parameter.
-It is interesting to note that for $\Lambda > 2(1 - \lambda)$ potential $V_0(z)$ presumes local minimum at $\pm 2 K(\lambda)$ that is marked by red point $C$ in Fig. 3b.
+It is interesting to note that for $\Lambda > 2(1 - \lambda)$ potential $V_0(z)$ presumes local minimum at $\pm 2 K(\lambda)$, see Fig. 3b.
 
-\textit{Fock regime} $\Lambda \ll 1/N^2$.
-In purely quantum limit the two mode system approaches by the state $\ket{\psi} \propto (\psi_1^\dag)^s (\psi_1^\dag)^s \ket{0}_1 \ket{0}_2$ with the phase wavefunction $\Phi(\phi) \to (2\pi)^{-1/2}$.
-In this regime, when inequality $\Lambda \ll \lambda < 1$ is holds, Eq.(\ref{eq:schrodinger_usual}) transforms into Mathieu equation that implies spectrum consisting from all Mathieu functions.
 % $ce_0(z, q)$, $ce_1(z, q)$, $se_1(z, q)$, \dots, which are $2\pi$-periodic, and corresponding eigenvalues $a$ can be found using series expansions in powers of $q$.
 %from (\ref{eq:potential}) one can obtain
 %
@@ -304,27 +307,24 @@ In this regime, when inequality $\Lambda \ll \lambda < 1$ is holds, Eq.(\ref{eq:
 %where $a = E / \alpha + s^2 \lambda(1 - \lambda) / 2$, $q = s^2 \lambda (1 - \lambda)/ 4$.
 %We recall our boundary condition: $\Psi(z + 2\pi) = \Psi(z)$.
 
-
-
 %In another limit $\lambda \ll \Lambda$ 
 %that might  be studied within Fock regime is relevant to condition . In this case from (\ref{eq:potential}) 
 %we have $V_0(z) \simeq -\Lambda \cos{z}$.
 %In fact, this limit that deals with negligible $\lambda$ reproduces results for convenient quantum phase model \cite{Anglin}.
 
+\section{Annealing problem versus Quantum-classical PT's \label{sec:quantum_classical}}
 
-\section{Quantum-classical phase transitions \label{sec:quantum_classical}}
+Strictly speaking, results established in previous section are valid at zero temperature. However, in current experiments with exciton polaritons  the condensate is observed at finite and high enough temperatures \cite{Sanvitto,Guillet}.
+In this section we find conditions when quantum approach to the phase problem for Josephson junction with coupled exciton polariton condensates is valid. This conditions, in fact, responsible for ability of our system to perform quantum annealing algorithm \cite{Das}.
 
-Strictly speaking, results established in previous section are completely valid at zero temperature. However, in current experiments with exciton polaritons  the condensate is observed at finite and high enough temperatures.
-In this section we find answer to vital question: when quantum approach to the phase problem for Josephson junction with coupled exciton polariton condensates is valid?
+To  be more specific we consider the tunneling in  effective $W$ -- like potential represented in Fig. \ref{phase_potential}b  inherent to  Josephson regime. We examine thermodynamically equilibrium system of exciton polaritons at finite temperature $T$.  Transition between two stable states (say, between points $-z_{min}$ and $+z_{min}$ in Fig. \ref{phase_potential}b) can happen  either through the quantum tunneling or, in classical way, due to the thermal activation. 
+Obviously, at high temperatures such as $k_{B}T\ge\Delta V$ ($\Delta V$ is height of the barrier between two states with minimum of potential energy) the particle jumps over the barrier governed by familiar thermoactivation (Arrhenius) escape rate $\Gamma \sim e^{-\Delta V /k_{B}T}$, cf. \cite{Larkin}. This process inherent to classical (thermal) annealing problem \cite{Das}. 
 
-To give an answer to this question we consider the effective $W$ -- like potential represented in Fig. \ref{phase_potential}b,c inherent to  Josephson (or, Fock) regimes, respectively.
-To be more specific we examine thermodynamically equilibrium system at finite temperature $T$.  Transition between two stable states (say, between points $z_{1,2}$ in Fig. \ref{phase_potential}b) can happen  either through the quantum tunneling or, in classical way, due to the thermal activation. 
-Obviously, at high temperatures such as $k_{B}T\ge\Delta V$ ($\Delta V$ is height of the barrier between two states with minimum of potential energy) the particle undergoes hopping over the barrier governed by familiar thermoactivation (Arrhenius) escape rate $\Gamma \sim e^{-\Delta V /k_{B}T}$, cf. \cite{Larkin}.
-On the other hand, in the ``low temperature'' limit $k_{B}T\ll\Delta V$ particle undergoes quantum tunneling through the barrier with vanishing rate.
+In the ``low temperature'' limit $k_{B}T\ll\Delta V$ particle undergoes quantum tunneling through the barrier with vanishing rate, that is important especially for quantum annealing scheme. 
 %with the rate $\Gamma \sim e^{-B/\hbar}$, where $B$ is the instanton action.
 %Now we elucidate conditions for their realization for exciton polariton Josephson junction problem. 
 
-Our description for exciton polariton Josephson junction problem is based on imaginary time path integral approach, cf. \cite{Ankerhold}.
+Our description is based on imaginary time path integral approach, cf. \cite{Ankerhold}.
 The imaginary-time action obtained within WKB method approaches as $S(E) = \oint (\tfrac{1}{2} m \dot{z}^2 + V(z)) d \tau$.
 %
 %\begin{equation}
@@ -332,15 +332,15 @@ The imaginary-time action obtained within WKB method approaches as $S(E) = \oint
 %\label{eq:thermon_action_1}
 %\end{equation}
 %
-The decay rate $\Gamma \sim e^{-S_{min}/\hbar}$ according our approach can be expressed through the minimal value $S_{min}$ of the action.
-The trajectories which are minimize the action $S_T$ satisfy to classical equation of motion $m \ddot{z} = \frac{d V}{dz}$ written for the thermon that  oscillates inside the inverted potential $-V(z)$. 
+The decay rate $\Gamma \sim e^{-S_{min}/\hbar}$ according to our approach can be expressed through the minimal value $S_{min}$ of the action.
+The trajectories which are minimize the action $S_T$ satisfy to classical equation of motion $m \ddot{z} = \frac{d V}{dz}$ written for the thermon "particle" that  oscillates inside the inverted potential $-V(z)$. 
 %
 %\begin{equation}
 %m \ddot{z} = \frac{d V}{dz}.
 %\label{eq:thermon}
 %\end{equation}
 %
-Periodic solutions of this equation satisfy the relation
+Periodic solutions of this equation satisfy
 %
 \begin{equation}
 \tfrac{1}{2} m \dot{z}^2 = V(z) - E(\tau_p),
@@ -355,10 +355,10 @@ where $\tau_p = \hbar / k_B T$ is a thermon period corresponding to the energy $
 \end{equation}
 %
 In (\ref{eq:thermon_period}) the $z_{1,2}(E)$ are turning points, cf. Fig. \ref{phase_potential}b.
-The Eqs.(\ref{eq:total_energy}),(\ref{eq:thermon_period}) taken at energy $E = 0$ and temperature $T = 0$ characterize instanton solution.
+The Eqs.(\ref{eq:total_energy}),(\ref{eq:thermon_period}) taken at energy $E = 0$ and temperature $T = 0$ characterize instanton solution with infinite period.
 Combining  equation for $S(E)$ 
 %(\ref{eq:thermon_action_1}) 
-with (\ref{eq:total_energy}) we obtain  
+with (\ref{eq:total_energy}) we arrive to 
 %
 \begin{equation}
 S_T = 2 \sqrt{2 m} \int_{z_1(E)}^{z_2(E)} \sqrt{V(z) - E} ~dz + E \tau_p (E).
@@ -394,24 +394,28 @@ Phase boundary between 1st and 2nd order phase transitions is determined by the 
 \label{eq:order_border}
 \end{equation}
 %
-We summarize our results in the Fig. \ref{pic:phase_boundary_combined}.  First order phase transition occurs in the shaded region for two type of potentials only. 
+
+We summarize our results in Fig. \ref{pic:phase_boundary_combined}. An insets demonstrate various type of  phase potentials $V_0(z)$ inherent to our EPJJ model. First order PT occurs for two type of potentials in the shaded region bounded by bold  (red) curve.  Second order PT's appear for potential landscapes taken from  dark area. 
 %
 \begin{figure}[ht]
 \center{\includegraphics[width=0.5\linewidth]{pic/phase_transition_diagram_combined.eps}}
-\caption{Diagram of the phase boundary for  first- and second-order  phase transitions in $\Lambda$,$\lambda$-parameter plane \label{pic:phase_boundary_combined}}
+\caption{Diagram of the phase boundary for  1st- and 2nd-order  PT's in $\Lambda$,$\lambda$-parameters plane. The PEL's are shown in the windows. \label{pic:phase_boundary_combined}}
 \end{figure}
 %
 
-The crossover temperature of second-order phase transition $T_{c}^{(2)} = \hbar \omega_0/ 2 \pi k_B$ is 
+The crossover temperature $T_{c}^{(2)} = \hbar \omega_0/ 2 \pi k_B$ of 2nd-order PT transition  is 
 %
 \begin{equation}
 T_{c}^{(2)} = T_{0} \sqrt{\lambda (1 - \lambda) + (2 \lambda - 1) \tfrac{\Lambda}{2} - \tfrac{1}{4} \Lambda^2},
 \label{eq:second_order}
 \end{equation}
 %
-where  $\omega_0 = \frac{2 \alpha s}{\hbar} \sqrt{\lambda (1 - \lambda) + \tfrac{1}{2} (2 \lambda - 1) \Lambda - \tfrac{1}{4} \Lambda^2}$ is small oscillation frequency of thermon near the bottom of inverted potential, $T_{0}=\alpha N / 2\pi k_B$ is critical temperature $T_{c}^{(2)}=T_{0}$ taken at $\Lambda=2\lambda-1$.
-The characteristic temperature $T_{0}$ discussed above implies important time scale $\tau_0=2\pi\hbar/ \alpha N$ that can be understood as thermon ``lifetime''.
-From (\ref{eq:second_order}) follows that, for $\Lambda \ge 2\lambda$ there is no barrier at $z = 0$.
+where  $\omega_0 = \frac{2 \alpha s}{\hbar} \sqrt{\lambda (1 - \lambda) + \tfrac{1}{2} (2 \lambda - 1) \Lambda - \tfrac{1}{4} \Lambda^2}$ is small oscillation frequency of thermon "particle" near the bottom of inverted potential,  $T_{0}=\alpha N / 2\pi k_B$ is some characteristic temperature that inherent to exciton polariton system.  The $T_{0}$  implies important time scale $\tau_0=2\pi\hbar/ \alpha N$ that can be understood as thermon particle ``lifetime''. Notably, as it is follows from (\ref{eq:second_order}) there is no barrier at $z = 0$ for $\Lambda \ge 2\lambda$ -- see white domain in Fig. \ref{pic:phase_boundary_combined}.
+
+Figure \ref{pic:action_period}a displays 2nd-order PT from quantum (solid bold line of $S_T$) to thermal (classical) regimes --- dashed bold line of $S_0$.
+The crossover occurs at the critical temperature $T_{c}^{(2)}$ where $S_T = S_0$ and {$E = E_0$}.
+The inset demonstrate monotonic dependence of normalized thermon period $\tau_p/\tau_0$ on energy $E$ that is inherent to second-order phase transition.
+Closest to the critical point with energy $E=E_0$ thermon undergoes small amplitude oscillations.  
 
 %
 \begin{figure}[ht]
@@ -422,21 +426,16 @@ From (\ref{eq:second_order}) follows that, for $\Lambda \ge 2\lambda$ there is n
 \begin{minipage}[h]{0.49\linewidth}
 \center{\includegraphics[width=1\linewidth]{pic/action_period_1st_order_transition.eps} \\ (b)}
 \end{minipage}
-\caption{Dependences of  minimal action $S_{min}$ (ABC-curve) taken in $s\hbar$ units as a function of reduced temperature $ T/T_{0}$ for (a) 2nd-order transition, $\lambda = 0.9$, $\Lambda = 0.1$; and, (b) 1st-order transition, $\lambda = 0.5$, $\Lambda = 0.5$; the solid (bold) line corresponds to the thermon action, $S_T$; the dashed line corresponds to the thermodynamic action, $S_0 = \hbar \Delta V / k_B T$, $S_{min} = \min \{S_0, S_T\}$. The inset shows dependences of  dimensionless $\tau_p / \tau_0$ versus energy $E$ given in  $\alpha s^2$ units. 
+\caption{Dependences of  minimal action $S_{min}$ (ABC-(blue) curve) taken in $s\hbar$ units as a function of normalized temperature $ T/T_{0}$ for (a) 2nd-order PT, $\lambda = 0.9$, $\Lambda = 0.1$; and, (b) 1st-order PT, $\lambda = 0.5$, $\Lambda = 0.5$; the solid (bold) line corresponds to the thermon action, $S_T$; the dashed line corresponds to the thermodynamic action, $S_0 = \hbar \Delta V / k_B T$, $S_{min} = \min \{S_0, S_T\}$. The inset shows dependences of normalized thermon period $\tau_p / \tau_0$ versus energy $E$ given in  $\alpha s^2$ units. 
 \label{pic:action_period}}
 \end{figure}
 %
-
-The Fig. \ref{pic:action_period}a displays second-order phase transition from quantum (solid bold line of $S_T$) to thermal (classical) regimes --- dashed bold line of $S_0$.
-The crossover occurs at the critical point $T_{c}^{(2)}$ where $S_T = S_0$ and {$E = E_0$}.
-The inset demonstrate monotonic dependence of thermon period $\tau_p$ on energy $E$ that is inherent to second-order phase transition.
-Closest to the critical point with energy $E=E_0$ thermon undergoes small amplitude oscillations.  
-  
-In Fig. \ref{pic:action_period}b we represent results exhibiting first-order phase transition.
-It is clearly seen that the first derivative of $S_{min}$ is discontinuous in this case and the dependence of thermon period $\tau_p$ on energy $E$ is non-monotonic (see inset in Fig. \ref{pic:action_period}b).
+ 
+In Fig. \ref{pic:action_period}b we represent results exhibiting 1st-order PT inherent to narrow shadow domain in Fig.\ref{pic:phase_boundary_combined}.
+It is clearly seen that the first derivative of $S_{min}$ is discontinuous in this case and the dependence of normalized thermon period  $\tau_p / \tau_0$ on energy $E$ is non-monotonic, see inset in Fig. \ref{pic:action_period}b.
 The critical temperature $T_{c}^{(1)}$ belongs to the temperature domain $T_{min} < T_{c}^{(1)} < T_{max}$ and can be find out numerically by solving Eqs.(\ref{eq:thermon_period}) - (\ref{eq:thermal_action}) under the condition $S_T = S_0$.
  
-Analytically critical temperature $T_{c}^{(1)}$ meight be estimated from $T_{c}^{(1)} = \Delta V / B$, where $B$ is a instanton action that can be represented as $B = S(E_{min})$.
+Analytically critical temperature $T_{c}^{(1)}$ might be estimated from $T_{c}^{(1)} = \Delta V / B$, where $B$ is a instanton action that can be represented as $B = S(E_{min})$.
 After some straightforward calculations for $B$ we obtain
 %
 \begin{equation}
@@ -447,32 +446,32 @@ B = S(E_{min}) = 2 s \hbar \left[ \ln \frac{2 \sqrt{\lambda} + \sqrt{4 \lambda^2
 \end{equation}
 %
 
-In current experiments it is much more easier to manipulate be the density of exciton polaritons instead of their temperature due to some  non-equilibrium processes occurring in real microcavity samples, see e.g. \cite{Sanvitto,Guillet}.
-For instance, the density of polariton gas can be manipulated by using the optical pump.
-In Fig. \ref{pic:temperatures} we plot numerically calculated critical temperature of 1st and 2nd order phase transitions against $\Lambda$-parameter for experimentally accessible semiconductor Josephson junction samples.
-The solid (green) line corresponds to analytical solution obtained with  Eq. (\ref{eq:B_action}).
+In experiments with exciton polaritons it is much more easier to manipulate by polariton density instead of the temperature, see e.g. \cite{Sanvitto,Guillet}.
+For instance, the density of polariton gas can be changed by using external optical pump.
+In Fig. \ref{pic:temperatures} we plot numerically calculated critical temperature of 1st and 2nd order PTs against $\Lambda$-parameter for experimentally accessible semiconductor Josephson junction samples.
+Bold (green) line corresponds to analytical solution obtained with  Eq. (\ref{eq:B_action}).
 Since the $\Lambda$-parameter is inversionally proportional to the density of exciton polariton gas (so-called blue shift) Fig. \ref{pic:temperatures} establishes important correspondence between critical temperatures discussed in the paper and relevant exciton polariton densities.
 %
 \begin{figure}[ht]
 \center{\includegraphics[width=0.5\linewidth]{pic/phase_transition_temperatures.eps}}
 \caption
-{Dependence of dimensionless critical temperature $T_{c}/T_{0}$ as a function of parameter $\Lambda$. Solid (green) line corresponds to analytical solution for  $T_{c}^{(1)}$.     
+{Dependence of normalized critical temperature $T_{c}/T_{0}$ as a function of parameter $\Lambda$. Bold (green) line corresponds to analytical solution for  $T_{c}^{(1)}$.     
 \label{pic:temperatures}}
 \end{figure}
 %
 
-Now let us briefly discuss decay of the upper state that is relevant to the point C in ..... and exist for $\Lambda > 2(1 - \lambda)$.
-Potential presumes local minima at $\pm 2K(\lambda)$ and local maxima at $z_{max} = \pm \cn^{-1} \left( -\frac{2(1 - \lambda)}{\Lambda} \right)$.
-Equation for the thermon yields 
+Now let us consider decay of the upper state that is relevant to  upper minima located at $\pm 2K(\lambda)$ in Fig.\ref{phase_potential}b and exists for $\Lambda > 2(1 - \lambda)$. Physically this problem presumes tunneling through the barrier located at one of the point $z_{max} = \pm \cn^{-1} \left( -\frac{2(1 - \lambda)}{\Lambda} \right)$.
 %small ocsillation frequency near the bottom $z_{max}$ of the inverted potential $\omega_0 = \frac{\alpha s}{\hbar} \sqrt{\frac{\Lambda^2}{1 - \lambda} - 4(1 - \lambda)}$.
-crossover temperature of second-order phase transition $T_{c}^{(2)} = (T_{0}/ 2) \sqrt{\frac{\Lambda^2}{1 - \lambda} - 4(1 - \lambda)}$, cf.... 
+By expanding the potential $V(z)$ near the vicinity of $z_{max}$ it is possible to show that only 2nd-order PT with temperature $T_{c}^{(2)} = (T_{0}/ 2) \sqrt{\frac{\Lambda^2}{1 - \lambda} - 4(1 - \lambda)}$ appear in this case.
+
+Let us briefly discuss observation feasibility of quantum-classical PT for exciton polariton BEC's obtained in experiments. In particular, for experimentally accessible polariton interaction strength $\alpha N=0.6meV$, given for narrow-band semiconductor samples, the  $T_{0}$ is about $1.2K$ that is comparable with typical temperature of condensation, or, with temperature of Berezinsky-Kosterlitz-Thouless PT considered for dilute weakly interacting exciton polariton gas being at thermal equilibrium,cf. \cite{Sanvitto,Guillet}. Practically some enhancement of $T_{0}$ is possible by increasing of exciton polariton density and by improvement of experiment conditions, cf. \cite{Snoke_2017}.  
 %
 %\begin{equation}
 %T_{c}^{(2)} = (T_{0}/ 2) %\sqrt{\frac{\Lambda^2}{1 - \lambda} - 4(1 - \lambda)}.
 %\label{eq:second_order_2}
 %\end{equation}
 %
-By expanding the potential $V(z)$ near the vicinity of $z_{max}$ it is possible to show that only second-order phase transition appear for this case.
+
 
 %With the aim of analytical determining of the phase transition order let's write the Taylor series for $V(z)$ near the vicinity of $z_{max}$.
 %Expansion of the potential $V(z)$ excluding constant value $V(z_{max})$ gives:
@@ -498,28 +497,28 @@ By expanding the potential $V(z)$ near the vicinity of $z_{max}$ it is possible 
 %\caption{\dots \label{pic:action_period_temperature_2}}
 %\end{figure}
 %
-\section{Phase transitions in the presence of dissipation 
+\section{PT's in the presence of dissipation 
 \label{sec:non-equilibrium}}
 
-The obtained above results for phase transitions are valid in true thermodynamically equilibrium limit. Notably  exciton polariton condensates in current experiments are out of   thermal  equilibrium, cf. [   ].  
-It is obvious that for quantum tunneling effects observation  characteristic time scale $\tau_0$ should be shorter than time scales which relay to non-equilibrium processes. More precisely, in this case we require fulfillment of  inequality 
+The obtained results for PTs are valid in true thermodynamical equilibrium limit possessing infinite exciton polariton lifetime $\tau_{pol}$. Obviously, for finite $\tau_{pol}$  characteristic time $\tau_0$ that is responsible for quantum tunneling effects observation  should be shorter than time scales describing non-equilibrium processes with exciton polaritons. More precisely, in this case we require fulfillment of  inequality 
  
 \begin{equation}
- \tau_{0}\ll\tau_{pol},
+ \tau_{0}\ll\tau_{pol}.
  \label{eq:lifetime}  
 \end{equation}
-where $\tau_{pol}$ characterizes  exciton polariton lifetime. However, in realistic (experimental) situation with exction polariton BEC it will be hard to obey to condition {\eqref{eq:lifetime}. In this case it is necessary to analyze dynamics of the system.      
- Below we consider the influence of the dissipation to the phase properties in adiabatic limit.
 
-We start from mean field  equations obtained from  (\ref{eq:hamiltonian}) for  $\Gamma = 0$,  which reads as 
+For estimations given above, characteristic  temperature $T_{0}=1.2K$ corresponds to thermon effective lifetime  $3.5ps$. Excepting  recent experimental results  described in Ref. \cite{Snoke_2017} where polariton lifetime attains  $275ps$ at resonance, it might  be hard to adhere to  condition {\eqref{eq:lifetime} in current experiments with exction polariton condensates. 
+
+We consider the influence of the dissipation to  EPJJ phase properties in adiabatic limit, cf. \cite{Sols}.
+We start from mean field GP equations obtained from  (\ref{eq:hamiltonian}) for  $\Gamma = 0$ ($B = G$),  which reads as 
 %
 \begin{equation}
-i \dot{\psi}_{1,2} = -i \kappa \psi_{1,2} +  \alpha |\psi_{1,2}|^2 \psi_{1,2} - (B/2 - \beta \psi_{1,2}^* \psi_{2,1}) \psi_{2,1}, 
+i \hbar \dot{\psi}_{1,2} = -i \kappa \psi_{1,2} + (A|\psi_{1,2}|^2 + 2C |\psi_{2,1}|^2) \psi_{1,2} - (B/2 - C \psi_{1,2}^* \psi_{2,1}) \psi_{2,1}. 
 \label{eq:GP}
 \end{equation}
 %
-where we also introduced dissipation rate term with $\kappa \simeq 1/\tau_{pol}$.
-By introducing new variables  $\psi_{1,2} = \Psi_{1,2} \exp(-\kappa t)$ for mean field pseudo-spin  parameters (\ref{eq:pseudo_spin}) from ({\ref{eq:GP}}) we obtain
+In (\ref{eq:GP}) we introduced dissipation  term with $\kappa \simeq 1/\tau_{pol}$.
+Defining new variables  $\psi_{1,2} = \Psi_{1,2} \exp(-\kappa t / \hbar)$ for mean field pseudo-spin  parameters (\ref{eq:pseudo_spin}) from ({\ref{eq:GP}}) we obtain
 %
 %\begin{equation}
 %\begin{array}{lcl}
@@ -538,17 +537,15 @@ By introducing new variables  $\psi_{1,2} = \Psi_{1,2} \exp(-\kappa t)$ for mean
 % 
 \begin{equation}
 \begin{array}{lcl}
-\dot{S}_z & = &  2 \beta(t) S_x S_y - B S_y; \\
-\dot{S}_x & = & -2 \alpha(t) S_z S_y; \\
-\dot{S}_y & = & 2(\alpha(t) - \beta(t)) S_z S_z + B S_z.
+\dot{S}_z & = &  2 \beta'(t) S_x S_y - S_y; \\
+\dot{S}_x & = & -2 \alpha'(t) S_z S_y; \\
+\dot{S}_y & = & 2(\alpha'(t) - \beta'(t)) S_z S_x + S_z.
 \end{array}
 \label{eq:pseudo-spin}
 \end{equation}
 %
-
-Now set of Eqs.\ ({\ref{eq:pseudo-spin}}) looks similar to one taken for  non-dissipative system but with time dependent parameters $\alpha(t) = \alpha \exp(-2 \kappa t)$, $\beta(t) = \beta \exp(-2 \kappa t)$, cf. .... 
-
-Without dissipation Eqs.\ ({\ref{eq:pseudo-spin}}) posses  bifurcation point $\beta^* = B / 2R$, where $R$ is  radius of the Bloch  sphere, i.e. $R^2=S_x^2 + S_y^2 + S_z^2$.
+Here we explore the dimensionless time $t' = t B / \hbar$.
+Now set of Eqs.\ ({\ref{eq:pseudo-spin}}) looks similar to one taken for  non-dissipative system but with time dependent parameters $\alpha'(t) = (\alpha / B) \exp(-2 \kappa t')$, $\beta'(t) = (\beta / B) \exp(-2 \kappa t')$, cf.\cite{Sedov}. Without dissipation Eqs.\ ({\ref{eq:pseudo-spin}}) posses  bifurcation point $\beta^* = B / 2R$, where $R$ is  radius of the Bloch  sphere, i.e. $R^2=S_x^2 + S_y^2 + S_z^2$.
 %
 %\begin{equation}
 %\end{equation}
@@ -556,10 +553,9 @@ Without dissipation Eqs.\ ({\ref{eq:pseudo-spin}}) posses  bifurcation point $\b
 %where $R$ -- is a radius of the Poincare sphere.
 %Non-dissipative system has a bifurcation at the critical values of .
 
-In Fig. \ref{pic:phase} we represent phase difference $ \phi = \arctan(-S_y / S_x)$ between the junctions as a function of reduced time.  Non-dissipative system has two different regimes depending on  $B$ -- parameter values; blue and red curves in the Fig. \ref{pic:phase}, respectively. Blue  curve characterizes by condition $\beta > \beta^*$ and  corresponds to the existence of barrier for potential energy (see inset to Fig. \ref{pic:phase}). Contrary,  red curve establishes phase properties below the threshold ($\beta < \beta^*$) that corresponds to the absence of the barrier. 
+In Fig. \ref{pic:phase} we plot phase difference $ \phi = \arctan(-S_y / S_x)$ between the junctions as a function of time.  Non-dissipative system has two different regimes depending on the values of  $B$ -- parameter, that is blue and red curves in the Fig. \ref{pic:phase}, respectively. Blue  curve is plotted under the condition $\beta' > \beta^*$ and  corresponds to the existence of barrier for potential energy (see inset to Fig. \ref{pic:phase}). Contrary,  red curve establishes phase properties below the threshold ($\beta' < \beta^*$) that corresponds to the absence of the barrier. 
 
-In the presence of dissipation (solid black curve in Fig. \ref{pic:phase}) exciton polariton
-system starts from one of potential  minimum. It evolves adiabatically and then  crosses the critical value
+In the presence of dissipation (solid black curve in Fig. \ref{pic:phase}) phase of EPJJ starts from one of potential  minimum. It evolves adiabatically and then  crosses the critical value
 of $\beta^*$ due to decreasing of total number of particles. 
 %It can be transformed to the equation on the phase difference $\phi$ and $S_z$ as follows
 %
@@ -574,19 +570,20 @@ of $\beta^*$ due to decreasing of total number of particles.
 %
 \begin{figure}[ht]
 \center{\includegraphics[width=0.7\linewidth]{pic/phase_potential_dissipation.eps}}
-\caption{Normalized phase difference as a function of dimensionless time for {\red \dots}.
-For red, blue and black curves initial conditions are {\red \dots}, respectively. Inset demonstrates potential behavior for red and blue curves respectively.
+\caption{Normalized phase difference as a function of time for $\kappa / \hbar = 0.04 \cdot 10^{12}$ $1 / sec$. Initial conditions
+for red, blue and black curves  are $S_z(0) = 0$, $S_x(0) = 0.62$, $S_y(0) = 0.78$, and $\phi(0) = 0.9$, respectively. Inset demonstrates potential behavior for red and blue curves respectively.
 \label{pic:phase}}
 \end{figure}
 %
-Adiabaticity condition reads, cf. {\red [ ]}:
+In Fig.\ref{pic:phase} this transition occurs at the time about $20ps$ for given value of dissipation rate $\kappa / \hbar = 0.04 \cdot 10^{12}$ $1 / sec$.
+
+Adiabaticity condition reads, cf. {\cite{Sols}:
 %
 \begin{equation}
 \dfrac{1}{\omega^2(t)} \Big| \dfrac{d \omega}{d t} \Big| \ll 1.
 \end{equation}
 %
 where $\omega(t) = \sqrt{(B - 2\beta(t))(B - 2 \beta(t) + 2 \alpha(t))}$ is small amplitude oscillations slowly depending on time. 
-
 %It allows us to reduce linear system to the harmonic oscillator equaiton with slowly evolving frequency:
 %
 %\begin{equation}
@@ -600,21 +597,25 @@ The solution of the phase in this case can be given as
 %
 where $\tau$ is the time elapsed after the oscillation sets in, and $A$ is an amplitude of oscillations at the moment $\tau = 0$.
 
-Physically, behavior of the system in the presence of dissipation showed in Fig. \ref{pic:phase} establishes non-equilibrium phase transition from quantum (where tunneling is possible) to the classical regime where tunneling is escaped. 
+Physically, behavior of the phase in the presence of dissipation showed in Fig. \ref{pic:phase} establishes non-equilibrium PT from quantum (where tunneling is possible) to the classical regime where tunneling is escaped. 
 
 \section{Conclusion \label{sec:conclusion}}
 
-Let us summarize the results obtained. In the paper we examine quantum phase properties for  Josephson junctions created from coupled exciton polariton condensates in the limit of finite temperatures and dissipation. We obtain  various shape of phase potentials depending on the $\Lambda$ and $\lambda$ parameters characterizing condensate junctions. The W-shape potential at finite temperature admits two regimes which are  purely quantum tunneling regime through the barrier or classical regime of thermal activation.   Transition (crossover) between this two limits exhibits universal features of first or second order phase transitions which can be interpreted as phase transition between classical and quantum regimes. It is important that critical temperature of transition depends on some  characteristic temperature  parameter $T_{0}$ (see e.g. (\ref{eq:second_order})) that depends on polariton-polariton interaction (so-called blue shift) $\alpha N$. For experimentally observed values of polariton interaction strength, that implies,say,  $\alpha N=0.3meV$, taken for narrow-band semiconductor samples, the  $T_{0}$ is about $0.6K$ which is less than  typical temperature of condensation, or, temperature of Berezinsky-Kosterlitz-Thouless phase transition considered at thermal equilibrium,cf. {\red [ ]}.  Hence, at large enough temperatures (few tens of Kelvins and more) which are relevant to current experiments with non-equilibrium  exciton polariton condensate junction device operates in classical way. 
+Let us summarize the results obtained. In the paper we examine quantum phase properties for  extended EPJJs created with the help of coupled exciton polariton condensates taken at finite temperatures and finite exciton polariton lifetime. We have shown that  PEL with set of barriers and wells (various W--like potentials) can be achieved for our model  depending on the $\Lambda$ and $\lambda$ parameters which characterize condensate junctions. The W-shape potential at finite temperatures admits two regimes which are  purely quantum tunneling regime through the barrier or classical regime of thermal activation.   Transition (crossover) between this two limits exhibits universal features of 1st or 2nd order PTs which can be interpreted as PT between classical and quantum regimes. It is important that critical temperature of transition depends on some  characteristic temperature  parameter $T_{0}$ (see e.g. (\ref{eq:second_order})) that depends on polariton-polariton interaction length (so-called blue shift) $\alpha N$.  It is expected that  at the temperatures sufficiently higher than  $T_{0}$ the EPJJ device operates in classical way. 
 
-The influence of dissipation effects to this picture is evident from our analysis. The thermon lifetime for given  estimations is about $7ps$ that comparable with polariotn lifetime $\tau_{pol}$ in the cavity, cf. {\eqref{eq:lifetime} and [ ]. Thus, the observation of quantum tunneling become possible only within short time intervals when the dissipation cannot essentially affected to the system. Otherwise, after some time interval dissipation leads to crossover in the phase dynamics  and breaking  the evolution of quantum phase in W--potential, see \ref{pic:phase}).    
+The influence of dissipation effects to this picture is evident from our analysis. The observation of quantum tunneling processes become possible only within short time intervals when the dissipation cannot essentially affected to the system.
+Otherwise, after some time interval dissipation leads to crossover in the phase dynamics and destroy the W--potential as whole, see Fig. \ref{pic:phase}.
+For moderate dissipation rates and at the temperatures (or relevant polariton gas densities) sufficiently below the temperature of $T_{0}$   the EPJJ device is  capable for various applications where quantum tunneling effect is crucial. 
 
-At the temperatures (or relevant polariton gas densities) sufficiently below the temperature $T_{0}$ of phase transition the exciton polariton condensate junctions are capable for various applications where quantum tunneling effect is crucial. First, it is quantum annealing with exciton polariton condensates that can be enhanced with the help of bosonic stimulation phenomena {\red [ ]}. 
-
-Second, quantum tunneling effect can be explored for design exciton polariton phase qubits, cf. {\red [ ]}. In order, two minima located at the points $A$ and $B$ of $W$-shape quantum phase potential in Fig. \ref{phase_potential}b can be used for initialization of exciton polariton qubit states $\ket{0}$ and $\ket{1}$ similarly to superconductor flux qubits, respectively, {\red cf. [ ]}. However, in our case such qubits much more easier to tailor by external optical or electrical pump {\red [ ]}.  
+First, it is quantum information processing and especially quantum annealing problem  with exciton polariton condensates that can be enhanced with the help of bosonic stimulation phenomena {\cite{Yan}. Notably the results obtained by us can be implemented  here in new way.  In order, quantum tunneling effect might be utilized  for design exciton polariton phase qubits similarly to superconductor devices, but in optical wavelength domain, cf. \cite{Makhlin}. Actually,  two minima located at the points $-z_{min}$ and $+z_{max}$ of $W$-shape quantum phase potential in Fig. \ref{phase_potential}b can be used for initialization of exciton polariton qubit states $\ket{0}$ and $\ket{1}$ similarly to superconductor flux qubits, respectively. However, in our case such qubits much more easier to tailor by external optical or electrical pump. As a result, quantum annealing problem can be experimentally solved   
+with help of this type of qubits, cf.\cite{Johnson}.  
  
-Third, the quantum regime of exciton polariton junctions can be useful for creation of  interferometers with exciton polariton condensates(see e.g. [   ]) for quantum metrology purposes, {\red [ ]}. In particular, we speak here about measurement of the phase shift with high precision accuracy.  It is possible to show that for the Fock regime described by us in the paper the dispersion of the quantum phase approaches to so-callrd Heisenberg limit  ${<(\Delta\phi)^2> \propto \dfrac{1}{N^2}}$ that is 
-minimal accessible error for the phase measurement in respect of total particle number.
+Another promising area of potential applications of obtained results with quantum exciton polariton states is connected with quantum metrology purposes. More precisely, EPJJs can be useful for creation of interferometers and/or gyroscopes operating with the phase of  exciton polariton condensates in quantum regime, cf. \cite{Pezze, Gulevich}. We speak here about measurement of the phase shift with high precision accuracy. It is possible to show that for the Fock regime described by us in the paper the dispersion of the quantum phase approaches to so-called Heisenberg limit ${<(\Delta\phi)^2> \propto \dfrac{1}{N^2}}$ that is minimal accessible error for the phase measurement in respect of total particle number. The results relate to this problem we will publish in forthcoming papers. 
 
+\section{Acknowledgement
+ \label{sec:acknowledgement}}
+We  acknowledge financial support from RFBR, Grants No. 15-52-52001 and No. 14-
+02-97503. 
 % Create the reference section using BibTeX:
 \bibliography{list}
 

@@ -410,19 +410,19 @@ boltzmann_const = 1;
 
 % 2nd order
 % Frequency of the small thermon oscillations
-omega0 = @(lambda, Lambda) 2 * alpha * s * sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
-T_2nd = @(lambda, Lambda) omega0(lambda, Lambda) / (2 * pi);
+% omega0 = @(lambda, Lambda) 2 * alpha * s * sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
+T_2nd = @(lambda, Lambda) (1 / pi) * sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
 
 % 1st order
 % Action on the thermon
-B = @(lambda, Lambda) 2 * s * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) ...
+B = @(lambda, Lambda) 2 * (log((2 * sqrt(lambda) + sqrt(4 * lambda^2 - Lambda^2)) ...
 	/ ((2 * sqrt(lambda) - sqrt(4 * lambda^2 - Lambda^2)))) ...
 	- (Lambda / sqrt(lambda * (1 - lambda))) ...
 	* atan(sqrt((1 - lambda) * (2 * lambda - Lambda) * (2 * lambda + Lambda)) / Lambda));
 
-V0 = @(lambda, Lambda) alpha * s^2 * (1 - Lambda / (2 * lambda))^2;
+V0 = @(lambda, Lambda) (1 - Lambda / (2 * lambda))^2;
 
-lambda = 0.75;
+lambda = 0.9;
 
 % Border
 Lambda_border =  (1 - 16 * lambda + 16 * (lambda .^ 2) + ...
@@ -431,11 +431,16 @@ Lambda_border =  (1 - 16 * lambda + 16 * (lambda .^ 2) + ...
 Lambda_1st = 0:0.01:Lambda_border;
 t_1st = zeros(1, length(Lambda_1st));
 
+t_1st_estimation = zeros(1, length(Lambda_1st));
+for i = 1:length(Lambda_1st)
+	t_1st_estimation(i) = V0(lambda, Lambda_1st(i)) / B(lambda, Lambda_1st(i));
+end
+
 fprintf('1st-order transition; total number of iterations: %i\n', length(Lambda_1st));
 for i = 1:length(Lambda_1st)
 	fprintf('%i\n', i);
 	
-	V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda_1st(i) ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
+	V = @(x) ( ((1/4) * (Lambda_1st(i) ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 	- Lambda_1st(i) * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
 
 	[~, V_min] = fminsearch(V, 0); % (!)
@@ -443,19 +448,15 @@ for i = 1:length(Lambda_1st)
 	Vb = @(x) V(x) - V_min;
 	V0 = Vb(0);
 	
-	E = iterational_process(Vb, V0, mass, 0.5 * V0);
+	E = iterational_process(Vb, V0, 0.5 * V0);
 	[xleft, xright] = roots_near_x0(@(x) -Vb(x) + E, 0);
-	period = sqrt(2 * mass) * integral(@(x) 1 ./ sqrt(Vb(x) - E),...
+	period = integral(@(x) 1 ./ sqrt(Vb(x) - E),...
 		xleft, xright, 'AbsTol', 1e-6);
-	t_1st(i) = planck_const / (boltzmann_const * period);
-end
-
-t_1st_estimation = zeros(1, length(Lambda_1st));
-for i = 1:length(Lambda_1st)
-	t_1st_estimation(i) = V0(lambda, Lambda_1st(i)) / B(lambda, Lambda_1st(i));
+	t_1st(i) = 1 / period;
 end
 
 Lambda_2nd = Lambda_border:0.01:(2 * lambda);
+Lambda_2nd = [Lambda_2nd, 2 * lambda];
 t_2nd = zeros(1, length(Lambda_2nd));
 
 fprintf('2nd-order transition; total number of iterations: %i\n', length(Lambda_2nd));
@@ -465,7 +466,7 @@ for i = 1:length(Lambda_2nd)
 	t_2nd(i) = T_2nd(lambda, Lambda_2nd(i));
 end
 
-figure('Position', [100 100 325 225]); hold on; grid on
+figure('Position', [100 100 325 225]); hold on;
 xlabel('\Lambda'); ylabel('T_{c}^{(1)}, T_{c}^{(2)}');
 title(sprintf('\\lambda = %g', lambda))
 
