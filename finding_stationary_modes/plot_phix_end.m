@@ -1,6 +1,6 @@
 function plot_phix_end( params, xspan )
 
-C = linspace(4, 6, 100);
+C = linspace(0, 1, 50);
 Phix_end = zeros(1, length(C));
 
 for i = 1:length(C)

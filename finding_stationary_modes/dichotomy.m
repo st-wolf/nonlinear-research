@@ -1,7 +1,7 @@
 function zero = dichotomy (func, a, b, eps)
 
 fa = func(a);
-while (((b-a) / 2) >= eps)
+while ((abs(b-a) / 2) >= eps)
 	c = (a + b) / 2;
 	fc = func(c);
 	if sign(fc) ~= sign(fa)
