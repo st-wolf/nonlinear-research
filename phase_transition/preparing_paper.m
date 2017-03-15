@@ -634,3 +634,38 @@ z_max = inv_cn(-2 * (1 - lambda) / Lambda, lambda);
 d1f = @(x) (Vb(x + eps) - Vb(x - eps)) / eps;
 d2f = @(x) (Vb(x + eps) - 2 * Vb(x) + Vb(x - eps)) / (eps^2);
 d3f = @(x) (Vb(x + 2 * eps) - 2 * Vb(x + eps) + 2 * Vb(x - eps) - Vb(x - 2 * eps)) / (2 * eps^2);
+
+%% Nice picture with potential
+clc; clear
+
+% f = @(x, y) (((x .^ 2) - 1) .^ 2) + ((y .^ 2) - 1) .^ 2;
+f = @(x, y) (((x .^ 2) - 1) .^ 2) + y .^ 2 + y .^ 4;
+% f = @(x, y) (((x .^ 2) - 1.2) .^ 2) - exp(0.5*y .^ 2);
+% f = @(x, y) (x .^ 2 + y .^ 2 - 1) .^ 2;
+
+x = -1.5:0.02:1.5;
+y = -0.8:0.02:0.8;
+
+[X, Y] = meshgrid(x, y);
+Z = f(X, Y);
+% Z(((abs(X) > 1) | (abs(Y) > 1)) & (Z > 1)) = 1;
+% Z(Z > 2) = 2;
+a = 1;
+Z(Z > a) = a;
+% Z((X + Y) < -1.3) = NaN;
+
+surf(X, Y, Z, 'EdgeColor','none');
+colormap cool
+grid off
+
+
+
+
+
+
+
+
+
+
+
+
