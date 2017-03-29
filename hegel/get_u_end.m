@@ -5,7 +5,7 @@ eps = 1e-6;
 xstart = xspan(1);
 init = asympt_left(params, C, xstart);
 
-[~, U] = f_solve(params, xspan, init, 2 ^ 12);
+[~, U] = f_solve(params, xspan, init, 2 ^ 14);
 
 u_end = U(end, 1);
 

@@ -15,7 +15,7 @@ Point<2> hegel(double x, Point<2> u, double* param)
 	double omega = param[0], Omega = param[1];
 	
 	du[0] = u[1];
-	du[1] = -(omega - pow(x, 2)) * u[0] + (cos(2 * Omega * x)) * pow(u[0], 3);
+	du[1] = -(omega - pow(x, 2)) * u[0] - (cos(2 * Omega * x)) * pow(u[0], 3);
 	return du;
 }
 

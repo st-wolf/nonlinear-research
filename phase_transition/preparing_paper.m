@@ -269,8 +269,8 @@ alpha = 1; % Parameter, lambda = beta / alpha
 mass = 1 / (2 * alpha);
 
 % Potential
-lambda = 0.5; Lambda = 0.5; % 1st-order transition
-% lambda = 0.5; Lambda = 0.5; % 2nd-order transition
+% lambda = (?); Lambda = (?); % 1st-order transition
+lambda = 0.5; Lambda = 0.5; % 2nd-order transition
 
 % V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
 %	- Lambda * cn(x, lambda) ) ./ (dn(x, lambda) .^ 2);
@@ -336,6 +336,15 @@ xlabel('E'); ylabel('h \tau_p / \alpha s')
 
 plot(E, tau_p, 'LineWidth', 2, 'Color', 'black')
 
+%% Something else
+P = (V0 - E) / V0;
+
+figure('Position', [100 100 325 225]);
+plot(T, (P), 'Color', 'black');
+axis([0, (max(T) + max(T)*0.5), -0.1, 1.1]);
+
+xlabel('T'); h = ylabel('$$\sqrt{P}$$');
+set(h, 'Interpreter','latex','fontsize',9) 
 %% Transition temperature
 
 % 2nd order

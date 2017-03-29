@@ -5,6 +5,10 @@ init = asympt_left(params, C, xstart);
 
 [~, U] = f_solve(params, xspan, init, 2 ^ 12);
 
-ux_end = U(end, 2);
+if isempty(U)
+    ux_end = NaN;
+else
+    ux_end = U(end, 2);
+end
 
 end

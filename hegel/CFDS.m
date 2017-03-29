@@ -12,15 +12,15 @@ V = @(x) x .^ 2;
 Omega = params(2);
 
 % Nonlinear cosine potential
-g = @(x) - cos(2 * Omega * x);
+g = @(x) cos(2 * Omega * x);
 
 xstep = 0.005;
 xspan = [-6 6];
 xgrid = xspan(1):xstep:xspan(2);
 Nx = length(xgrid);
 
-tstep = 0.01;
-tspan = [0 12];
+tstep = 0.02;
+tspan = [0 36];
 tgrid = tspan(1):tstep:tspan(2);
 Nt = length(tgrid);
 

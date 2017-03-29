@@ -34,9 +34,59 @@ end
 %%
 clc; clear
 
-omega = 2.9; Omega = 10;
+omega = 1.3; Omega = 8;
 params = [omega Omega];
-xspan = [-8 0];
+xspan = [-5 0];
+
+get_u_end_params = @(C) get_u_end(params, C, xspan);
+
+c0 = 0.01;
+cstep = 0.5;
+u_end_0 = get_u_end_params(c0);
+
+eps = 1e-6;
+
+while true
+	c1 = c0 + cstep;
+	u_end_1 = get_u_end_params(c1);
+		
+	if sign(u_end_0) ~= sign(u_end_1)
+		cmode = dichotomy(get_u_end_params, c0, c1, eps);
+		break
+	else
+		c0 = c1;
+		u_end_0 = u_end_1;
+	end
+end
+
+[X, U] = get_antisymmetric_mode(params, cmode, xspan);
+figure
+subplot(1,2,1)
+plot_mode(params, X, U)
+
+eigs = get_spectrum(params, X, U, 128);
+subplot(1,2,2);
+plot_spectrum(params, eigs);
+
+%%
+[Grid, U, Norm] = CFDS(params, X, U(:, 1));
+
+%%
+N = 1000;
+C = linspace(0, 6, N);
+
+ux_end = zeros(1, N);
+
+for i = 1:N
+	ux_end(i) = get_ux_end_params(C(i));
+end
+
+plot(C, ux_end);
+
+%%
+omega = 26.17; Omega = 8;
+params = [omega Omega];
+xspan = [-5 0];
 
 get_ux_end_params = @(C) get_ux_end(params, C, xspan);
 
@@ -64,53 +114,61 @@ figure
 subplot(1,2,1)
 plot_mode(params, X, U)
 
-%%
-eigs = get_spectrum(params, X, U, 256);
+eigs = get_spectrum(params, X, U, 128);
 subplot(1,2,2);
 plot_spectrum(params, eigs);
 
 %%
-[Grid, U, Norm] = CFDS(params, X, U(:, 1));
+
+for i = -15:15
+    plot([(pi + 2 * pi * i) / (2 * Omega), (pi + 2 * pi * i) / (2 * Omega)], [0, 12], 'Color', 'red', 'LineWidth', 2);
+end
 
 %%
-N = 1000;
-C = linspace(0, 6, N);
+clc; clear
 
-ux_end = zeros(1, N);
+omega = -26.17; Omega = 8;
+params = [omega Omega];
+xspan = [-1 0];
 
-for i = 1:N
-	ux_end(i) = get_ux_end_params(C(i));
+get_ux_end_params = @(C) get_ux_end(params, C, xspan);
+
+cstep = 0.001;
+C = 0:cstep:0.1;
+
+ux_end = zeros(1, length(C));
+
+for i = 1:length(C)
+    ux_end(i) = get_ux_end_params(C(i));
 end
 
 plot(C, ux_end);
-
-%%
-% Let's look on our mode (\omega = 1) while varying the parmeter \omega
-
-omegas = omega:(-0.01):2.9;
-cmodes = zeros(1, length(omegas));
-cmodes(1) = cmode;
-
-for i = 2:length(omegas);
-	i
-	params_shift = [omegas(i), Omega];
-	get_ux_end_params_shift = @(C) get_ux_end(params_shift, C, xspan);
-	cmodes(i) = newton(get_ux_end_params_shift, cmodes(i - 1));
-end
-
-plot(omegas, cmodes);
+% axis([0 C(end) -1 1])
 
 %%
 
-for i = -15:15
-    plot([pi * i / Omega, pi * i / Omega], [0, 12], 'Color', 'red', 'LineWidth', 2);
-end
+eps = 1e-6;
+figure
+cmode = dichotomy(get_ux_end_params, 0.03, 0.08, eps);
+[X, U] = get_symmetric_mode(params, cmode, xspan);
+plot(X, U);
 
+%%
+Fs = 1000;            % Sampling frequency                    
+T = 1/Fs;             % Sampling period       
+L = 1500;             % Length of signal
+t = (0:L-1)*T;        % Time vector
+S = 0.7*sin(2*pi*50*t) + sin(2*pi*120*t);
+X = S + 2*randn(size(t));
 
+Y = fft(X);
 
+P2 = abs(Y/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
 
-
-
-
-
-
+f = Fs*(0:(L/2))/L;
+plot(f,P1) 
+title('Single-Sided Amplitude Spectrum of X(t)')
+xlabel('f (Hz)')
+ylabel('|P1(f)|')
