@@ -269,7 +269,7 @@ alpha = 1; % Parameter, lambda = beta / alpha
 mass = 1 / (2 * alpha);
 
 % Potential
-% lambda = (?); Lambda = (?); % 1st-order transition
+% lambda = 0.9; Lambda = 0.1; % 1st-order transition
 lambda = 0.5; Lambda = 0.5; % 2nd-order transition
 
 % V = @(x) alpha * (s^2) * ( ((1/4) * (Lambda ^ 2) - lambda * (1 - lambda)) * (sn(x, lambda) .^ 2) ...
@@ -305,7 +305,7 @@ for i = 1:length(E)
 	fprintf('%i\n', i);
 	
 	[xleft, xright] = roots_near_x0(@(x) -Vb(x) + E(i), 0);
-	tau_p(i) = integral(@(x) 1 ./ sqrt(Vb(x) - E(i)),...
+	tau_p(i) = (1 / pi) * integral(@(x) 1 ./ sqrt(Vb(x) - E(i)),...
 		xleft, xright, 'AbsTol', 1e-6);
 
 	% T(i) = planck_const / (boltzmann_const * tau_p(i));
@@ -313,14 +313,14 @@ for i = 1:length(E)
 
 	S(i) = 2 * integral(@(x) sqrt(Vb(x) - E(i)),...
 		xleft, xright, 'AbsTol', 1e-6) + ...
-		E(i) * tau_p(i);
+		pi * E(i) * tau_p(i);
 	
 	S0(i) = V0 * tau_p(i);
 end
 
 T_thermal = min(T):0.001:(2*max(T));
 % S_thermal = (planck_const * V0) ./ (boltzmann_const * T_thermal);
-S_thermal = V0 ./ T_thermal;
+S_thermal = pi * V0 ./ T_thermal;
 
 % Plotting
 figure('Position', [100 100 650 225]);
@@ -332,7 +332,7 @@ plot(T, S, 'LineWidth', 2, 'Color', 'black');
 plot(T_thermal, S_thermal, '--', 'Color', 'black');
 
 subplot(1, 2, 2); hold on
-xlabel('E'); ylabel('h \tau_p / \alpha s')
+xlabel('E'); ylabel('\tau_p / \tau_0')
 
 plot(E, tau_p, 'LineWidth', 2, 'Color', 'black')
 
@@ -340,11 +340,11 @@ plot(E, tau_p, 'LineWidth', 2, 'Color', 'black')
 P = (V0 - E) / V0;
 
 figure('Position', [100 100 325 225]);
-plot(T, (P), 'Color', 'black');
+plot(T, sqrt(P), 'Color', 'black');
 axis([0, (max(T) + max(T)*0.5), -0.1, 1.1]);
 
-xlabel('T'); h = ylabel('$$\sqrt{P}$$');
-set(h, 'Interpreter','latex','fontsize',9) 
+xlabel('T'); h = ylabel('P');
+set(h, 'Interpreter','tex','fontsize',9) 
 %% Transition temperature
 
 % 2nd order
@@ -420,7 +420,9 @@ boltzmann_const = 1;
 % 2nd order
 % Frequency of the small thermon oscillations
 % omega0 = @(lambda, Lambda) 2 * alpha * s * sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
-T_2nd = @(lambda, Lambda) (1 / pi) * sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
+% T_2nd = @(lambda, Lambda) (1 / pi) * sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
+T_2nd = @(lambda, Lambda) sqrt(lambda * (1 - lambda) + 0.5 * (2 * lambda - 1) * Lambda - 0.25 * Lambda^2);
+
 
 % 1st order
 % Action on the thermon
@@ -442,7 +444,7 @@ t_1st = zeros(1, length(Lambda_1st));
 
 t_1st_estimation = zeros(1, length(Lambda_1st));
 for i = 1:length(Lambda_1st)
-	t_1st_estimation(i) = V0(lambda, Lambda_1st(i)) / B(lambda, Lambda_1st(i));
+	t_1st_estimation(i) = pi * V0(lambda, Lambda_1st(i)) / B(lambda, Lambda_1st(i));
 end
 
 fprintf('1st-order transition; total number of iterations: %i\n', length(Lambda_1st));
@@ -459,7 +461,7 @@ for i = 1:length(Lambda_1st)
 	
 	E = iterational_process(Vb, V0, 0.5 * V0);
 	[xleft, xright] = roots_near_x0(@(x) -Vb(x) + E, 0);
-	period = integral(@(x) 1 ./ sqrt(Vb(x) - E),...
+	period = (1/pi) * integral(@(x) 1 ./ sqrt(Vb(x) - E),...
 		xleft, xright, 'AbsTol', 1e-6);
 	t_1st(i) = 1 / period;
 end
