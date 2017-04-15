@@ -1,0 +1,127 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{authblk}
+
+% Title and authors
+\title{Supplementary materials: \\ Exciton-polariton Josephson junctions at finite temperatures}
+
+\author[1]{M. E. Lebedev\textsuperscript{1}, \\ }
+\author[1]{D. A. Dolinina}
+\author[2]{Kuo-Bin Hong}
+\author[2]{Tien-Chang Lu}
+\author[3, 4, 5]{A. V. Kavokin}
+\author[1, 6, *]{A. P. Alodjants}
+
+\affil[1]{ITMO University, St. Petersburg 197101, Russia}
+\affil[2]{Department of Photonics, National Chiao Tung University, Hsinchu 300, Taiwan}
+\affil[3]{Spin Optics Laboratory, St. Petersburg State University, Ul’anovskaya, Peterhof, St. Petersburg 198504, Russia}
+\affil[4]{School of Physics and Astronomy, University of Southampton, SO17 1BJ Southampton, United Kingdom}
+\affil[5]{Istituto CNR-SPIN, Viale del Politecnico 1, I-00133, Rome, Italy}
+\affil[6]{Vladimir State University named after A. G. and N. G. Stoletovs, Gorkii Street 87, Vladimir, Russia}
+
+\affil[*]{alexander\_ap@list.ru}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{equation}{0}
+\makeatletter
+\renewcommand{\theequation}{S\arabic{equation}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+To derive Eq.(1) we consider an equilibrium exciton polariton condensate trapped in a symmetric one dimensional double-well potential $U(x) = h ((x/x_0)^2 - 1)^2$.
+Here $2x_0$ is the distance between potential minima, $h$ is the depth of the potential.
+The Hamiltonian for the system of weakly interacting exciton polaritons trapped in an external potential $U(x)$ can be written in the using the secondary quanttization formalism as:
+%
+\begin{equation}
+\hat{H} = \int \hat{\psi}^\dag\Big\{ -\dfrac{\hbar^2}{2m_{pol}}  \dfrac{d^2 }{dx^2} + U(x) + \dfrac{g}{2} \hat{\psi}^{\dag} \hat{\psi}  \Big\}\hat{\psi} dx,
+\label{eq:gpe_hamiltonian}
+\end{equation}
+%
+where $\hat{\psi} \equiv \hat{\psi}(x, t)$ is a polariton field operator that annihilates a particle at the position $x$ and time $t$, $g$ describes the two-body (polariton-polariton) scattering length, $m_{pol}$ is low branch polariton effective mass.
+In the paper we use so-called two-mode representation of $\hat{\psi}$ - operator:
+%
+\begin{equation}
+\hat{\psi} = \hat{\psi}_1(t) \Phi_1(x) + \hat{\psi}_2(t) \Phi_2(x),
+\label{eq:two_modes}
+\end{equation}
+%
+where $\hat{\psi}_{1,2}$ are time dependent operators characterizing the condensates at the left and at the right wells respectively; $\Phi_{1,2}(x)$ are condensate wavefunctions in real space.
+It's convenient to represent $\Phi_{1,2}(x)$ as
+%
+\begin{equation}
+\Phi_{1,2} = \dfrac{\Phi_+ \pm \Phi_-}{\sqrt{2}}
+\label{eq:basic_modes}
+\end{equation}
+%
+where $\Phi_{\pm}(x) = \pm \Phi_{\pm}(-x)$ are symmetric ($\Phi_+$) and antisymmetric ($\Phi_-$) real wavefunctions obeying the stationary Gross-Pitaevskii equations
+%
+\begin{equation}
+\mu_{\pm} \Phi_{\pm} = -\dfrac{\hbar^2}{2m_{pol}} \dfrac{d^2 \Phi_{\pm}}{dx^2} + U(x) \Phi_{\pm} + g \Phi_{\pm}^3
+\end{equation}
+%
+and the normalization condition $\int \Phi_{\pm}^2 dx = 1$; $\mu_{\pm}$ is a chemical potential.
+As a result, an operator $N=\hat{\psi_1}^\dag\hat{\psi_1} + \hat{\psi_2}^\dag\hat{\psi_2}$ characterizes the total number of particles.
+Substituting (\ref{eq:basic_modes}), (\ref{eq:two_modes}) into (\ref{eq:gpe_hamiltonian}) we arrive to
+% 
+\begin{equation}
+\begin{array}{lcl}
+\hat{H} & = & \dfrac{A}{2} (\hat{\psi}_1^{\dag 2} \hat{\psi}_1^2 + \hat{\psi}_2^{\dag 2} \hat{\psi}_2^2) - \dfrac{G}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 + \hat{\psi}_1 \hat{\psi}_2^\dag) \\ [8pt]
+& & -\dfrac{\Gamma}{2} (\hat{\psi}_1^{\dag 2} \hat{\psi}_1 \hat{\psi}_2 + \hat{\psi}_1^\dag \hat{\psi}_1^2 \hat{\psi}_2^\dag + \hat{\psi}_1^\dag \hat{\psi}_2^\dag \hat{\psi}_2^2 + \hat{\psi}_1 \hat{\psi}_2^{\dag 2} \hat{\psi}_2) \\ [8pt]
+& & +\dfrac{C}{2} (\hat{\psi}_1^{\dag 2} \hat{\psi}_2^2 + 4 \hat{\psi}_1^\dag \hat{\psi}_1 \hat{\psi}_2^\dag \hat{\psi}_2 + \hat{\psi}_1^2 \hat{\psi}_2^{\dag 2}),
+\end{array}
+\label{eq:hamiltonian}
+\end{equation}
+%
+where we have denoted $\gamma_{ij} = g \int \Phi_i^2 \Phi_j^2 dx, i,j \in \{+,-\}$,
+$A = \frac{1}{4} (\gamma_{++} + \gamma_{--} + 6 \gamma_{+-})$, $\Gamma = \frac{1}{2} (\gamma_{--} - \gamma_{++})$, $C = \frac{1}{4} (\gamma_{++} + \gamma_{--} - 2\gamma_{+-})$, $G = \mu_- - \mu_+ - 2\Gamma$.
+
+Hamiltonian (\ref{eq:hamiltonian}) describes the non-linear model of a Josephson junction effect with exciton polariton condensates trapped in a double-well potential.
+The terms containing $\Gamma$ and $C$ in (\ref{eq:hamiltonian}) characterize the non-linear contribitions to the tunneling of single polaritons and polariton pairs, respectively.
+The effective (nonlinear) tunneling rate governed by these terms is $G_{eff} = \dfrac{1}{2}(G+\Gamma N - C\hat{\psi}_1^\dag\hat{\psi}_2)$.
+
+The relevant coefficients can be estimated using the variational ansatz $\Phi_{\pm} = A_{\pm} \Big[ \exp \Big( -\dfrac{(x - x_0)^2}{2 a^2} \Big) \pm \exp \Big( -\dfrac{(x + x_0)^2}{2 a^2} \Big) \Big]$, where $a$ is the localisation length of the condensate wavefunctions in each of two potential wells which are assumed identical.
+The amplitudes $A_+$ and $A_-$ are given by the normalization conditions.
+It is important that differences between various rates $\gamma_{ij}$ rapidly vanish with the increasing the inter-well distance $2x_0$.
+We shall assume $\Gamma = C = 0$ for $x_0 >> a$.
+This limit corresponds to the familiar problem of two weakly linked condensates at zero temperature, see e.g. \cite{Aleiner, Shelykh_2008, Borgh_2010, Raghavan}.
+Now let us introduce the pseudo spin operators
+%
+\begin{subequations}
+\begin{align}
+\hat{S}_x = & \dfrac{1}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 + \hat{\psi}_1 \hat{\psi}_2^\dag) \\
+\quad \hat{S}_y = & \dfrac{i}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 - \hat{\psi}_1 \hat{\psi}_2^\dag) \\
+\hat{S}_z = & \dfrac{1}{2} (\hat{\psi}_2^\dag \hat{\psi}_2 - \hat{\psi}_1^\dag \hat{\psi}_1).
+\end{align}
+\label{eq:pseudo_spin}
+\end{subequations}
+%
+Inserting (\ref{eq:pseudo_spin}) into the (\ref{eq:hamiltonian}) we obtain Eq.(1) with $\alpha = A - C = 2\gamma_{\pm} > 0$, $\beta = 2C > 0$ and $B = \Gamma N + G > 0$.
+We also chose $x_0$ obeying the condition $\gamma_{++} \simeq \gamma_{--} = \gamma$ assuming $\Gamma = 0$ for simplicity.
+
+\begin{thebibliography}{9}
+
+\bibitem{Aleiner}
+Aleiner, I. L., Altshuler, B. L. and Rubo, Yu. G., Radiative coupling and weak lasing of exciton-polariton condensates. {\it Phys. Rev. B}, {\bf 85} (2012).
+
+\bibitem{Shelykh_2008}
+Shelykh, I. A., Solnyshkov, D. D., Pavlovic, G. and Malpuech, G., Josephson effects in condensates of excitons and exciton polaritons. {\it Phys. Rev. B}, {\bf 78} (2008).
+
+\bibitem{Borgh_2010}
+Borgh, M. O., Keeling, J. and Berloff, N. G., Spatial pattern formation and polarization dynamics of a nonequilibrium spinor polariton condensate. {\it Phys. Rev. B}, {\bf 81} (2010).
+
+\bibitem{Raghavan}
+Raghavan, S., Smerzi, A., Fantoni, S. and Shenoy, S. R., Coherent oscillations between two weakly coupled Bose-Einstein condensates: Josephson effects, $\pi$ oscillations, and macroscopic quantum self-trapping. {\it Phys. Rev. A}, {\bf 59}, (1999).
+
+\end{thebibliography}
+
+\end{document}

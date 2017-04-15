@@ -1,4 +1,4 @@
-\documentclass[aps, pre, preprint, groupedaddress, superscriptaddress, showkeys, showpacs] {revtex4-1}
+\documentclass[fleqn,10pt]{wlscirep}
 
 \usepackage{amsmath}
 \usepackage{mathtools}
@@ -13,54 +13,11 @@
 \DeclarePairedDelimiter\bra{\langle}{\rvert}
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 
-% Remove ugly line above reverences
-\def\bibsection{\section*{\refname}}
-
 % For the debug usage only
 \newcommand{\red}{\color{red}}
 \newcommand{\blue}{\color{blue}}
 
-\begin{document}
-
-\title{{Exciton-polariton Josephson junctions at finite temperatures}}
-
-\author{M. E. Lebedev}
-\affiliation{ITMO University, St. Petersburg 197101, Russia}
-
-\author{D. A. Dolinina}
-\affiliation{ITMO University, St. Petersburg 197101, Russia}
-
-\author{S. M. Arakelian}
-\affiliation{Vladimir State University named after A. G. and N. G. Stoletovs, Gorkii Street 87, Vladimir, Russia}
-
-\author{Tien-Chang Lu}
-\affiliation{Department of Photonics, National Chiao Tung University, Hsinchu 300, Taiwan}
-
-\author{A. V. Kavokin}
-\affiliation{Spin Optics Laboratory, St. Petersburg State University, Ul’anovskaya, Peterhof, St. Petersburg 198504, Russia}
-\affiliation{School of Physics and Astronomy, University of Southampton, SO17 1BJ Southampton, United Kingdom}
-\affiliation{Istituto CNR-SPIN, Viale del Politecnico 1, I-00133, Rome, Italy}
-
-\author{A. P. Alodjants}
-\email{alexander\_ap@list.ru}
-\affiliation{ITMO University, St. Petersburg 197101, Russia}
-\affiliation{Vladimir State University named after A. G. and N. G. Stoletovs, Gorkii Street 87, Vladimir, Russia}
-
-\date{\today}
-
-\begin{abstract}
-We consider finite temperature effects in a non-standard Bose-Hubbard model for an exciton polariton Josephson junction (EPJJ) that is characterised by complicated potential energy landscapes (PEL) consisting of sets of barriers and wells.
-We show that the transition between  thermal  activation (classical) and tunneling (quantum) regimes exhibits universal features of the first and second order phase transition (PT) depending on the PEL for two polariton condensates.
-In the presence of dissipation the relative phase of two condensates exhibits non-equilibrium PT from the quantum regime characterized by efficient tunneling of polaritons to the regime of permanent Josephson or Rabi oscillations, where the tunneling is suppressed, respectively.
-This analysis paves way for the application of coupled polariton condensates for the realisation of a quantum annealing algorithm.
- 
-\end{abstract}
-
-\pacs{\dots}
-\keywords{\dots}
-
-\maketitle
-
+% Elliptic functions
 \newcommand{\sn}{\textrm{sn}}
 \newcommand{\cn}{\textrm{cn}}
 \newcommand{\dn}{\textrm{dn}}
@@ -69,7 +26,45 @@ This analysis paves way for the application of coupled polariton condensates for
 \newcommand{\nd}{\textrm{nd}}
 \newcommand{\am}{\textrm{am}}
 
-\section{Introduction \label{sec:introduction}}
+% Title and authors
+\title{Exciton-polariton Josephson junctions at finite temperatures}
+
+\author[1]{M. E. Lebedev}
+\author[1]{D. A. Dolinina}
+\author[2]{Kuo-Bin Hong}
+\author[2]{Tien-Chang Lu}
+\author[3, 4, 5]{A. V. Kavokin}
+\author[1, 6, *]{A. P. Alodjants}
+
+\affil[1]{ITMO University, St. Petersburg 197101, Russia}
+\affil[2]{Department of Photonics, National Chiao Tung University, Hsinchu 300, Taiwan}
+\affil[3]{Spin Optics Laboratory, St. Petersburg State University, Ul’anovskaya, Peterhof, St. Petersburg 198504, Russia}
+\affil[4]{School of Physics and Astronomy, University of Southampton, SO17 1BJ Southampton, United Kingdom}
+\affil[5]{Istituto CNR-SPIN, Viale del Politecnico 1, I-00133, Rome, Italy}
+\affil[6]{Vladimir State University named after A. G. and N. G. Stoletovs, Gorkii Street 87, Vladimir, Russia}
+
+\affil[*]{alexander\_ap@list.ru}
+
+% \keywords{\dots}
+
+\begin{abstract}
+
+We consider finite temperature effects in a non-standard Bose-Hubbard model for an exciton polariton Josephson junction (EPJJ) that is characterised by complicated potential energy landscapes (PEL) consisting of sets of barriers and wells.
+We show that the transition between  thermal  activation (classical) and tunneling (quantum) regimes exhibits universal features of the first and second order phase transition (PT) depending on the PEL for two polariton condensates.
+In the presence of dissipation the relative phase of two condensates exhibits non-equilibrium PT from the quantum regime characterized by efficient tunneling of polaritons to the regime of permanent Josephson or Rabi oscillations, where the tunneling is suppressed, respectively.
+This analysis paves way for the application of coupled polariton condensates for the realisation of a quantum annealing algorithm.
+ 
+\end{abstract}
+
+\begin{document}
+
+\flushbottom
+\maketitle
+
+% (?)
+\thispagestyle{empty}
+
+\section*{Introduction}
 
 In the XXI century, the studies of exciton-polariton Bose-Einstein condensates (BEC) in various type of semiconductor microstructures have become an important area of research in photonics and semiconductor physics, see e.g. \cite{Sanvitto, Guillet}.
 Microcavity exciton polaritons are bosonic quasiparticles representing admixtures of quantized cavity photons and quantum well excitons.
@@ -89,8 +84,8 @@ collective (bosonic) character of polariton condensation could be used for the a
 \caption{Scketch of two tunnel coupled exciton condensates. The two minima of the trapping potential $U$ are situated in the points $+x_0$ and $-x_0$. At thermal equilibrium the interplay between thermal and quantum annealing effects is governed by the blue shift of condensates, effective temperature of exciton-polaritons and the shape of the potential. \label{pic:potential_picture}}
 \end{figure} 
 %
-In the present paper we study the effect of a finite effective temperature on the coupling of quasi-equilibrium exciton-polariton condensates accounting for the competing thremal and quantum annealing effects.  
 
+In the present paper we study the effect of a finite effective temperature on the coupling of quasi-equilibrium exciton-polariton condensates accounting for the competing thremal and quantum annealing effects.  
 Recently Yongbao Sun et al \cite{Snoke_2017} reported the observation of a quasi-equilibrium low branch exciton polariton condensate in a high Q-factor microcavity characterised by a remarkably long photon lifetime of $135ps$.
 Clearly, exciton polaritons with long lifetime are promising candidates for quantum technologies \cite{Demirchyan}.
 One of the crucial advantages of exciton-polaritons over cold atoms consists in a perspective of room temperature operation of polariton devices.
@@ -114,7 +109,9 @@ The influence of non-equilibrium effects involving the microcavity exciton polar
 In Conclusion, we summarize the obtained results.
 In the Supplementary Material we explain in details the extended model of EPJJ formulated within the tight-binding approximation.
  
-\section{The Quantum Phase Model \label{sec:quantum_phase}}
+\section*{Results} 
+ 
+\subsection*{The Quantum Phase Model \label{sec:quantum_phase}}
 
 We consider a system of two spinless exciton-polariton condensates localised in lateral potential traps created in a planar semiconductor microcavity.
 The condensates are confined by a W-shape potential $U(x)$ possessing two minima at the points $\pm x_0$, see Fig. \ref{pic:potential_picture}.
@@ -136,7 +133,6 @@ It is important to note that the last term in Eq. (1) characterizes the familiar
 \cite{Lago1, Lago2}.
 The second term in (1) introduces an additional part that has no analogy in the XY-Hamiltonian; it is proportional to $\cos(2\phi)$, where $\phi$ is the phase difference between two polariton condensates.
 We will show that this term becomes essential if the barrier separating two condensates is sufficiently large.
-
 It is convenient to introduce the pseudo-spin operators in a form
 % 
 \begin{subequations}
@@ -198,7 +194,7 @@ V_0(z) = \frac{ (\frac{1}{4} \Lambda^2 - \lambda (1 - \lambda)) \sn^2{z} - \Lamb
 
 The dependences of the trapping potential $V_0(z)$ on the phase variable $z$ are shown in Fig. \ref{pic:phase_potential}. The period of the functions is  $4K(\lambda)$.
 The dependence of the $\lambda$ parameter on normalized half of the inter-well distance $\dfrac{x_0}{a}$ can be approximated by $\lambda = 0.5 \Big( \exp \Big[ \dfrac{2 x_0^2}{a^2} \Big] - 1 \Big)^{-1}$ by using variational approach,  see Suppl. Materials.
-The well-known behaviour of the quantum phase mesoscopic Josephson junction (that map to the XY--model, \citep{Lago1, Lago2} ) can be recovered from (\ref{eq:hamiltonian_spin}), (\ref{eq:potential}) at $\lambda = 0$ and shown by red curves in Fig. \ref{pic:phase_potential}. This limit corresponds to  infinitely large inter-well distances, with $x_0 \to \infty$.
+The well-known behaviour of the quantum phase mesoscopic Josephson junction (that map to the XY--model, \cite{Lago1, Lago2} ) can be recovered from (\ref{eq:hamiltonian_spin}), (\ref{eq:potential}) at $\lambda = 0$ and shown by red curves in Fig. \ref{pic:phase_potential}. This limit corresponds to  infinitely large inter-well distances, with $x_0 \to \infty$.
 On the other hand, the $\lambda$ -- parameter exhibits a sharp increase at $\dfrac{x_0}{a} \ll 1$.
 Obviously, in this limit our EPJJ model based on the assumption of a relatively weak coupling between trapped condensates breaks down.
 Below we are focusing on $\lambda$ -- parameters which belong to the range of $0 < \lambda < 1$ and correspond to the moderate values of $\dfrac{x_0}{a}$ such as $\dfrac{x_0}{a} \geq 0.45$. 
@@ -231,7 +227,7 @@ In the opposite limit, for $\Lambda < 2 \lambda$, the effective quantum ``partic
 The depth of the potential minima depends on the $\lambda$ parameter.
 It is interesting to note that for $\Lambda > 2(1 - \lambda)$ the potential $V_0(z)$ possesses a local minimum at $\pm 2 K(\lambda)$, see Fig. \ref{pic:potential_picture}b.
 
-\section{Annealing problem versus Quantum-classical PT's \label{sec:quantum_classical}}
+\subsection*{Annealing problem versus Quantum-classical PT's \label{sec:quantum_classical}}
 
 Experimentally, exciton-polariton condensates are being observed at elevated temperatures, up to the room temperature in wide-gap semiconductor microcavities \cite{Sanvitto,Guillet}.
 At high temperatures the validity of the quantum coherent treatment of the Josephson problem is limited.
@@ -281,7 +277,6 @@ S_0 = \Delta V \tau_p (E).
 \label{eq:thermal_action}
 \end{equation}
 %
-
 The expansion of the potential $V(z)$ into a series and excluding the constant value $V(0)$ gives:
 %
 \begin{equation}
@@ -393,12 +388,11 @@ Physically, the decay takes place because of the tunneling of our effective part
 By expanding the potential $V(z)$ in the vicinity of $z_{max}$ it is possible to show that only the 2nd-order PT with a temperature $T_{c}^{(2)} = (T_{0}/ 2) \sqrt{\frac{\Lambda^2}{1 - \lambda} - 4(1 - \lambda)}$ may take place in this case.
 
 Let us briefly discuss methods of the experimental study of the quantum-classical PT for the polariton Josephson junctions.
-Our estimations show that, for the experimentally accessible polariton interaction strength of $\alpha N=0.6meV$, characteristic of narrow-band semiconductor samples, $T_{0}$ is about $1.2K$ that corresponds to the thermon effective lifetime of $\tau_{0}=3.5ps$.
+Our estimations show that, for the experimentally accessible polariton interaction strength of $\alpha N=0.6meV$, characteristic of narrow-band semiconductor samples, $T_{0}$ is about $1.1K$ that corresponds to the thermon effective lifetime of $\tau_{0}\approx 7 ps$.
 The value of $T_{0}$ is comparable with a typical temperature of a Bose-Einstein condensation, or, with temperature of the Berezinsky-Kosterlitz-Thouless PT predicted for the dilute weakly interacting exciton polariton gas at thermal equilibrium \cite{Sanvitto,Guillet}.
 Some further enhancement of $T_{0}$ may be achieved by the increase of the optical pumping intensity and varying the detuning of exciton and photon modes in a microcavity \cite{Snoke_2017}.  
 
-\section{PT's in the presence of dissipation 
-\label{sec:non-equilibrium}}
+\subsection*{PT's in the presence of dissipation\label{sec:non-equilibrium}}
 
 Now let us consider the EPJJ accounting for the finite exciton polariton lifetime $\tau_{pol}$. 
 The finite radiative lifetime is a crucial characteristic of any polariton system and, strictly speaking, can never be ignored.
@@ -414,7 +408,7 @@ Here we examine a different situation namely, the case where the exciton polarit
 Note that this situation is realized the multiple experiments dealing with non-equilibrium exciton polariton condensates, see e.g. [1,2, 16-18].  
 
 To be more specific in what follows we shall consider the influence of the dissipation on the EPJJ quantum phase properties in the adiabatic limit \cite{Sols}.
-We start from GP equations obtained from  (\ref{eq:hamiltonian}) for the mean fields $\psi_{1,2}=<\hat\psi_{1,2}>$ at $\Gamma = 0$ ($B = G$), which read as
+We start from GP equations obtained from  (see supplementary equation (S5)) for the mean fields $\psi_{1,2}=<\hat\psi_{1,2}>$ at $\Gamma = 0$ ($B = G$), which read as
 %
 \begin{equation}
 i \hbar \dot{\psi}_{1,2} = -i \kappa \psi_{1,2} + (A|\psi_{1,2}|^2 + 2C |\psi_{2,1}|^2) \psi_{1,2} - (B/2 - C \psi_{1,2}^* \psi_{2,1}) \psi_{2,1}. 
@@ -422,7 +416,7 @@ i \hbar \dot{\psi}_{1,2} = -i \kappa \psi_{1,2} + (A|\psi_{1,2}|^2 + 2C |\psi_{2
 \end{equation}
 %
 In (\ref{eq:GP}) we have introduced the dissipation term with $\kappa \simeq \hbar/\tau_{pol}$.
-Defining new variables $\Psi_{1,2}$ as $\psi_{1,2} = \Psi_{1,2} \exp(-\kappa t / \hbar)$ for the mean field pseudo-spin components (\ref{eq:pseudo_spin}).
+Defining new variables $\Psi_{1,2}$ as $\psi_{1,2} = \Psi_{1,2} \exp(-\kappa t / \hbar)$ for the mean field pseudo-spin components (see supplementary equation (S6)).
 We obtain from (\ref{eq:GP})
 % 
 \begin{equation}
@@ -450,7 +444,7 @@ The final (temporal) state represents the Josephson or, Rabi oscillation regime.
 %
 \begin{figure}[ht]
 \center{\includegraphics[width=\linewidth]{pic/phase_potential_dissipation.eps}}
-\caption{(a) -- Normalized phase difference as a function of time; (b) -- effective potential vs phase parameter $z$ for red, black and blue curves, respectively, and (c) -- reduced thermon period $\tau_{p} / \tau_0$ ($\tau_0 = \pi \hbar / \alpha s $) vs time for $\kappa/\hbar = 0.1 THz$. 
+\caption{(a) -- Normalized phase difference as a function of time; (b) -- effective potential vs phase parameter $z$ for red, black and blue curves, respectively, and (c) -- reduced thermon period $\tau_{p} / \tau_0$  vs time for $\kappa/\hbar = 0.1 THz$. 
 Initial conditions are $S_z(0) = S_x(0) = 0$, $S_y(0) = 1$, and $\phi(0) = \pi / 2$, respectively.
 \label{pic:phase}}
 \end{figure}
@@ -477,7 +471,7 @@ At large enough times, $\omega(t) \approx$ $B/ \hbar$ and permanent Rabi  oscill
 To distinguish between the quantum and classical character of these oscillations, a purely quantum approache to the problem should be considered.      
 It will be in the scope of our further research.
 
-\section{Conclusion \label{sec:conclusion}}
+\section*{Discussion \label{sec:conclusion}}
 
 We have studied theoretically the coupling of two spacially separated trapped exciton polariton condensates at finite temperatures and accounting for the dissipation.
 We demonstrate the crossover from thermal to quantum annealing regime for a model system of two condensates localised by a W-shape potential.
@@ -491,102 +485,24 @@ In this case permanent Rabi  oscillations of Josephson junction phase occurs wit
 To reveal either quantum of classical nature of these oscillations it is necessary to study the fluctuations of the exciton polariton system beyond the semiclassical approach represented in Sec.\ref{sec:non-equilibrium}}. 
 For moderate dissipation rates and at temperatures (or relevant polariton gas densities) sufficiently below the temperature of $T_{0}$ the EPJJ device is suitable for various applications where the quantum tunneling effect is crucial. 
 
-First, it is quantum information processing and especially the quantum annealing problem  with exciton polariton condensates that allow for acceleration of the quantum annealing due to the final state bosonic stimulation {\cite{Yan}.
+In order, it is quantum information processing and especially the quantum annealing problem  with exciton polariton condensates that allow for acceleration of the quantum annealing due to the final state bosonic stimulation {\cite{Yan}.
 Notably the results obtained by us can be implemented here in new way.
 In order, quantum tunneling effect might be utilized for design exciton polariton phase qubits similarly to superconductor devices, but in optical wavelength domain, \cite{Makhlin}.
 Actually, two minima located at the points $-z_{min}$ and $+z_{max}$ of $W$-shape quantum phase potential in Fig. \ref{pic:phase_potential}b can be used for initialization of exciton polariton qubit states $\ket{0}$ and $\ket{1}$ similarly to superconductor flux qubits, respectively.
 However, in our case such qubits may be tailored by external optical or electrical pump.
-As a result, quantum annealing problem can be experimentally solved with help of this type of qubits \cite{Johnson}.  
- 
-Another promising area of potential applications of the obtained results is quantum metrology.
-In particular, EPJJs can be useful for realisation of interferometers and/or gyroscopes operating with the phase of  exciton polariton condensates in the quantum regime \cite{Pezze, Gulevich}.
-The high accuracy measurements of the phase relations between polariton condensates would be needed in this case.
-It is possible to show that for the Fock regime the dispersion of the quantum phase approaches the so-called Heisenberg limit ${<(\Delta\phi)^2> \propto \dfrac{1}{N^2}}$ that is the minimal accessible error for the phase measurement for the given total number of particles.
+As a result, quantum annealing problem can be experimentally solved with help of this type of qubits \cite{Johnson}.
 
-\section{Acknowledgement
-\label{sec:acknowledgement}}
-We acknowledge the financial support from RFBR, Grants No. 15-52-52001 and No. 14-02-97503.
-A. Kavokin acknowledges the support from HORIZON 2020 RISE project CoExAn (Grant No. 644076) and the EPSRC Established Career fellowship on Quantum Polaritonics RP 008833.
-
-
-%% -SUPPLEMENTAL- %%
-\pagebreak
-\widetext
-\begin{center}
-\textbf{Supplemental Materials: Extended  Model of EPJJ}
-\end{center}
-
-\setcounter{equation}{0}
-\makeatletter
-\renewcommand{\theequation}{S\arabic{equation}}
-\renewcommand{\thefigure}{S\arabic{figure}}
-\renewcommand{\citenumfont}[1]{S#1}
-
-To derive Eq.(\ref{eq:hamiltonian_spin}) we consider an equilibrium exciton polariton condensate trapped in a symmetric one dimensional double-well potential $U(x) = h ((x/x_0)^2 - 1)^2$; $2x_0$ is the distance between potential minima, $h$ is the depth of the potential.
-The Hamiltonian for the system of weakly interacting exciton polaritons trapped in an external potential $U(x)$ can be written in the using the secondary quanttization formalism as:
-%
-\begin{equation}
-\hat{H} = \int \hat{\psi}^\dag\Big\{ -\dfrac{\hbar^2}{2m_{pol}}  \dfrac{d^2 }{dx^2} + U(x) + \dfrac{g}{2} \hat{\psi}^{\dag} \hat{\psi}  \Big\}\hat{\psi} dx,
-\label{eq:gpe_hamiltonian}
-\end{equation}
-%
-where $\hat{\psi} \equiv \hat{\psi}(x, t)$ is a polariton field operator that annihilates a particle at the position $x$ and time $t$, $g$ describes the two-body (polariton-polariton) scattering length, $m_{pol}$ is low branch polariton effective mass.
-In the paper we use so-called two-mode representation of $\hat{\psi}$ - operator:
-%
-\begin{equation}
-\hat{\psi} = \hat{\psi}_1(t) \Phi_1(x) + \hat{\psi}_2(t) \Phi_2(x),
-\label{eq:two_modes}
-\end{equation}
-%
-where $\hat{\psi}_{1,2}$ are time dependent operators characterizing the condensates at the left and at the right wells respectively; $\Phi_{1,2}(x)$ are condensate wavefunctions in real space.
-It's convenient to represent $\Phi_{1,2}(x)$ as
-%
-\begin{equation}
-\Phi_{1,2} = \dfrac{\Phi_+ \pm \Phi_-}{\sqrt{2}}
-\label{eq:basic_modes}
-\end{equation}
-%
-where $\Phi_{\pm}(x) = \pm \Phi_{\pm}(-x)$ are symmetric ($\Phi_+$) and antisymmetric ($\Phi_-$) real wavefunctions obeying the stationary Gross-Pitaevskii equations $\mu_{\pm} \Phi_{\pm} = -\dfrac{\hbar^2}{2m_{pol}} \dfrac{d^2 \Phi_{\pm}}{dx^2} + U(x) \Phi_{\pm} + g \Phi_{\pm}^3$
-and the normalization condition $\int \Phi_{\pm}^2 dx = 1$; $\mu_{\pm}$ is a chemical potential.
-As a result, an operator $N=\hat{\psi_1}^\dag\hat{\psi_1} + \hat{\psi_2}^\dag\hat{\psi_2}$ characterizes the total number of particles.
-Substituting (\ref{eq:basic_modes}), (\ref{eq:two_modes}) into (\ref{eq:gpe_hamiltonian}) we arrive to
-% 
-\begin{equation}
-\begin{array}{lcl}
-\hat{H} & = & \dfrac{A}{2} (\hat{\psi}_1^{\dag 2} \hat{\psi}_1^2 + \hat{\psi}_2^{\dag 2} \hat{\psi}_2^2) - \dfrac{G}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 + \hat{\psi}_1 \hat{\psi}_2^\dag) \\ [8pt]
-& & -\dfrac{\Gamma}{2} (\hat{\psi}_1^{\dag 2} \hat{\psi}_1 \hat{\psi}_2 + \hat{\psi}_1^\dag \hat{\psi}_1^2 \hat{\psi}_2^\dag + \hat{\psi}_1^\dag \hat{\psi}_2^\dag \hat{\psi}_2^2 + \hat{\psi}_1 \hat{\psi}_2^{\dag 2} \hat{\psi}_2) \\ [8pt]
-& & +\dfrac{C}{2} (\hat{\psi}_1^{\dag 2} \hat{\psi}_2^2 + 4 \hat{\psi}_1^\dag \hat{\psi}_1 \hat{\psi}_2^\dag \hat{\psi}_2 + \hat{\psi}_1^2 \hat{\psi}_2^{\dag 2}),
-\end{array}
-\label{eq:hamiltonian}
-\end{equation}
-%
-where we have denoted $\gamma_{ij} = g \int \Phi_i^2 \Phi_j^2 dx, i,j \in \{+,-\}$,
-$A = \frac{1}{4} (\gamma_{++} + \gamma_{--} + 6 \gamma_{+-})$, $\Gamma = \frac{1}{2} (\gamma_{--} - \gamma_{++})$, $C = \frac{1}{4} (\gamma_{++} + \gamma_{--} - 2\gamma_{+-})$, $G = \mu_- - \mu_+ - 2\Gamma$.
-
-Hamiltonian (\ref{eq:hamiltonian}) describes the non-linear model of a Josephson junction effect with exciton polariton condensates trapped in a double-well potential.
-The terms containing $\Gamma$ and $C$ in (\ref{eq:hamiltonian}) characterize the non-linear contribitions to the tunneling of single polaritons and polariton pairs, respectively.
-The effective (nonlinear) tunneling rate governed by these terms is $G_{eff} = \dfrac{1}{2}(G+\Gamma N - C\hat{\psi}_1^\dag\hat{\psi}_2)$.
-
-The relevant coefficients can be estimated using the variational ansatz $\Phi_{\pm} = A_{\pm} \Big[ \exp \Big( -\dfrac{(x - x_0)^2}{2 a^2} \Big) \pm \exp \Big( -\dfrac{(x + x_0)^2}{2 a^2} \Big) \Big]$, where $a$ is the localisation length of the condensate wavefunctions in each of two potential wells which are assumed identical.
-The amplitudes $A_+$ and $A_-$ are given by the normalization conditions.
-It is important that differences between various rates $\gamma_{ij}$ rapidly vanish with the increasing the inter-well distance $2x_0$.
-We shall assume $\Gamma = C = 0$ for $x_0 >> a$.
-This limit corresponds to the familiar problem of two weakly linked condensates at zero temperature, see e.g. \cite{Aleiner, Shelykh_2008, Borgh_2010, Raghavan}.
-Now let us introduce the pseudo spin operators
-%
-\begin{subequations}
-\begin{align}
-\hat{S}_x = & \dfrac{1}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 + \hat{\psi}_1 \hat{\psi}_2^\dag) \\
-\quad \hat{S}_y = & \dfrac{i}{2} (\hat{\psi}_1^\dag \hat{\psi}_2 - \hat{\psi}_1 \hat{\psi}_2^\dag) \\
-\hat{S}_z = & \dfrac{1}{2} (\hat{\psi}_2^\dag \hat{\psi}_2 - \hat{\psi}_1^\dag \hat{\psi}_1).
-\end{align}
-\label{eq:pseudo_spin}
-\end{subequations}
-%
-Inserting (\ref{eq:pseudo_spin}) into the (\ref{eq:hamiltonian}) we obtain Eq.(1) with $\alpha = A - C = 2\gamma_{\pm} > 0$, $\beta = 2C > 0$ and $B = \Gamma N + G > 0$.
-We also chose $x_0$ obeying the condition $\gamma_{++} \simeq \gamma_{--} = \gamma$ assuming $\Gamma = 0$ for simplicity.
+\section*{Methods}
+\dots
 
 % Create the reference section using BibTeX:
 \bibliography{list}
+
+\section*{Acknowledgement}
+We acknowledge the financial support from RFBR, Grants No. 15-52-52001 and No. 14-02-97503.
+A. Kavokin acknowledges the support from HORIZON 2020 RISE project CoExAn (Grant No. 644076) and the EPSRC Established Career fellowship on Quantum Polaritonics RP 008833.
+
+\section*{Author contributions statement}
+All authors reviewed the manuscript.
 
 \end{document}
