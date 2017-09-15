@@ -19,7 +19,7 @@ xspan = [-6 6];
 xgrid = xspan(1):xstep:xspan(2);
 Nx = length(xgrid);
 
-tstep = 0.02;
+tstep = 0.002;
 tspan = [0 36];
 tgrid = tspan(1):tstep:tspan(2);
 Nt = length(tgrid);
@@ -100,9 +100,10 @@ for i = 2:Nt
 		
 	end
 	
-	% plot(abs(U(i, :))); drawnow
-	% pause(1e-1)
-	Norm(i) = simpson(abs(U(i, :)) .^ 2, xstep);
+	plot(abs(U(i, :))); drawnow
+    pause(1e-1)
+	
+    Norm(i) = simpson(abs(U(i, :)) .^ 2, xstep);
 	% Logging
 	fprintf('iter = %i of %i, max = %g, norm = %g\n', i, Nt, max(abs(U(i, :))), Norm(i));
 	

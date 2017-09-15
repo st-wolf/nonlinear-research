@@ -37,7 +37,7 @@ D = -k^2 * (diag(-N:N) .^ 2);
 Gt{1} = toeplitz([Gf{1}(N+1:2*N+1) zeros(1, N)],...
 					  [Gf{1}(N+1:-1:1)  zeros(1, N)]);
 Gt{2} = toeplitz([Gf{2}(N+1:2*N+1) zeros(1 ,N)],...
-					  [Gf{2}(N+1:-1:1)  zeros(1 ,N)]);
+					  [Gf{2}(N+1:-1:1)  zeros(1, N)]);
 
 M = (D + Gt{2}) * (D + Gt{1});
 

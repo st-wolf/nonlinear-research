@@ -34,39 +34,53 @@ end
 %%
 clc; clear
 
-omega = 1.3; Omega = 8;
-params = [omega Omega];
-xspan = [-5 0];
+pool = 4.9:-0.01:2.8;
+for omega = pool
 
-get_u_end_params = @(C) get_u_end(params, C, xspan);
+%omega = 2.9;
+Omega = 18;
+
+params = [omega Omega];
+xspan = [-6 0];
+
+get_ux_end_params = @(C) get_ux_end(params, C, xspan);
 
 c0 = 0.01;
 cstep = 0.5;
-u_end_0 = get_u_end_params(c0);
+ux_end_0 = get_ux_end_params(c0);
 
-eps = 1e-6;
+eps = 1e-8;
 
 while true
 	c1 = c0 + cstep;
-	u_end_1 = get_u_end_params(c1);
-		
-	if sign(u_end_0) ~= sign(u_end_1)
-		cmode = dichotomy(get_u_end_params, c0, c1, eps);
+	ux_end_1 = get_ux_end_params(c1);
+
+	if sign(ux_end_0) ~= sign(ux_end_1)
+		cmode = dichotomy(get_ux_end_params, c0, c1, eps);
 		break
 	else
 		c0 = c1;
-		u_end_0 = u_end_1;
+		ux_end_0 = ux_end_1;
 	end
 end
 
-[X, U] = get_antisymmetric_mode(params, cmode, xspan);
-figure
-subplot(1,2,1)
-plot_mode(params, X, U)
+[X, U] = get_symmetric_mode(params, cmode, xspan);
+% U = -U;
+% figure
+% subplot(1,2,1)
+% plot_mode(params, X, U)
+% plot(X, U);
 
-eigs = get_spectrum(params, X, U, 128);
-subplot(1,2,2);
-plot_spectrum(params, eigs);
+eigs = get_spectrum(params, X, U, 256 );
+% subplot(1,2,2);
+% plot_spectrum(params, eigs);
+
+plot(eigs, 'o', 'MarkerFaceColor', 'k', 'MarkerSize', 5)
+axis([-1 1 0 9])
+
+
+drawnow
+end
 
 %%
 [Grid, U, Norm] = CFDS(params, X, U(:, 1));
@@ -152,23 +166,3 @@ figure
 cmode = dichotomy(get_ux_end_params, 0.03, 0.08, eps);
 [X, U] = get_symmetric_mode(params, cmode, xspan);
 plot(X, U);
-
-%%
-Fs = 1000;            % Sampling frequency                    
-T = 1/Fs;             % Sampling period       
-L = 1500;             % Length of signal
-t = (0:L-1)*T;        % Time vector
-S = 0.7*sin(2*pi*50*t) + sin(2*pi*120*t);
-X = S + 2*randn(size(t));
-
-Y = fft(X);
-
-P2 = abs(Y/L);
-P1 = P2(1:L/2+1);
-P1(2:end-1) = 2*P1(2:end-1);
-
-f = Fs*(0:(L/2))/L;
-plot(f,P1) 
-title('Single-Sided Amplitude Spectrum of X(t)')
-xlabel('f (Hz)')
-ylabel('|P1(f)|')

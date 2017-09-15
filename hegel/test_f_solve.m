@@ -3,7 +3,7 @@ clc; clear
 
 omega = 4; Omega = 0.5;
 params = [omega, Omega];
-xspan = [0 3];
+xspan = [0 3.6];
 init = [0.1 0.1];
 
 intervals = 1024;

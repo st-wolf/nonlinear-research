@@ -20,12 +20,14 @@ xmax = max(1, 1.2 * max(real(eigenvalues)));
 ymax = 1.2 * max(imag(eigenvalues(real(eigenvalues) > 1e-5)));
 
 if ~isempty(ymax)
-	ymax = max(15, ymax);
+	ymax = max(9.8, ymax);
 else
-	ymax = 15;
+	ymax = 9.8;
 end
 
-axis([-xmax xmax -ymax ymax])
+% axis([-xmax xmax -ymax ymax])
+axis([-xmax xmax 0 ymax])
+
 title(sprintf('Parameters: omega = %g, Omega = %g', params(1), params(2)))
 grid on
 

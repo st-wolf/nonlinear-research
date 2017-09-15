@@ -7,7 +7,7 @@ using namespace NR;
 // Lyuba Hegel task.
 // NLS with presence of quadratic linear potential and cosine nonlinear potential
 // Equation for nonlinear stationary modes
-// u_{xx} + (\omega - x^2) u - \cos{2 \Omega x} u^3 = 0
+// u_{xx} + (\omega - x^2) u - \sin{2 \Omega x} u^3 = 0
 // Parameters: [\omega \Omega]
 Point<2> hegel(double x, Point<2> u, double* param)
 {
