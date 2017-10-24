@@ -4,7 +4,7 @@ function df = ode( x, f, params )
 % INPUT:
 %	
 
-[omega, Omega] = parse_params(params);
-df = [f(2), -(omega - x^2) * f(1) - cos(2 * Omega * x) * (f(1)^3) ];
+[mu, Omega] = parse_params(params);
+df = [f(2), -(mu - x^2) * f(1) - (1 + 2*cos(Omega * x)) * (f(1)^3) ];
 
 end
