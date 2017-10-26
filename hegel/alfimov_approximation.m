@@ -33,13 +33,17 @@ clc; clear
 xstart = -10; xstep = 0.01; xend = 10;
 x = xstart:xstep:xend;
 
-mu = 3.1; Omega = 8; sigma_1 = 1; params = [mu Omega sigma_1];
-n = 2;
+mu = 1.1; Omega = 24; sigma_1 = 1; params = [mu Omega sigma_1];
+n = 1;
 
 u_approx = get_alfimov_approximation(params, n, x);
-plot(x, u_approx);
+plot(x, -u_approx)
 
 % True solution
+[X, U] = get_mode_with_linear_counterpart(3, params, xstart);
+
+hold on
+plot(X, U(:, 1))
 
 
 %% Solutions for the quantum harmonic oscillator

@@ -19,9 +19,92 @@ Hn_6th_integral = simpson(Hn_solution .^ 6, xstep);
 
 U0 = ((2 * Hn_2nd_integral * delta_mu) / (3 * Hn_6th_integral)) ^ (1/4);
 
-u_approx = U0 * sqrt(Omega) * Hn_solution + (U0 ^ 3) * sigma
+u_approx = ...
+	U0 * sqrt(Omega) * Hn_solution + ...
+	(U0 ^ 3) * (sigma_1 / sqrt(Omega)) * (Hn_solution .^ 3) .* cos(Omega * x);
 
-plot(x, Hn_solution);
+plot(x, u_approx);
+
+%% Compare alfimov approximation with real solution 
+
+clc; clear
+
+% On a finite grid
+xstart = -10; xstep = 0.01; xend = 10;
+x = xstart:xstep:xend;
+
+mu = 1.1; Omega = 8; sigma_1 = 1; params = [mu Omega sigma_1];
+n = 1;
+
+u_approx = get_alfimov_approximation(params, n, x);
+plot(x, u_approx);
+
+% True solution
+mu_analog = 3;
+mu_aug = 0.1; % augmentation to bifurcate from zero solution
+
+mu_start = mu_analog - mu_aug;
+
+if mod(n, 2) == 0
+	% Even solution
+	get_end = @(mex_solver_name, params, C, xspan) get_ux_end(mex_solver_name, params, C, xspan);
+else
+	% Odd solution
+	get_end = @(mex_solver_name, params, C, xspan) get_u_end(mex_solver_name, params, C, xspan);
+end
+
+% Find solution in \mu_start and continue it on the parameter \mu
+params = [mu_start Omega sigma_1];
+get_end_params = @(c) get_u_end('f_sigma_solve', params, c, [xstart 0]);
+
+% Find cspan for dichotomy solver
+cstep = 0.1; cstart = cstep; cend = cstart + cstep;
+end_cstart = get_end_params(cstart);
+end_cend = get_end_params(cend);
+
+while sign(end_cstart) == sign(end_cend)
+	cend = cend + cstep;
+	end_cend = get_end_params(cend);
+end
+
+% Dichotomy precision
+eps = 1e-9;
+
+cmode = dichotomy(get_end_params, cstart, cend, eps);
+
+if mod(n, 2) == 0
+	% Even solution
+	[X, U] = get_symmetric_mode('f_sigma_solve', params, cmode, [xstrat 0]);
+else
+	% Odd solution
+	[X, U] = get_antisymmetric_mode('f_sigma_solve', params, cmode, [xstart 0]);
+end
+
+plot(X, U);
+
+% Continuation on the parameter \mu
+mu_step = mu_aug; % why not!?
+
+mu_intermediate_values = mu_start:mu_step:mu;
+cmode_intermediate_values = zeros(1, length(mu_intermediate_values));
+cmode_intermediate_values(1) = cmode;
+
+for i = 2:length(mu_intermediate_values)
+	fprintf('%i of %i\n', i, length(mu_intermediate_values))
+	params = [mu_intermediate_values(i) Omega sigma_1];
+	
+	get_end_params = @(c) get_u_end('f_sigma_solve', params, c, [xstart 0]);
+	cmode_intermediate_values(i) = newton(get_end_params, cmode_intermediate_values(i - 1));
+	
+	% Debug usage
+	if mod(n, 2) == 0
+		% Even solution
+		[X, U] = get_symmetric_mode('f_sigma_solve', params, cmode, [xstrat 0]);
+	else
+		% Odd solution
+		[X, U] = get_antisymmetric_mode('f_sigma_solve', params, cmode, [xstart 0]);
+	end
+end
 
 %% Solutions for the quantum harmonic oscillator
 harmonic_oscillator_diff = @(t, y) [y(2), -(mu - (t .^ 2)) .* y(1)];

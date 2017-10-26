@@ -28,8 +28,8 @@ ux_end = zeros(1, length(c));
 
 for i = 1:length(c);
 	init = asympt_left(params, c(i), xstart);
-	ux_end(i) = get_ux_end(f_solve, params, c(i), xspan);
-	% u_end(i) = get_u_end(f_solve, params, c(i), xspan);
+	ux_end(i) = get_ux_end('f_solve', params, c(i), xspan);
+	% u_end(i) = get_u_end('f_solve', params, c(i), xspan);
 	
 	if abs(ux_end(i)) > 100
 	% if abs(u_end(i)) > 100
@@ -53,13 +53,13 @@ mode_cspan = [0.3 0.6]; % mu = 4.95, Omega = 1, P1 = 0, 3-st
 % mode_cspan = [0.3 0.6]; % mu = 4.95, Omega = 8, P1 = 2, 3-st
 % mode_cspan = [0.3 0.6]; % mu = 4.95, Omega = 12, P1 = 2, 3-st
 
-get_ux_end_params = @(c) get_ux_end(f_solve, params, c, xspan);
-% get_u_end_params = @(c) get_u_end(params, c, xspan);
+get_ux_end_params = @(c) get_ux_end('f_solve', params, c, xspan);
+% get_u_end_params = @(c) get_u_end('f_solve', params, c, xspan);
 cmode = dichotomy(get_ux_end_params, mode_cspan(1), mode_cspan(2), eps);
 % cmode = dichotomy(get_u_end_params, mode_cspan(1), mode_cspan(2), eps);
 
-[X, U] = get_symmetric_mode(params, cmode, xspan);
-% [X, U] = get_antisymmetric_mode(params, cmode, xspan);
+[X, U] = get_symmetric_mode('f_solve', params, cmode, xspan);
+% [X, U] = get_antisymmetric_mode('f_solve', params, cmode, xspan);
 
 figure; plot_mode(params, X, U);
 
@@ -78,14 +78,14 @@ Norm(1) = get_norm(X, U);
 
 for i = 2:length(mu)
 	fprintf('%i of %i\n', i, length(mu))
-	params = [mu(i) Omega];
-	get_ux_end_params = @(c) get_ux_end(f_solve, params, c, xspan);
-	% get_u_end_params = @(c) get_u_end(params, c, xspan);
+	params = [mu(i) Omega P1];
+	get_ux_end_params = @(c) get_ux_end('f_solve', params, c, xspan);
+	% get_u_end_params = @(c) get_u_end('f_solve', params, c, xspan);
 	
 	c(i) = newton(get_ux_end_params, c(i - 1));
 	% c(i) = newton(get_u_end_params, c(i - 1));
-	[X, U] = get_symmetric_mode(params, c(i), xspan);
-	% [X, U] = get_antisymmetric_mode(params, c(i), xspan);
+	[X, U] = get_symmetric_mode('f_solve', params, c(i), xspan);
+	% [X, U] = get_antisymmetric_mode('f_solve', params, c(i), xspan);
 	Norm(i) = get_norm(X, U);
 	plot_mode(params, X, U); pause(1e-2);
 end
@@ -117,9 +117,9 @@ for m = 1:3
 	Omega = pair(1); P1 = pair(2);
 	
 	params = [mu_start Omega P1];
-	get_ux_end_params = @(c) get_ux_end(f_solve, params, c, xspan);
+	get_ux_end_params = @(c) get_ux_end('f_solve', params, c, xspan);
 	cmode = dichotomy(get_ux_end_params, cspan(1), cspan(2), eps);
-	[X, U] = get_symmetric_mode(params, cmode, xspan);
+	[X, U] = get_symmetric_mode('f_solve', params, cmode, xspan);
 	
 	c = zeros(1, length(mu));
 	c(1) = cmode;
@@ -128,10 +128,10 @@ for m = 1:3
 	for i = 2:length(mu)
 		fprintf('%i of %i\n', i, length(mu))
 		params = [mu(i) Omega P1];
-		get_ux_end_params = @(c) get_ux_end(f_solve, params, c, xspan);
+		get_ux_end_params = @(c) get_ux_end('f_solve', params, c, xspan);
 
 		c(i) = newton(get_ux_end_params, c(i - 1));
-		[X, U] = get_symmetric_mode(params, c(i), xspan);
+		[X, U] = get_symmetric_mode('f_solve', params, c(i), xspan);
 		modes_norms_1st(m, i) = get_norm(X, U);
 	end
 end
@@ -167,9 +167,9 @@ for m = 1:3
 	Omega = pair(1); P1 = pair(2);
 	
 	params = [mu_start Omega P1];
-	get_u_end_params = @(c) get_u_end(params, c, xspan);
+	get_u_end_params = @(c) get_u_end('f_solve', params, c, xspan);
 	cmode = dichotomy(get_u_end_params, cspan(1), cspan(2), eps);
-	[X, U] = get_symmetric_mode(params, cmode, xspan);
+	[X, U] = get_antisymmetric_mode('f_solve', params, cmode, xspan);
 	
 	c = zeros(1, length(mu));
 	c(1) = cmode;
@@ -178,10 +178,10 @@ for m = 1:3
 	for i = 2:length(mu)
 		fprintf('%i of %i\n', i, length(mu))
 		params = [mu(i) Omega P1];
-		get_u_end_params = @(c) get_u_end(params, c, xspan);
+		get_u_end_params = @(c) get_u_end('f_solve', params, c, xspan);
 
 		c(i) = newton(get_u_end_params, c(i - 1));
-		[X, U] = get_antisymmetric_mode(params, c(i), xspan);
+		[X, U] = get_antisymmetric_mode('f_solve', params, c(i), xspan);
 		modes_norms_2nd(m, i) = get_norm(X, U);
 	end
 end
@@ -216,9 +216,9 @@ for m = 1:3
 	Omega = pair(1); P1 = pair(2);
 	
 	params = [mu_start Omega P1];
-	get_ux_end_params = @(c) get_ux_end(f_solve, params, c, xspan);
+	get_ux_end_params = @(c) get_ux_end('f_solve', params, c, xspan);
 	cmode = dichotomy(get_ux_end_params, cspan(1), cspan(2), eps);
-	[X, U] = get_symmetric_mode(params, cmode, xspan);
+	[X, U] = get_symmetric_mode('f_solve', params, cmode, xspan);
 	
 	c = zeros(1, length(mu));
 	c(1) = cmode;
@@ -227,10 +227,10 @@ for m = 1:3
 	for i = 2:length(mu)
 		fprintf('%i of %i\n', i, length(mu))
 		params = [mu(i) Omega P1];
-		get_ux_end_params = @(c) get_ux_end(f_solve, params, c, xspan);
+		get_ux_end_params = @(c) get_ux_end('f_solve', params, c, xspan);
 
 		c(i) = newton(get_ux_end_params, c(i - 1));
-		[X, U] = get_symmetric_mode(params, c(i), xspan);
+		[X, U] = get_symmetric_mode('f_solve', params, c(i), xspan);
 		modes_norms_3rd(m, i) = get_norm(X, U);
 	end
 end

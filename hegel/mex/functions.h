@@ -29,6 +29,7 @@ Point<2> hegel_sigma(double x, Point<2> u, double* param)
 	
 	du[0] = u[1];
 	du[1] = -(mu - pow(x, 2)) * u[0] - sigma_1 * cos(Omega * x) * pow(u[0], 3);
+	return du;
 }
 
 #endif
