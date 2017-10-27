@@ -46,8 +46,6 @@ else
 	[X, U] = get_antisymmetric_mode('f_sigma_solve', params, cmode, [xstart 0]);
 end
 
-plot(X, U);
-
 % Continuation on the parameter \mu
 mu_step = mu_aug; % why not!?
 
@@ -71,8 +69,9 @@ for i = 2:length(mu_intermediate_values)
 		[X, U] = get_antisymmetric_mode('f_sigma_solve', params, cmode_intermediate_values(i), [xstart 0]);
 	end
 	
-	plot(X, U);
-	pause()
+	% For debug purposes
+	% plot(X, U);
+	% pause()
 end
 
 end

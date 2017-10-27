@@ -45,6 +45,24 @@ plot(x, -u_approx)
 hold on
 plot(X, U(:, 1))
 
+%% Compare their spectrum
+
+clc; clear
+
+% On a finite grid
+xstart = -6; xstep = 0.002; xend = 6;
+x = xstart:xstep:xend;
+
+mu = 0.9; Omega = 40; sigma_1 = 1; params = [mu Omega sigma_1];
+n = 1;
+
+u_approx = get_alfimov_approximation(params, n, x);
+[X, U] = get_mode_with_linear_counterpart(3, params, xstart);
+
+%% Here comes da spectrum!
+
+spec_1 = get_spectrum_sigma(params, x, u_approx, 400);
+spec_2 = get_spectrum_sigma(params, X, U, 300);
 
 %% Solutions for the quantum harmonic oscillator
 harmonic_oscillator_diff = @(t, y) [y(2), -(mu - (t .^ 2)) .* y(1)];
