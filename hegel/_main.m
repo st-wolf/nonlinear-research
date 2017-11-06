@@ -165,4 +165,4 @@ eps = 1e-6;
 figure
 cmode = dichotomy(get_ux_end_params, 0.03, 0.08, eps);
 [X, U] = get_symmetric_mode(params, cmode, xspan);
-plot(X, U);
+plot(X, U)
