@@ -1,4 +1,4 @@
-function eigenvalues = get_spectrum( params, X, U, N )
+function eigenvalues = get_spectrum( params, nonlinear_potential, X, U, N )
 
 % TODO Symmetrize with respect to the horizontal axis
 
@@ -7,6 +7,7 @@ function eigenvalues = get_spectrum( params, X, U, N )
 
 % INPUT:
 % :params: parameter of NLS with nonlinear potential (see info.txt)
+% :nonlinear_potential: function of the form @nonlinear_potential(params, x)
 % :X: grid
 % :U: values on grid
 % :N: number of harmonics in fourie series
@@ -21,8 +22,8 @@ xstep = X(2) - X(1);
 % Wavenumber
 k = 2*pi / period;
 
-G{1} = params(1) - (X .^ 2) + f_potential(params, X) .* (U(:, 1).^2);
-G{2} = params(1) - (X .^ 2) + 3*f_potential(params, X) .* (U(:, 1).^2);
+G{1} = params(1) - (X .^ 2) + nonlinear_potential(params, X) .* (U(:, 1).^2);
+G{2} = params(1) - (X .^ 2) + 3*nonlinear_potential(params, X) .* (U(:, 1).^2);
 
 for n = -N:N
 	Gf{1}(n+N+1) = (1 / period) * simpson(G{1} .* exp(-1i * k*n*X), xstep);
@@ -47,6 +48,7 @@ eigenvalues = [eigenvalues; -eigenvalues];
 end
 
 % ------------------------------------------------------------------------
-function potential = f_potential(params, x)
-potential = cos(params(2) * x);
-end
+% DEPRECATED
+% function potential = f_potential(params, x)
+% potential = cos(params(2) * x);
+% end

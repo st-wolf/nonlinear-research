@@ -1,7 +1,8 @@
 function [ mu_intermediate_values, mode_norm, stability ] = ...
 	get_norm_on_chemical_potential( mex_solver_name, mu_analog, params, xstart )
 % Input arguments are the same as for @get_mode_with_linear_counterpart
-% function.
+% function. Nonlinear potential is P(x) = 1 + P_1 \cos(\Omega x) used in
+% @get_spectrum function.
 %
 % Equation is u_{xx} + (\mu - x^2) u + (1 + P_1 \cos(\Omega x)) u^3 = 0
 %
@@ -11,9 +12,15 @@ function [ mu_intermediate_values, mode_norm, stability ] = ...
 %		potential for the nonlinear mode
 %
 % OUTPUT:
-%	mu - chemical potential
-%	N  - norm of the solution
+%	mu_intermediate_values - chemical potential
+%	mode_norm - norm of the solution
+%	stability - vactor of 1s (stable) and 0s (unstable)
 %
+
+% -----------------------------------------------------------------------------
+% Nonlinear potential
+nonlinear_potential = @(params, x) 1 + params(3) * cos(params(2) * x);
+% -----------------------------------------------------------------------------
 
 mu_target = params(1); Omega = params(2); P1 = params(3);
 mu_aug = 0.05; % augmentation to bifurcate from zero solution
@@ -76,11 +83,13 @@ stability = zeros(1, length(mu_intermediate_values));
 mode_norm(1) = get_norm(X, U);
 
 % TODO: what are the parameters?
-stability(1) = is_stable(params, X, U);
+% The same as in @get_spectrum function
+n_harmonics = 500;
+stability(1) = is_stable(params, nonlinear_potential, X, U, n_harmonics);
 
 for i = 2:length(mu_intermediate_values)
 	fprintf('\tFrom linear analog: %i of %i\n', i, length(mu_intermediate_values))
-	params = [mu_intermediate_values(i) Omega sigma_1];
+	params = [mu_intermediate_values(i) Omega P1];
 	
 	get_end_params = @(c) get_end(mex_solver_name, params, c, [xstart 0]);
 	cmode_intermediate_values(i) = newton(get_end_params, cmode_intermediate_values(i - 1));
@@ -96,7 +105,7 @@ for i = 2:length(mu_intermediate_values)
 	
 	% Computing norm and stability of the solution
 	mode_norm(i) = get_norm(X, U);
-	stability(i) = is_stable(params, X, U);
+	stability(i) = is_stable(params, nonlinear_potential, X, U, n_harmonics);
 	
 	% For debug purposes
 	% plot(X, U);
