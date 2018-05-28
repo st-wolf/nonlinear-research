@@ -1,8 +1,8 @@
 function d = dissipation(xgrid)
 
-dissip_stength = 100;
+dissip_stength = 500;
 
-l = 0.1 * (xgrid(end) - xgrid(1));
+l = 0.2 * (xgrid(end) - xgrid(1));
 L = xgrid(end);
 
 d = zeros(1, length(xgrid));

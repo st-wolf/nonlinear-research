@@ -19,11 +19,12 @@ function [ mu_intermediate_values, mode_norm, stability ] = ...
 
 % -----------------------------------------------------------------------------
 % Nonlinear potential
-nonlinear_potential = @(params, x) 1 + params(3) * cos(params(2) * x);
+% nonlinear_potential = @(params, x) 1 + params(3) * cos(params(2) * x);
+nonlinear_potential = @(params, x) params(3) * cos(params(2) * x);
 % -----------------------------------------------------------------------------
 
 mu_target = params(1); Omega = params(2); P1 = params(3);
-mu_aug = 0.05; % augmentation to bifurcate from zero solution
+mu_aug = 0.025; % augmentation to bifurcate from zero solution
 mu_start = mu_analog - mu_aug;
 
 % Numer of the mode: 0, 1, 2, 3, 4, 5 ...
@@ -65,7 +66,9 @@ else
 end
 
 % Continuation on the parameter \mu
-mu_step = mu_aug; % why not!?
+% mu_step = mu_aug; % why not!?
+mu_step = 0.025; % why not!?
+% mu_step = 0.0125; % why not!?
 
 mu_intermediate_values = mu_start:(-mu_step):mu_target;
 
@@ -110,6 +113,11 @@ for i = 2:length(mu_intermediate_values)
 	% For debug purposes
 	% plot(X, U);
 	% pause()
+	
+	% Temporal break
+	if mode_norm(i) > 65
+		break
+	end
 end
 
 end

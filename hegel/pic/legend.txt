@@ -1,0 +1,43 @@
+Fig_1.
+Have been made by Dima Zezylin.
+
+Fig_2.
+Modes for: P0 = 1, P1 = 2. Upper one: \Omega -> \infty (equal P1 = 0)
+
+Fig_3.
+shoot from x_{start} = -5.
+Fig_3_mode_1: P0 = 1, P1 = 2, \Omega = 8, \mu = 0, cmode = 1.0406, norm = 1.9427.
+Fig_3_mode_2: P0 = 1, P1 = 2, \Omega = 8, \mu = 2, cmode = 1.9900, norm = 2.6533.
+Fig_3_mdoe_3: P0 = 1, P1 = 2, \Omega = 8, \mu = 4, cmode = 2.2643, norm = 2.8133.
+Fig_3_mode_4: P0 = 1, P1 = 2, \Omega = 8, \mu = -0.5, cmode = 5.9446, norm = 11.4949.
+Fig_3_mode_5: P0 = 1, P1 = 2, \Omega = 8, \mu = 3.4, cmode = 9.9295, norm = 12.1436.
+
+Fig_4.
+shoot from x_{start} = -8.
+Fig_4_mode_1: P0 = 0, P1 = 1, \Omega = 8, \mu = 4, cmode = 4.83, norm = 14.84.
+Fig_4_mode_2: P0 = 0, P1 = 1, \Omega = 8, \mu = 6.8, cmode = 3.636, norm = 13.32.
+Fig_4_mode_3: P0 = 0, P1 = 1, \Omega = 8, \mu = 1.5, cmode = 6.151, norm = 34.58.
+Fig_4_mode_4: P0 = 0, P1 = 1, \Omega = 8, \mu = 5, cmode = 7.39, norm = 47.23.
+Fig_4_mode_5: P0 = 0, P1 = 1, \Omega = 8, \mu = 7.5, cmode = 5.458, norm = 44.56.
+
+Fig_5.
+grey and bold: exact solution.
+black and thick thin: only one term of approximation (33).
+black and red: two terms of approximation (33).
+
+P0 = 0, P1 = 1.
+(1) 0th mode (n = 0), \Omega = 16, \mu = 0 (\mu_analog = 1).
+(2) 1st mdoe (n = 1), \Omega = 16, \mu = 1 (\mu_analog = 3).
+
+Fig_6.
+Eigenvalues stability diagrams
+1. P0 = 0, P1 = 1, 2nd mode (n = 1), \mu_analog = 3 -> \mu = 0.5.
+2. P0 = 0, P1 = 1, 3st mode (n = 2), \mu_analog = 5 -> \mu = 2.5.
+	Собственное значение \pm 2 расщепляется в четверку без слияния с кем-то еще.
+3. P0 = 0, P1 = 1, 4th mode (n = 3), \mu_analog = 7 -> \mu = 4.5.
+
+Fig_7.
+1a. P0 = 0, P1 = 1, 1st mode (n = 1), \Omega = 8, \mu = 2.9 (\mu_analog = 3).
+1b. Its spectrum.
+2a. P1 = 0, P1 = 1, 1st mode (n = 1), \Omega = 8, \mu = 2.6 (\mu_analog = 3).
+2b. Its spectrum.

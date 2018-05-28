@@ -67,11 +67,11 @@ clc; clear
 xstart = -6; xend = 6; xstep = 0.01; xspan = [xstart xend];
 x = xstart:xstep:xend;
 
-mu = 1.1; Omega = 16; sigma_1 = 1; params = [mu Omega sigma_1];
-n = 1; mu_analog = 2 * n + 1;
+mu = 0; Omega = 16; sigma_1 = 1; params = [mu Omega sigma_1];
+n = 0; mu_analog = 2 * n + 1;
 
 u_approx = get_alfimov_approximation(params, n, x);
-plot(x, -u_approx, 'blue');
+plot(x, u_approx, 'blue');
 
 hold on;
 

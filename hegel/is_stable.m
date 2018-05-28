@@ -15,14 +15,16 @@ function [ stable ] = is_stable( params, nonlinear_potential, X, U, N )
 eigenvalues = get_spectrum(params, nonlinear_potential, X, U, N);
 max_real = max(abs(real(eigenvalues)));
 
-% For debug purpoces
-% plot_spectrum(params, eigenvalues);
-
 % Compareson with zero
-if max_real < 1e-3
+if max_real < 1e-2
 	stable = true;
 else
 	stable = false;
+end
 
+% For debug purpoces
+% plot_spectrum(params, eigenvalues);
+% pause()
+	
 end
 

@@ -10,17 +10,19 @@ V = @(x) x .^ 2;
 
 % Nonlinear cosine potential parameter
 Omega = params(2);
+P1 = params(3);
 
 % Nonlinear cosine potential
-g = @(x) cos(2 * Omega * x);
+% g = @(x) P1 * cos(Omega * x);
+g = @(x) 1 + P1 * cos(Omega * x);
 
-xstep = 0.005;
+xstep = 0.02;
 xspan = [-6 6];
 xgrid = xspan(1):xstep:xspan(2);
 Nx = length(xgrid);
 
-tstep = 0.002;
-tspan = [0 36];
+tstep = 0.005;
+tspan = [0 12];
 tgrid = tspan(1):tstep:tspan(2);
 Nt = length(tgrid);
 
@@ -33,7 +35,7 @@ U(1, :) = resample(X0, U0, xgrid);
 % Perturbation
 a = 0.01;
 f = 10;
-U(1, :) = U(1, :) .* (1 + a * (1 + cos(f * xgrid)));
+U(1, :) = U(1, :) .* (1 + a * (1 + sin(f * xgrid)));
 
 U(1, 1) = 0;
 U(1, end) = 0;

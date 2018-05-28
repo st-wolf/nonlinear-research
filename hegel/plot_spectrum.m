@@ -25,10 +25,10 @@ else
 	ymax = 15;
 end
 
-% axis([-xmax xmax -ymax ymax])
 axis([-xmax xmax -ymax ymax])
+% axis([-xmax xmax -3 3])
 
-title(sprintf('Parameters: omega = %g, Omega = %g', params(1), params(2)))
+title(sprintf('Parameters: mu = %g, Omega = %g', params(1), params(2)))
 grid on
 
 end
