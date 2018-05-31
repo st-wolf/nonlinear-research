@@ -4,12 +4,12 @@
 #include "Point.h"
 using namespace NR;
 
-Point<2> test_task(double x, Point<2> u, ComplexNumber* param)
+Point<2> test_task(double x, Point<2> u, complex* param)
 {
 	Point<2> du;
 
 	// Parse complex parameters
-	ComplexNumber factor = param[0];
+	complex factor = param[0];
 
 	// Use them in equation
 	du[0] = u[1];
@@ -17,7 +17,7 @@ Point<2> test_task(double x, Point<2> u, ComplexNumber* param)
 	return du;
 }
 
-Point<2> kucheryavy(double x, Point<2> u, ComplexNumber* param)
+Point<2> kucheryavy(double x, Point<2> u, complex* param)
 {
 	Point<2> du;
 	// Parse compel parameters

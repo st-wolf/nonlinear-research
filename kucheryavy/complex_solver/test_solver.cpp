@@ -7,12 +7,12 @@ int main()
     /* test RK4 complex solver */
 
     // Parameters
-    ComplexNumber* param = new ComplexNumber(0, 1);
+    complex* param = new complex(0, 1);
 
     // Preparing
-    ComplexNumber* U0 = new ComplexNumber[2];
-    U0[0] = ComplexNumber(1, 0);
-    U0[1] = ComplexNumber(0, 0);
+    complex* U0 = new complex[2];
+    U0[0] = complex(1, 0);
+    U0[1] = complex(0, 0);
 
     int intCount = 1024;
     double xspan[2] = {0.0, 1.0};

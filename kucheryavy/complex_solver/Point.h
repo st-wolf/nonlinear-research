@@ -10,24 +10,24 @@
 namespace NR
 {
 
-class ComplexNumber
+class complex
 {
     double real;
     double imag;
 public:
-    ComplexNumber()
+    complex()
     {
         real = 0;
         imag = 0;
     }
 
-    ComplexNumber(double i_real, double i_imag)
+    complex(double i_real, double i_imag)
     {
         real = i_real;
         imag = i_imag;
     }
 
-    ComplexNumber(const ComplexNumber& n)
+    complex(const complex& n)
     {
         real = n.real;
         imag = n.imag;
@@ -38,63 +38,63 @@ public:
         return sqrt(real * real + imag * imag);
     }
 
-    ComplexNumber operator+(const ComplexNumber& n) const
+    complex operator+(const complex& n) const
     {
-        ComplexNumber sum;
+        complex sum;
         sum.real = this->real + n.real;
         sum.imag = this->imag + n.imag;
         return sum;
     }
 
-    ComplexNumber operator+(const double n) const
+    complex operator+(const double n) const
     {
-        ComplexNumber sum;
+        complex sum;
         sum.real = this->real + n;
         sum.imag = this->imag;
         return sum;
     }
 
-    ComplexNumber operator-(const ComplexNumber& n) const
+    complex operator-(const complex& n) const
     {
-        ComplexNumber diff;
+        complex diff;
         diff.real = this->real - n.real;
         diff.imag = this->imag - n.imag;
         return diff;
     }
 
-    ComplexNumber operator-(const double& n) const
+    complex operator-(const double& n) const
     {
-        ComplexNumber diff;
+        complex diff;
         diff.real = this->real - n;
         diff.imag = this->imag;
         return diff;
     }
 
-    ComplexNumber operator*(const ComplexNumber& n) const
+    complex operator*(const complex& n) const
     {
-        ComplexNumber mul;
+        complex mul;
         mul.real = this->real * n.real - this->imag * n.imag;
         mul.imag = this->real * n.imag + this->imag * n.real;
         return mul;
     }
     
-    ComplexNumber operator*(const double n) const
+    complex operator*(const double n) const
     {
-        ComplexNumber mul;
+        complex mul;
         mul.real = this->real * n;
         mul.imag = this->imag * n;
         return mul;
     }
 
-    ComplexNumber operator/(const double n) const
+    complex operator/(const double n) const
     {
-        ComplexNumber division;
+        complex division;
         division.real = this->real / n;
         division.imag = this->imag / n;
         return division;
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const ComplexNumber n)
+    friend std::ostream& operator<<(std::ostream& stream, const complex n)
     {
         stream << n.real << " + " << n.imag << "i";
         return stream;
@@ -102,7 +102,7 @@ public:
 };
 
 /*
-std::ostream &operator<<(std::ostream& stream, ComplexNumber n)
+std::ostream &operator<<(std::ostream& stream, complex n)
 {
     stream << n.real << " + " n.imag;
     return stream;
@@ -111,16 +111,16 @@ std::ostream &operator<<(std::ostream& stream, ComplexNumber n)
 template <int dim>
 class Point
 {
-    ComplexNumber X[dim];
+    complex X[dim];
 public:
     Point()
     {
-        memset(X, 0x00, sizeof(ComplexNumber)* dim);
+        memset(X, 0x00, sizeof(complex)* dim);
     }
 
-    Point(ComplexNumber* i_X)
+    Point(complex* i_X)
     {
-        memcpy(X, i_X, sizeof(ComplexNumber)* dim);
+        memcpy(X, i_X, sizeof(complex)* dim);
     }
 
     Point operator+(const Point& p) const
@@ -190,12 +190,12 @@ public:
         return sub;
     }
 
-    ComplexNumber& operator[](int i)
+    complex& operator[](int i)
     {
         return X[i];
     }
 
-    const ComplexNumber operator[](int i) const
+    const complex operator[](int i) const
     {
         return X[i];
     }
