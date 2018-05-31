@@ -12,9 +12,10 @@ namespace NR
 
 class complex
 {
+public:
     double real;
     double imag;
-public:
+
     complex()
     {
         real = 0;
