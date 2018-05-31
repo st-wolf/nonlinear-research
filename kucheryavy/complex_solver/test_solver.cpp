@@ -7,7 +7,8 @@ int main()
     /* test RK4 complex solver */
 
     // Parameters
-    complex* param = new complex(0, 1);
+    // double* param = new double(1);
+    double param = 1.0;
 
     // Preparing
     complex* U0 = new complex[2];
@@ -18,7 +19,7 @@ int main()
     double xspan[2] = {0.0, 1.0};
 
     // Solving
-    OdeProblem<2> OP(test_task, param, U0, xspan);
+    OdeProblem<2> OP(test_task, &param, U0, xspan);
     Solver<2> Slv;
     Solution<2> Sol = Slv.Solve(OP, intCount);
 

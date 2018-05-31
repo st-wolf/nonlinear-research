@@ -54,6 +54,14 @@ public:
         return sum;
     }
 
+    friend complex operator+(const double left, const complex& right)
+    {
+        complex sum;
+        sum.real = left + right.real;
+        sum.imag = right.imag;
+        return sum;
+    }
+
     complex operator-(const complex& n) const
     {
         complex diff;

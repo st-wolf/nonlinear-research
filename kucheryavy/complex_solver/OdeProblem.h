@@ -7,10 +7,10 @@ namespace NR
 template <int dim>
 class Problem
 {
-	complex* p;
-	Point<dim>(*f)(double t, Point<dim> y, complex* param);
+	double* p;
+	Point<dim>(*f)(double t, Point<dim> y, double* param);
 public:
-	Problem(Point<dim>(*function)(double, Point<dim>, complex*), complex* param)
+	Problem(Point<dim>(*function)(double, Point<dim>, double*), double* param)
 	{
 		f = function;
 		p = param;
@@ -32,8 +32,8 @@ public:
 	//double prec;
 	//int intCount;
 
-	OdeProblem(Point<dim>(*function)(double, Point<dim>, complex*),
-				complex* param, Point<dim> i_Init, double* i_tspan)
+	OdeProblem(Point<dim>(*function)(double, Point<dim>, double*),
+				double* param, Point<dim> i_Init, double* i_tspan)
 		:f(function, param)
 	{
 		Init = i_Init;
