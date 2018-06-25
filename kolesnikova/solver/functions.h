@@ -9,7 +9,7 @@ using namespace NR;
 // Equation for nonlinear stationary modes
 // u_{xx} + (\omega - x^2) u + (1 + \alpha x^2) u^3 = 0
 // Parameters: [\omega \alpha]
-Point<2> hegel(double x, Point<2> u, double* param)
+Point<2> kolesnikova(double x, Point<2> u, double* param)
 {
 	Point<2> du;
 	double omega = param[0], alpha = param[1];

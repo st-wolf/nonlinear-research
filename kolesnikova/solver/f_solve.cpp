@@ -38,7 +38,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 	int intCount = (int)(*pIntCount);
 
 	//Solving
-	OdeProblem<2> OP(hegel, i_param, U0, i_xspan);
+	OdeProblem<2> OP(kolesnikova, i_param, U0, i_xspan);
 	Solver<2> Slv;
 	Solution<2> Sol = Slv.Solve(OP, intCount);
 
