@@ -4,9 +4,9 @@ function init = asympt_right( params, C, x )
 % INPUT:
 %	C - constant of the asymptote
 
-[omega, ~] = parse_params(params);
+[mu, omega, ~] = parse_params(params);
 
-func = @(x) C * (+x)^(0.5 * (omega - 1)) * exp(-(x^2) / 2);
+func = @(x) C * (+x)^(0.5 * (mu - 1)) * exp(-(x^2) * (omega^2) / 4);
 
 eps = 1e-12;
 

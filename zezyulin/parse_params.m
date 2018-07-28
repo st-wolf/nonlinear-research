@@ -1,15 +1,14 @@
-function [ omega, alpha ] = parse_params( params )
+function [ mu, omega, A ] = parse_params( params )
 %
 % INPUT:
 %	params - main equation parameters array (see description below)
 %
 % OUTPUT:
-%	omega - chemical potential (energy level);
-%	alpha - parameter of the nonlinear parabolic potential:
-%       P(x) = 1 + \alpha x^2
-%
+%	mu - chemical potential (energy level);
+%   omega - parameter of the linear potential V(x) = 1/2 \omega^2  x^2
+%	A - parameter of the nonlinear potential: P(x) = 1 + A \tanh^2{x}
 
-omega = params(1); alpha = params(2);
+mu = params(1); omega = params(2); A = params(3);
 
 end
 
