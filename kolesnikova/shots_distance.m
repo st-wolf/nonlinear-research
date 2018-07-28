@@ -7,7 +7,7 @@ function [ distance ] = shots_distance( params, xleft, cleft, cright )
 % INTERNAL PARAMETERS:
 xright = -xleft; xend = 0;
 xspan_left = [xleft xend]; xspan_right = [xright xend];
-intervals = 2 ^ 12;
+intervals = 2 ^ 10;
 
 init_left = asympt_left(params, cleft, xleft);
 init_right = asympt_right(params, cright, xright);

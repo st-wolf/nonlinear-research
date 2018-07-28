@@ -5,7 +5,7 @@ function diagram( params )
 %	params - main equation parameters array (see `parse_params`)
 
 % INTERNAL PARAMETERS:
-xstart = -8; xend = 0; xspan = [xstart xend];
+xstart = -6; xend = 0; xspan = [xstart xend];
 cstart = 0; cstep = 0.05; cend = 30; C = cstart:cstep:cend;
 intervals = 2 ^ 12;
 
