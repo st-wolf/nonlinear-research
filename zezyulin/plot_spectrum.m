@@ -5,7 +5,6 @@ function plot_spectrum( params, eigenvalues )
 % :eigenvalues: eigen values of differential operator, that correspon to
 %	the evolution of perturbations
 
-figure
 hold on
 
 % Continuous spectrum
@@ -28,7 +27,7 @@ end
 axis([-xmax xmax -ymax ymax])
 % axis([-xmax xmax -3 3])
 
-title(sprintf('Parameters: \\omega = %g, \\alpha = %g', params(1), params(2)))
+% title(sprintf('Parameters: \\mu = %g, \\omega = %g, A = %g', params(1), params(2), params(3)))
 grid on
 
 end

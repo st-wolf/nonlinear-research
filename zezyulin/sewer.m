@@ -1,4 +1,4 @@
-function [ X, U ] = sewer( params, cleft_init, cright_init )
+function [ X, U, c_left, c_right ] = sewer( params, cleft_init, cright_init )
 % TODO: add description
 % TODO: add internal parameters (like `intervals`, `tolx` and so on)
 %
@@ -17,6 +17,9 @@ intervals = 2 ^ 14;
 % Prepare internal fucntion for `fminsearch` usage
 shots_distance_params = @(C) shots_distance(params, xleft, C(1), C(2));
 [cmin, ~] = fminsearch(shots_distance_params, [cleft_init, cright_init], options);
+
+c_left = cmin(1);
+c_right = cmin(2);
 
 init_left = asympt_left(params, cmin(1), xleft);
 init_right = asympt_right(params, cmin(2), xright);

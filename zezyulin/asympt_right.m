@@ -6,7 +6,11 @@ function init = asympt_right( params, C, x )
 
 [mu, omega, ~] = parse_params(params);
 
-func = @(x) C * (+x)^(0.5 * (mu - 1)) * exp(-(x^2) * (omega^2) / 4);
+if omega ~= 0
+    func = @(x) C * (+x)^(0.5 * (mu - 1)) * exp(-(x^2) * (omega^2) / 4);
+else
+    func = @(x) C * exp(-sqrt(-mu) * x);
+end
 
 eps = 1e-12;
 

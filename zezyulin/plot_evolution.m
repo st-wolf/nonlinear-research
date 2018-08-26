@@ -10,8 +10,8 @@ image([xrange(1) xrange(2)], [T(1) T(end)], abs(U(:, sel)), 'CDataMapping', 'sca
 set(gca,'YDir','normal');
 xlabel('X')
 ylabel('T')
-title_str = sprintf('Parameters: omega = %g, alpha = %g', params(1), params(2));
-title(title_str)
+% title_str = sprintf('Parameters: omega = %g, alpha = %g', params(1), params(2));
+% title(title_str)
 
 end
 

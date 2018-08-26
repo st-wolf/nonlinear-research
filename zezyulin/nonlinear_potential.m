@@ -4,8 +4,9 @@ function potential = nonlinear_potential( params, xgrid )
 % INPUT:
 %
 
-[~, alpha] = parse_params(params);
-potential = -(1 + alpha * (xgrid .^ 2));
+[~, ~, A] = parse_params(params);
+% potential = (1 + A * (tanh(xgrid) .^ 2));
+potential = 1 + A * xgrid .^ 2;
 
 end
 

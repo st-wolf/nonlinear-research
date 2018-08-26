@@ -33,7 +33,7 @@ U(1, :) = resample(X0, U0, xgrid);
 % Perturbation
 a = 0.01;
 f = 10;
-U(1, :) = U(1, :) .* (1 + a * (1 + sin(f * xgrid)));
+%U(1, :) = U(1, :) .* (1 + a * (1 + cos(f * xgrid)));
 
 U(1, 1) = 0;
 U(1, end) = 0;

@@ -16,14 +16,14 @@ function eigenvalues = get_spectrum( params, nonlinear_potential, X, U, N )
 % :eigenvalues: eigen values of differential operator, that correspon to
 %	the evolution of perturbations
 
+[mu, omega, ~] = parse_params(params);
 period = abs(X(end) - X(1));
-xstep = X(2) - X(1);
 
 % Wavenumber
 k = 2*pi / period;
 
-G{1} = params(1) - (X .^ 2) + nonlinear_potential(params, X) .* (U(:, 1).^2);
-G{2} = params(1) - (X .^ 2) + 3*nonlinear_potential(params, X) .* (U(:, 1).^2);
+G{1} = mu - (0.5 * omega^2 * X .^ 2) + nonlinear_potential(params, X) .* (U(:, 1).^2);
+G{2} = mu - (0.5 * omega^2 * X .^ 2) + 3*nonlinear_potential(params, X) .* (U(:, 1).^2);
 
 for n = -N:N
 	Gf{1}(n+N+1) = (1 / period) * trapz(X, G{1} .* exp(-1i * k*n*X));
@@ -46,9 +46,3 @@ eigenvalues = sqrt(-eig(M));
 eigenvalues = [eigenvalues; -eigenvalues];
 
 end
-
-% ------------------------------------------------------------------------
-% DEPRECATED
-% function potential = f_potential(params, x)
-% potential = cos(params(2) * x);
-% end
